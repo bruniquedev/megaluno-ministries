@@ -1,0 +1,95 @@
+.multi-carousel{
+  width:100%;
+  margin:auto;
+  position: relative;
+}
+.row-multislider{
+  width:100%;
+  padding:0;
+  overflow:hidden;
+  margin:auto;
+}
+.row-multislider-container{
+  width:2000px;
+  transition:0.5s;
+    display: flex;
+ /*align-items: center;*/
+flex-grow: 1;
+
+}
+
+.clear{
+  clear:both;
+}
+.multislider-controls{
+  width:100%;
+  margin:auto;
+}
+.multi-carousel .multisliderbtn{
+  color:white;
+      position: absolute;
+    /*background-color: transparent;*/
+    background-color:#fff;
+    box-shadow: 0 0 7px #999;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 1px solid #b2e0ff;
+    z-index: 10;
+     display: none;
+}
+
+
+.multi-carousel .left-controlbtn {
+    left: -30px; 
+}
+
+.multi-carousel .right-controlbtn {
+    right: -2px;
+}
+
+i.multislider-nav-icon{
+ font-size: 22px; 
+   fill: #002640;
+  padding-left: 5px;
+      padding-top: 2px;
+  display: block;
+  color: #282727;
+}
+
+
+ .container-multislider .icon-outlined {
+    color: #007aff;
+    border: 1px #e5e5e5 solid;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 125px;
+    height: 125px;
+    line-height: 80px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    margin-bottom: 0px;
+}
+
+.container-multislider .icon-outlined:hover{
+border: 1px solid #fdb819;
+}
+
+.container-multislider .icon-outlined a i.iconic_bg {
+   width: 95px;
+    height: 95px;
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 15px 15px 15px 15px;
+    border-radius: 25%;
+}
+
+@media screen and (max-width: 600px){
+.multi-carousel .left-controlbtn {
+    left: -9px;
+}
+}

@@ -1,0 +1,238 @@
+
+
+/*  Media queries 
+============================= */
+
+
+
+ @media (max-width: 320px){
+
+        .box-area-wrap .box-simple {
+            margin: 1px 7px 1px 1px;
+            text-align: center;
+        }
+
+        .box-simple .icon-outlined {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .box-simple .icon-outlined a, .box-simple h3 a {
+            font-size: 15px;
+        }
+
+      
+        .box-simple .icon-outlined a .ion {
+            padding: 0px;
+            font-size: 19px;
+            width: 21px;
+            text-align: center;
+            text-decoration: none;
+            margin: 9px -10px;
+            position: absolute;
+        }
+
+    }
+
+
+@media (max-width: 767px) {
+
+    body {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+  }
+
+
+
+    @media (max-width: 900px) {
+
+.main-content-section{
+    margin-top: 65px!important;
+    margin-bottom: 5px!important;
+}
+.main-content-section.home{
+    margin-top: 10px!important;
+}
+.hidden-on-mobile{
+    display: none;
+}
+
+
+.about-container{
+  width: 97%!important;  
+}
+
+.about-content h1{
+    font-size: 20px!important;
+}
+.about-container .about-content p {
+
+    font-size: 14px;
+}
+
+
+.section-row-mini .col-item,
+.section-row-mini .n-container-item {
+    width: 45%!important;
+}
+
+.section-row-content .col-item,
+.section-row-content .n-container-item {
+    width: 90%!important;
+}
+
+ h1.section-heading {
+   font-size: 20px!important;
+   margin: 0px 5px;
+   font-weight: 500;
+}
+
+
+
+.thumbnail-caption h6 {
+    font-size: 14px;
+    margin-top: 14px;
+    text-align: center;
+}
+.thumbnail-caption small{
+font-size: 14px!important;
+    margin: 1px 3px;
+}
+
+.t-content .t-description {
+    font-size: 15px;
+}
+
+.multislide-section{
+    justify-content: unset!important;
+}
+.multislide-section .u-repeater-item-mb,
+.multislide-section .u-repeater-item-mb .item-content-mb{
+     width: 300px!important;
+
+}
+
+a.more-btn-eui {
+    width: 100%!important;
+    font-size: 13px!important;
+    padding: 3px 8px!important;
+    margin: auto 5px;
+}
+
+.content-container-img{
+    width: 100%!important;
+}
+.content-container-img img{
+height: 200px!important;
+    }
+
+.about-content.sneekpeek-detail-content {
+    border-radius: 0px;
+    width: 100%!important;
+}
+
+.heading .heading_1{
+    font-size: 22px;
+}
+
+.search-form-container{
+    min-width: 100%;
+    margin-bottom: 5px!important;
+}
+
+ul.custom-dropdown-content-eui, .custom-dropdown-content-eui{
+width: 90%;
+}
+
+#FORM_BOOKNOW .form-groupy{
+margin-bottom: 5px!important;
+width: 94%!important;
+}
+
+
+.property-details-reviews .reviews-col-1 {
+    width: 100%;
+        margin-right: 10px;
+}
+.property-details-reviews .reviews-col-2{
+    width: 100%;
+        margin-right: 10px;
+}
+
+.col-box-item.box-area-contact{
+    width: 100%!important;
+} 
+.col-item.col-box-item{
+      width: 100%!important;  
+}
+.col-item.col-box-item:last-child{
+margin-top: 20px;
+}
+
+#FORM_CONTACT .form-groupy{
+margin-bottom: 5px!important;
+width: 94%!important;
+}
+
+    .box-area-wrap .box-simple {
+        margin: 1px 20px 1px 1px;
+    }
+   
+    .box-simple .icon-outlined {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+    }
+
+    .box-simple .icon-outlined a, .box-simple h3 a {
+        font-size: 15px;
+    }
+
+  
+    .box-simple .icon-outlined a .ion {
+        padding: 0px;
+        font-size: 19px;
+        width: 21px;
+        text-align: center;
+        text-decoration: none;
+        margin: 9px -10px;
+        position: absolute;
+    }
+
+    
+.float_whatsApp_btn{
+   right: 2px!important; 
+} 
+.scrollup {
+ right: 6px!important; 
+}
+.footer-blurb-item{
+    width: 100%!important;
+    margin-bottom: 15px;
+}
+
+.main-content-container {
+    width: 100%;
+}
+
+}
+
+
+
+
+@media (min-width: 1200px){
+
+    
+    }
+
+   
+
+
+
+
+
+
+

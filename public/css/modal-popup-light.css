@@ -1,0 +1,90 @@
+.popup-light-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    transition: opacity 0ms;
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+    background: rgba(25, 23, 23, 0.81);
+    box-shadow: 1px 1px 4px 0 rgb(0 0 0 / 85%);
+    height: 100vh;
+}
+
+.popup-light-overlay.show{
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 99;
+    display: unset;
+}
+
+.popup-light-overlay .popup-light-body {
+    margin: 0rem auto;
+    padding: 40px 50px;
+    width: 700px;
+    border-radius: 3px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+        overflow: hidden auto;
+    max-height: 100vh;
+}
+
+
+.popup-light-overlay .popup-light-body::-webkit-scrollbar {
+width: 10px;
+-webkit-transition: all .5s;
+}
+.popup-light-overlay .popup-light-body::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    /*background-color: rgb(230, 243, 229);*/
+  margin: 2px;
+ border: 10px solid transparent;
+   border-radius: 10px;
+   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+   transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.popup-light-overlay .popup-light-body::-webkit-scrollbar-track {
+ border-radius: 10px;
+ /*background-color: #16232d;*/
+ background-color: rgb(230, 243, 229);
+ box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+ transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popup-light-overlay .close-popup-light {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    transition: all 200ms;
+    font-size: 40px;
+    text-decoration: none;
+    color: #fff;
+    opacity: 1;
+
+    float: right;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+
+}
+ a.close-popup-light {
+    color: #fff;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 900px){
+
+.popup-light-overlay .popup-light-body {
+    padding: 40px 10px;
+    width: 95%!important;
+}
+.popup-light-overlay .close-popup-light {
+top: 4px;
+    right: 13px;
+}
+
+}
+
