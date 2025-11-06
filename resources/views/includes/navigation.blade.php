@@ -77,10 +77,26 @@ if($ContactsSetupDataInfo->detailtype=="Tel"){
 
 <li ><a href="/about"><i class="ion ion-information-circled"></i> About</a></li>
    
+ 
+
    <!-----dropdown---->
 <li  class="custom-dropdown">
+  <a href="/projects" class="dropbtn">
+<i class="ion ion-android-bulb"></i> Ministries<i class="m-l-3 ion-ios-arrow-down"></i></a>
+    <ul class="custom-dropdown-content">
+@if(count($Projectsinfo) > 0) 
+@foreach ($Projectsinfo as $info)
+<li><a  href="/project/{{$info->id}}/{{$info->headingtext}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->headingtext}}</a></li>
+@endforeach
+@endif  
+    </ul>
+</li>
+<!-----/dropdown---->
+
+  <!-----dropdown---->
+<li  class="custom-dropdown">
   <a href="/programmes" class="dropbtn">
-<i class="ion ion-android-hangout"></i> Programmes<i class="m-l-3 ion-ios-arrow-down"></i></a>
+<i class="ion ion-android-hangout"></i> Get Involved<i class="m-l-3 ion-ios-arrow-down"></i></a>
     <ul class="custom-dropdown-content">
 @if(count($Activitiesinfo) > 0) 
 @foreach ($Activitiesinfo as $info) 
@@ -91,19 +107,8 @@ if($ContactsSetupDataInfo->detailtype=="Tel"){
 </li>
 <!-----/dropdown---->
 
-   <!-----dropdown---->
-<li  class="custom-dropdown">
-  <a href="/projects" class="dropbtn">
-<i class="ion ion-android-bulb"></i> Projects<i class="m-l-3 ion-ios-arrow-down"></i></a>
-    <ul class="custom-dropdown-content">
-@if(count($Projectsinfo) > 0) 
-@foreach ($Projectsinfo as $info)
-<li><a  href="/project/{{$info->id}}/{{$info->headingtext}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->headingtext}}</a></li>
-@endforeach
-@endif  
-    </ul>
-</li>
-<!-----/dropdown---->
+<li ><a href="/events"><i class="ion ion-android-calendar"></i> Sermons</a></li>
+
 
 <li ><a href="/events"><i class="ion ion-android-calendar"></i> Events</a></li>
 
