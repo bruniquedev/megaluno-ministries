@@ -118,8 +118,9 @@ if($SEODataInfo->author=="Home"){
 @if(count($Eventsinfodata) > 0) 
 <section class="section_area m-t-20 bg-color-white p-5p b-r-b-l b-r-b-r">
  
-  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
+  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-3 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"> Sermons</a></span></h1>
+<p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 @foreach ($Eventsinfodata as $info)
@@ -235,9 +236,10 @@ if($SEODataInfo->author=="Home"){
  @if(count($Activitiesinfodata) > 0) 
 <section class="section_area m-t-20 bg-color-white p-5p b-r-t-l b-r-t-r">
  
-  <h1 class="f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
-    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light">PROGRAMMES</span> HIGHLIGHTS</a></span></h1>
+  <h1 class="f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
+    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span> Ministries / Departments</a></span></h1>
 
+<p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
  
@@ -264,7 +266,7 @@ if($SEODataInfo->author=="Home"){
 </div>
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/programmes" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">More Programmes <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+<a href="/programmes" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View more <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
 </section>
@@ -274,8 +276,9 @@ if($SEODataInfo->author=="Home"){
  @if(count($Projectsinfodata) > 0) 
 <section class="section_area m-t-20 p-5p bg-color-white">
  
-  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
-    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span>PROJECTS HIGHLIGHTS</a></span></h1>
+  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
+    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span>Get involved</a></span></h1>
+    <p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 
@@ -297,7 +300,7 @@ if($SEODataInfo->author=="Home"){
 </div>
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/projects" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">More projects<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+<a href="/projects" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View More<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
 </section>
@@ -307,8 +310,9 @@ if($SEODataInfo->author=="Home"){
 @if(count($Eventsinfodata) > 0) 
 <section class="section_area m-t-20 bg-color-white p-5p b-r-b-l b-r-b-r">
  
-  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
-    <span><a href="javascript:void(0);" class="color-black-dark"> EVENTS HIGHLIGHTS</a></span></h1>
+  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
+    <span><a href="javascript:void(0);" class="color-black-dark"> Upcoming Activities & Events</a></span></h1>
+    <p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 @foreach ($Eventsinfodata as $info)
@@ -350,11 +354,36 @@ if($SEODataInfo->author=="Home"){
 </div><!--bg attachment end-->
 
 
+
+@if(count($DataDonationsInfo) > 0) 
+<!--about section-->
+    <div class="section_area m-t-30">
+<div class="aboutarea background-img sneekpeekarea bg-img-attachment h-500p b-r-1p" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
+ <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime "> 
+<div class="about-content sneekpeek-content flex justify-center align-items-center flex-wrap flex-grow w-100">
+
+<div class="flex justify-center align-items-center m-t-15 m-b-15 w-100 gallery-btn-container">
+<a href="{{ route('gallery.index') }}" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui h-galley-btn">VIEW GALLERY <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+</div>
+
+</div>
+  </div> 
+</div>
+</div>
+@endif
+<!--/about section-->
+
+
+
+
+
 @if(count($TestimonialsData) > 0)
 <section class="section_area m-t-20">
  
-  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
+  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span>TESTIMONIALS</a></span></h1>
+
+    <p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
 <div class="multi-carousel" data-seconds="0" id="MulticarouselTestimonials">
   <div class="row-multislider">
