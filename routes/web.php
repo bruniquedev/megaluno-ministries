@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\PagesControllers\HomePageController;
+use App\Http\Controllers\PagesControllers\SermonsPageController;
+
 use App\Http\Controllers\PagesControllers\AboutPageController;
 
 use App\Http\Controllers\PagesControllers\sneekpeekPageController;
@@ -78,6 +80,11 @@ echo $exitCode; // 0 exit code for no errors.
 
 
 Route::get('/', [HomePageController::class, 'Index'])->name('home');
+
+Route::get('/sermons', [SermonsPageController::class, 'Index'])->name('sermons');
+Route::get('/sermon/{id}/{title}', [SermonsPageController::class, 'SermonDetails'])->name('sermon');
+
+
 Route::get('/about', [AboutPageController::class, 'Index'])->name('about-us');
 
 Route::get('/donate', [DonationPageController::class, 'Index'])->name('donate');

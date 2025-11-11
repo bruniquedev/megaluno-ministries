@@ -45,9 +45,9 @@ if($SEODataInfo->author=="Projects" && $option=="All"){
 
 <!--about section-->
     <div class="section_area m-t-10">
-<div class="aboutarea background-img sneekpeekarea" style="background-image: url('{{ asset("storage/projects_images/thumbnails/".$Details[0]->filename) }}');">
- <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime"> 
-<div class="about-content sneekpeek-content">
+<div class="aboutarea background-img pagecontainerarea" style="background-image: url('{{ asset("storage/projects_images/thumbnails/".$Details[0]->filename) }}');">
+ <div class="about-container page-container animate-element delay6 fadeInLeft-anime"> 
+<div class="about-content pagearea-content">
 
   <!--<h1 class="center f-s-25 animate-element delay6 fadeInDown-anime section-heading">
     <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">SNEAK PEEK</span> : UGANDA</a></span></h1>-->
@@ -85,9 +85,9 @@ if($SEODataInfo->author=="Projects" && $option=="All"){
  <?php if($option=="details"){ ?>
  @if(count($DataDonationsInfo) > 0)
     <div class="section_area m-t-30">
-<div class="aboutarea background-img sneekpeekarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
- <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content sneekpeek-content">
+<div class="aboutarea background-img pagecontainerarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
+ <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
+<div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
     <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">Donate and Give</span> :</a></span></h1>

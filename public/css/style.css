@@ -1747,10 +1747,10 @@ background-attachment:fixed;
     height: auto;
     border-radius: 10px
 }
-.aboutarea.sneekpeekarea{
+.aboutarea.pagecontainerarea{
     height: auto;
 }
-.aboutarea.sneekpeek-details-area{
+.aboutarea.pagecontainer-details-area{
    border-radius: 0px
 }
 .aboutarea.background-img::before {
@@ -1765,7 +1765,7 @@ display: block;
     border-radius: 10px
 }
 
-.aboutarea.sneekpeekarea::before {
+.aboutarea.pagecontainerarea::before {
     background: rgba(0, 0, 0, 0.7); /* Adjust the RGBA values and alpha (0 to 1) for your desired overlay */
 }
 
@@ -1776,17 +1776,17 @@ display: block;
         padding: 20px 0px;
 }
 
-.about-container.sneekpeek-container{
+.about-container.page-container{
     width: 50%;
 }
 
-.about-container.sneekpeek-detail {
+.about-container.pagearea-detail {
     width: 90%;
     margin: 0px 3px 0px auto;
     padding: 3px 0px;
 }
 
-.about-container.package-tour-container{
+.about-container.more-details-container{
       width: 90%;
     margin: 0px  auto;
     padding: 3px 0px;
@@ -1802,12 +1802,12 @@ display: block;
     border-radius: 10px;
     text-align: left;
 }
-.about-content.sneekpeek-content{
+.about-content.pagearea-content{
       background-color: transparent;
       top: 20px;
 }
 
-.about-content.sneekpeek-detail-content{
+.about-content.pagearea-detail-content{
 border-radius: 0px;
 }
 
@@ -1817,7 +1817,7 @@ font-size: 17px;
 color: #222;
 }
 
-.about-container .about-content.sneekpeek-content p{
+.about-container .about-content.pagearea-content p{
 color: #fff;
 }
 

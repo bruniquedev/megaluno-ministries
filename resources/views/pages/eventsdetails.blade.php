@@ -43,8 +43,8 @@ if($SEODataInfo->author=="Events" && $option=="All"){
 <?php if($option=="details"){ ?>
     <!--about section-->
     <div class="section_area">
-<div class="aboutarea sneekpeek-details-area background-img bg-img-attachment" style="background-image: url('{{asset("storage/events_images/thumbnails/".$Details[0]["filename"]) }}');"><!---->
- <div class="about-container package-tour-container flex justify-center flex-wrap flex-grow animate-element delay6 fadeInLeft-anime "> 
+<div class="aboutarea pagecontainer-details-area background-img bg-img-attachment" style="background-image: url('{{asset("storage/events_images/thumbnails/".$Details[0]["filename"]) }}');"><!---->
+ <div class="about-container more-details-container flex justify-center flex-wrap flex-grow animate-element delay6 fadeInLeft-anime "> 
 
 <!--with an image-->
   <div class="content-container-img w-45">
@@ -52,7 +52,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
   </div>
 <!--/with an image-->
 <!--with content-->
-<div class="about-content sneekpeek-detail-content w-45">
+<div class="about-content pagearea-detail-content w-45">
   <h1 class="f-s-20 f-w-500 animate-element delay6 fadeInDown-anime section-heading">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$Details[0]['headingtext']}}</a></span></h1>
     <div class="border-separator w-full"></div>
@@ -76,9 +76,9 @@ if($SEODataInfo->author=="Events" && $option=="All"){
  <?php if($option=="details"){ ?>
  @if(count($DataDonationsInfo) > 0)
     <div class="section_area m-t-30">
-<div class="aboutarea background-img sneekpeekarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
- <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content sneekpeek-content">
+<div class="aboutarea background-img pagecontainerarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
+ <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
+<div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
     <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">Donate and Give</span> :</a></span></h1>

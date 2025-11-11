@@ -128,7 +128,7 @@ if($SEODataInfo->author=="Home"){
   <div class="col-item w-32 m-r-10">
     <div class="t-container">
 <div class="t-item">
-    <a href="/event/{{$info->id}}/{{$info->headingtext}}" class="t-item-content">
+    <a href="/sermon/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="t-item-content">
        <div class="t-thumbnail">
         <img class="img-fluid" src="{{ asset('storage/events_images/thumbnails/'.$info->filename) }}" alt="">
        </div>
@@ -140,7 +140,7 @@ if($SEODataInfo->author=="Home"){
        <a class="t-description" href="javascript:void(0);"></a> 
         <div class="t-content-1">
  <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/event/{{$info->id}}/{{$info->headingtext}}" class="btn-ui btn-ui-xs btn-ui-default more-btn-eui f-s-14">Read more..  <i class="ion ion-ios-arrow-right f-s-13 m-l-5"></i></a>
+<a href="/sermon/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="btn-ui btn-ui-xs btn-ui-default more-btn-eui f-s-14">Read more..  <i class="ion ion-ios-arrow-right f-s-13 m-l-5"></i></a>
 </div>
         </div>
     </div>
@@ -193,9 +193,9 @@ if($SEODataInfo->author=="Home"){
  @if(count($DataDonationsInfo) > 0) 
 <!--about section-->
     <div class="section_area m-t-30">
-<div class="aboutarea background-img sneekpeekarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
- <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content sneekpeek-content">
+<div class="aboutarea background-img pagecontainerarea bg-img-attachment" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
+ <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
+<div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
     <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">Donate and Give</span> :</a></span></h1>
@@ -358,9 +358,9 @@ if($SEODataInfo->author=="Home"){
 @if(count($DataDonationsInfo) > 0) 
 <!--about section-->
     <div class="section_area m-t-30">
-<div class="aboutarea background-img sneekpeekarea bg-img-attachment h-500p b-r-1p" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
- <div class="about-container sneekpeek-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content sneekpeek-content flex justify-center align-items-center flex-wrap flex-grow w-100">
+<div class="aboutarea background-img pagecontainerarea bg-img-attachment h-500p b-r-1p" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
+ <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
+<div class="about-content pagearea-content flex justify-center align-items-center flex-wrap flex-grow w-100">
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15 w-100 gallery-btn-container">
 <a href="{{ route('gallery.index') }}" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui h-galley-btn">VIEW GALLERY <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
