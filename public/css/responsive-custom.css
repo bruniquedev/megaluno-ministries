@@ -223,9 +223,11 @@ width: 94%!important;
 
 
 
-@media (min-width: 1200px){
+@media (min-width: 1400px){
 
-    
+    .main-content-container.full-detail{
+    width: 65%;
+}
     }
 
    

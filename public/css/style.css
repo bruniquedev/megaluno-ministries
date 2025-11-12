@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6{
      font-family: CenturyGothic-bold;
 }
 p{
-font-family: Century-Gothic-light;
+font-family: sans-serif;
 }
 h1,h2,h3,h4,h5,p{
     margin-top: 0px;
@@ -751,7 +751,9 @@ margin: 20px;
 .m-t-140{
     margin-top: 140px !important;
 }
-
+.m-t-150{
+    margin-top: 150px !important;
+}
 
 
 .m-b-0{
@@ -1156,6 +1158,9 @@ float: left!important;
     font-weight: bold !important;
 }
 
+.font-Myriad-regular{
+    font-family: "Myriad-Regular";
+}
 .font-century-bold{
     font-family: "CenturyGothic-bold";
 }
@@ -1531,7 +1536,7 @@ color: #16232d!important;
 color: #222!important;
 }
 .color-black-fading {
-color: #777777!important;
+color: #4c4949!important;
 }
 .color-grey-faded{
     color: #aaa!important;

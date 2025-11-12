@@ -152,7 +152,7 @@ if($SEODataInfo->author=="Home"){
 </div>
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/events" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">More sermons <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+<a href="/sermons" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">More sermons <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
 </section>
@@ -249,13 +249,13 @@ if($SEODataInfo->author=="Home"){
   <div class="col-item w-32 m-r-10">
     <div class="t-container">
 <div class="t-item">
-    <a href="/programme/{{$info->id}}/{{$info->headingtext}}" class="t-item-content">
+    <a href="/ministry/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="t-item-content">
        <div class="t-thumbnail">
         <img class="img-fluid" src="{{ asset('storage/activities_images/thumbnails/'.$info->filename) }}" alt="">
        </div>
     </a>
     <div class="t-content">
-       <a class="t-description text-wrapping w-80" href="/programme/{{$info->id}}/{{$info->headingtext}}">{{$info->headingtext}}</a> 
+       <a class="t-description text-wrapping w-80" href="/ministry/{{$info->id}}/{{Str::slug($info->headingtext)}}">{{$info->headingtext}}</a> 
     </div>
 </div>
 </div>
@@ -266,7 +266,7 @@ if($SEODataInfo->author=="Home"){
 </div>
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/programmes" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View more <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+<a href="/ministries" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View more <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
 </section>
@@ -285,12 +285,12 @@ if($SEODataInfo->author=="Home"){
 @foreach ($Projectsinfodata as $info)
   <!--item-->
 <div class="n-container-item">
-  <a href="/project/{{$info->id}}/{{$info->headingtext}}" class="n-container-img">
+  <a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="n-container-img">
   <img src="{{ asset('storage/projects_images/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
 </a>
   <div class="n-content">
-    <p class="text-wrapping w-80"><a href="/project/{{$info->id}}/{{$info->headingtext}}">{{$info->headingtext}}</a></p>
-    <p class="text-wrapping w-80"><a href="/project/{{$info->id}}/{{$info->headingtext}}">
+    <p class="text-wrapping w-80"><a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}">{{$info->headingtext}}</a></p>
+    <p class="text-wrapping w-80"><a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}">
      <?php echo str_limit($info->descriptiontext, 10); ?></a></p>
   </div>
 </div>
@@ -300,7 +300,7 @@ if($SEODataInfo->author=="Home"){
 </div>
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/projects" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View More<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+<a href="/involvements" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View More<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
 </section>
@@ -320,7 +320,7 @@ if($SEODataInfo->author=="Home"){
   <div class="col-item w-32 m-r-10">
     <div class="t-container">
 <div class="t-item">
-    <a href="/event/{{$info->id}}/{{$info->headingtext}}" class="t-item-content">
+    <a href="/event/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="t-item-content">
        <div class="t-thumbnail">
         <img class="img-fluid" src="{{ asset('storage/events_images/thumbnails/'.$info->filename) }}" alt="">
        </div>
@@ -333,7 +333,7 @@ if($SEODataInfo->author=="Home"){
        <a class="t-description" href="javascript:void(0);"></a> 
         <div class="t-content-1">
  <div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="/event/{{$info->id}}/{{$info->headingtext}}" class="btn-ui btn-ui-xs btn-ui-default more-btn-eui f-s-14">Read more..  <i class="ion ion-ios-arrow-right f-s-13 m-l-5"></i></a>
+<a href="/event/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="btn-ui btn-ui-xs btn-ui-default more-btn-eui f-s-14">Read more..  <i class="ion ion-ios-arrow-right f-s-13 m-l-5"></i></a>
 </div>
         </div>
     </div>

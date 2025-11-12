@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\PagesControllers\HomePageController;
 use App\Http\Controllers\PagesControllers\SermonsPageController;
+use App\Http\Controllers\PagesControllers\MinistriesPageController;
+use App\Http\Controllers\PagesControllers\InvolvementPageController;
 
 use App\Http\Controllers\PagesControllers\AboutPageController;
 
@@ -84,18 +86,22 @@ Route::get('/', [HomePageController::class, 'Index'])->name('home');
 Route::get('/sermons', [SermonsPageController::class, 'Index'])->name('sermons');
 Route::get('/sermon/{id}/{title}', [SermonsPageController::class, 'SermonDetails'])->name('sermon');
 
+Route::get('/ministries', [MinistriesPageController::class, 'Index'])->name('ministries');
+Route::get('/ministry/{id}/{title}', [MinistriesPageController::class, 'MinistryDetails'])->name('ministry');
+
+
+Route::get('/involvements', [InvolvementPageController::class, 'Index'])->name('involvements');
+Route::get('/involvement/{id}/{title}', [InvolvementPageController::class, 'InvolvementDetails'])->name('involvement');
+
+
+Route::get('/events', [EventsPageController::class, 'Index'])->name('events');
+Route::get('/event/{id}/{title}', [EventsPageController::class, 'EventDetails'])->name('event');
+
 
 Route::get('/about', [AboutPageController::class, 'Index'])->name('about-us');
 
 Route::get('/donate', [DonationPageController::class, 'Index'])->name('donate');
-Route::get('/programmes', [ActivitiesPageController::class, 'Index'])->name('programmes');
-Route::get('/programme/{id}/{title}', [ActivitiesPageController::class, 'ProgrammeDetails'])->name('programme');
 
-Route::get('/projects', [ProjectsPageController::class, 'Index'])->name('projects');
-Route::get('/project/{id}/{title}', [ProjectsPageController::class, 'ProjectDetails'])->name('project');
-
-Route::get('/events', [EventsPageController::class, 'Index'])->name('events');
-Route::get('/event/{id}/{title}', [EventsPageController::class, 'EventDetails'])->name('event');
 
 Route::get('/testimonials', [TestimonialsPageController::class, 'Index'])->name('client-says');
 Route::post('post-testimonial', [TestimonialsPageController::class, 'postUserTestimonial'])->name('userTestimonial.post');
