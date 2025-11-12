@@ -1808,7 +1808,7 @@ display: block;
     text-align: left;
 }
 .about-content.pagearea-content{
-      background-color: transparent;
+      background-color: #ffffff;
       top: 20px;
 }
 
@@ -1823,7 +1823,7 @@ color: #222;
 }
 
 .about-container .about-content.pagearea-content p{
-color: #fff;
+
 }
 
 

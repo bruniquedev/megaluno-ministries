@@ -18,7 +18,7 @@ if($SEODataInfo->author=="Donation"){
 
 @section('content') 
 
-<section class="main-content-section w-full m-t-100 m-b-50">
+<section class="main-content-section w-full m-t-150 m-b-50">
     <div class="main-content-container">
 
 
@@ -30,7 +30,7 @@ if($SEODataInfo->author=="Donation"){
 <div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
-    <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">Donate and Give</span> :</a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black"><span class="">Donate and Give</span> :</a></span></h1>
 
     <div class="border-separator w-full"></div>
 
@@ -42,7 +42,7 @@ if($SEODataInfo->author=="Donation"){
   </div>
   <div class="item-col">
 <h3 class="text-left f-s-18 animate-element delay6 fadeInDown-anime">
-    <span><a href="javascript:void(0);" class="color-white">{{$DataDonationsInfo[0]->headingtext}}</a></span></h3>
+    <span><a href="javascript:void(0);" class="color-black">{{$DataDonationsInfo[0]->headingtext}}</a></span></h3>
 
 @foreach ($Donation_detailsData as $info) 
 <p>{{$info->description}}</p>

@@ -9,35 +9,15 @@ use App\Http\Controllers\PagesControllers\HomePageController;
 use App\Http\Controllers\PagesControllers\SermonsPageController;
 use App\Http\Controllers\PagesControllers\MinistriesPageController;
 use App\Http\Controllers\PagesControllers\InvolvementPageController;
-
 use App\Http\Controllers\PagesControllers\AboutPageController;
-
-use App\Http\Controllers\PagesControllers\sneekpeekPageController;
-use App\Http\Controllers\PagesControllers\SafarisPackagesPageController;
-use App\Http\Controllers\PagesControllers\higlightsPageController;
-
-use App\Http\Controllers\PagesControllers\ActivitiesPageController;
-use App\Http\Controllers\PagesControllers\ProjectsPageController;
 use App\Http\Controllers\PagesControllers\EventsPageController;
 use App\Http\Controllers\PagesControllers\DonationPageController;
-
-
 use App\Http\Controllers\PagesControllers\ContactPageController;
-//In the new version of laravel, it works like this Add This code
-//use App\Http\Controllers\PagesControllers\ServicesPageController;
 use App\Http\Controllers\PagesControllers\TestimonialsPageController;
-use App\Http\Controllers\PagesControllers\AppointmentPageController;
-use App\Http\Controllers\PagesControllers\AreasPageController;
 use App\Http\Controllers\PagesControllers\GalleryPageController;
 
+
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
-
-use App\Http\Controllers\AdminPagesControllers\CountriesController;
-use App\Http\Controllers\AdminPagesControllers\BookingsController;
-use App\Http\Controllers\AdminPagesControllers\PackagesController;
-use App\Http\Controllers\AdminPagesControllers\ParksHighlightsController;
-use App\Http\Controllers\AdminPagesControllers\SneekpeeksInfoController;
-
 use App\Http\Controllers\AdminPagesControllers\ActivitiesController;
 use App\Http\Controllers\AdminPagesControllers\ProjectsController;
 use App\Http\Controllers\AdminPagesControllers\EventsController;
@@ -49,12 +29,10 @@ use App\Http\Controllers\AdminPagesControllers\LogosController;
 use App\Http\Controllers\AdminPagesControllers\PartnersController;
 use App\Http\Controllers\AdminPagesControllers\SocialmediaController;
 use App\Http\Controllers\AdminPagesControllers\AboutController;
-//use App\Http\Controllers\AdminPagesControllers\ServicesController;
 use App\Http\Controllers\AdminPagesControllers\ContactsetupController;
 use App\Http\Controllers\AdminPagesControllers\ContactsController;
 use App\Http\Controllers\AdminPagesControllers\ChangepasswordController;
 use App\Http\Controllers\AdminPagesControllers\AdminsController;
-//use App\Http\Controllers\AdminPagesControllers\AreasservedController;
 use App\Http\Controllers\AdminPagesControllers\SearchengineController;
 use App\Http\Controllers\AdminPagesControllers\GalleryController;
 

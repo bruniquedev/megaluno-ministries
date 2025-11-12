@@ -18,7 +18,7 @@ if($SEODataInfo->author=="Contact us"){
 
 @section('content') 
 
-<section class="main-content-section w-full m-t-100 m-b-50">
+<section class="main-content-section w-full m-t-150 m-b-50">
     <div class="main-content-container">
 
 <!--about section-->
