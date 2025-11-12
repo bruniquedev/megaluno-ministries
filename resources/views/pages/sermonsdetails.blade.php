@@ -44,7 +44,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
     <!--about section-->
     <div class="section_area">
 <div class="aboutarea pagecontainer-details-area"><!---->
- <div class="about-container more-details-container flex flex-column  justify-center flex-wrap flex-grow animate-element delay6 fadeInLeft-anime "> 
+ <div class="about-container more-details-container w-80 flex flex-column  flex-wrap flex-grow animate-element delay6 fadeInLeft-anime "> 
 
 <!--with an image-->
   <div class="content-container-img w-100">
@@ -52,7 +52,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
   </div>
 <!--/with an image-->
 <!--with content-->
-<div class="about-content pagearea-detail-content w-100">
+<div class="about-content p-0p pagearea-detail-content w-100">
   <h1 class="f-s-20 f-w-500 animate-element delay6 fadeInDown-anime section-heading">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$Details[0]['headingtext']}}</a></span></h1>
     <div class="border-separator w-full"></div>
