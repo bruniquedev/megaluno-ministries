@@ -1548,16 +1548,31 @@ color: #bd3838!important;
 color: #f0ad4e!important;
 }
 
+.color-web-primary {
+color: #1a9fca!important;
+}
+
 .color-orange {
 color: #fb7701!important;
 }
 
+
+
+.bg-color-web-primary{
+background-color:#1a9fca!important;
+}
 .bg-color-aliceblue {
 background-color: #f0f8ff!important;
 }
 .bg-color-white {
 background-color: #fff!important;
 }
+
+.bg-color-transparent {
+background-color: transparent!important;
+}
+
+
 .pointer-cursor{
     cursor: pointer;
 }

@@ -198,7 +198,7 @@ if($SEODataInfo->author=="Home"){
 <div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
-    <span><a href="javascript:void(0);" class="color-white"><span class="font-century-light">Donate and Give</span> :</a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black"><span class="">Donate and Give</span> :</a></span></h1>
 
     <div class="border-separator w-full"></div>
 
@@ -210,7 +210,7 @@ if($SEODataInfo->author=="Home"){
   </div>
   <div class="item-col">
 <h3 class="text-left f-s-18 animate-element delay6 fadeInDown-anime">
-    <span><a href="javascript:void(0);" class="color-white">{{$DataDonationsInfo[0]->headingtext}}</a></span></h3>
+    <span><a href="javascript:void(0);" class="color-black">{{$DataDonationsInfo[0]->headingtext}}</a></span></h3>
 
 @foreach ($Donation_detailsData as $info) 
 <p>{{$info->description}}</p>
@@ -360,7 +360,7 @@ if($SEODataInfo->author=="Home"){
     <div class="section_area m-t-30">
 <div class="aboutarea background-img pagecontainerarea bg-img-attachment h-500p b-r-1p" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
  <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content pagearea-content flex justify-center align-items-center flex-wrap flex-grow w-100">
+<div class="about-content pagearea-content bg-color-transparent flex justify-center align-items-center flex-wrap flex-grow w-100">
 
 <div class="flex justify-center align-items-center m-t-15 m-b-15 w-100 gallery-btn-container">
 <a href="{{ route('gallery.index') }}" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui h-galley-btn">VIEW GALLERY <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
