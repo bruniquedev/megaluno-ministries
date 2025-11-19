@@ -35,6 +35,7 @@ To address the challenge of initializing newly added elements with the event,
     the event listeners for each new element.
 */
 // Event delegation for dom added events
+let Index = 0;
 document.addEventListener('click', function(event) {
   var target = event.target;
 
@@ -62,14 +63,18 @@ document.addEventListener('click', function(event) {
 
 
 function openLightModal(elem) {
-
+Index++;
+//console.log(elem);
 var images = elem.getAttribute("data-images");
 var text_desc = elem.getAttribute("data-desc");
 var captionText = document.getElementById("light-caption");
 
 var parentElement_slides = document.getElementById('light-slides-contents');
 var parentElement_columns = document.getElementById('light-columns-contents');
-//console.log(images);
+
+ parentElement_slides.innerHTML="";
+parentElement_columns.innerHTML="";
+
 var images_array = images.split(',');
 var counter=1;
 
@@ -139,7 +144,7 @@ var lightslideIndex = 1;
 //showLightSlides(lightslideIndex);
 
 function LightplusSlides(index) {
-  previewLightSlides(index++);
+  previewLightSlides(Index);
 }
 
 function currentLightSlide(n) {
@@ -166,14 +171,14 @@ function showLightSlides(n) {
 
 function previewLightSlides(index) {
   let slides = document.getElementsByClassName("light-box-preview");
-  console.log("index = "+ index);
+  //console.log("Index = "+ Index);
   if(slides){
-     if (index >= slides.length) {lightslideIndex = 0}
-  if (index <= 1) {lightslideIndex = index-1}
+     if (Index >= slides.length) {index = 0}
+  if (Index < 1) {index = Index-1}
+Index = index;
+//console.log("new Index = "+ Index);
 
-console.log(lightslideIndex);
-
-  let slide = document.getElementsByClassName("light-box-preview")[lightslideIndex];
+  let slide = document.getElementsByClassName("light-box-preview")[index];
 
    openLightModal(slide);
  }
