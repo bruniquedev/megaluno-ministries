@@ -944,7 +944,15 @@ margin-left: 30px !important;
 .p-20p{
  padding: 20px!important;   
 }
-
+.p-30p{
+ padding: 30px!important;   
+}
+.p-40p{
+ padding: 40px!important;   
+}
+.p-50p{
+ padding: 50px!important;   
+}
 
 .p-t-5p{
  padding-top: 5px!important;   
@@ -1608,10 +1616,13 @@ box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
   margin-left: 10px;
   margin-bottom: 1rem;
 }
+
+.form-groupy label{
+}
  .form-input-group{
 display: flex;
-    /* margin-top: 1rem; 
-    margin-bottom: 1rem; */
+     margin-top: 1rem; 
+    margin-bottom: 1rem; 
 }
 .display_label{ display:none !important; text-align:left !important; }
 
@@ -1633,9 +1644,9 @@ font-family: 'Myriad-Regular';
     color: #333;
     line-height: 28px;
     font-weight: 400;
-    padding: 10px 20px;
+    padding: 10px 5px;
     background-color: #ffffff;
-    border: 2px solid #ced4da;
+    border: 1px solid #ced4da;
     border-radius: 2px;
         transition: all 300ms ease;
         outline-width: 0 !important;
@@ -1746,7 +1757,7 @@ height: 36px;
 .background-img {
     position: relative;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: top center;
     background-size: cover;
    /* text-align: center;*/
 }
@@ -2517,6 +2528,59 @@ margin: 0 auto;
       background-color: #fff;
 }
 
+.testimonial-column{
+        position: relative;
+
+            display: flex;
+    flex-direction: column;
+    width: 32%;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.testimonial-column-item{
+        background: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    padding: 30px;
+    position: relative;
+            text-align: left;
+}
+
+.testimonail-content {
+    font-style: normal;
+    font-weight: 300;
+    line-height: 170%;
+    margin-bottom: 30px;
+}
+
+.testimonial_item_triangle {
+    border-left: 20px solid rgba(0, 0, 0, 0);
+    border-right: 20px solid rgba(0, 0, 0, 0);
+    border-top: 20px solid #1a9fca;
+    bottom: -20px;
+    content: "";
+    left: 50px;
+    position: absolute;
+}
+
+.testimonial-column-item h5 {
+    line-height: 14px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.testimonial-img{
+      border-radius: 50%;
+    margin: 30px 0 0 35px;
+    overflow: hidden;
+    transform: none;
+    width: 70px;  
+}
+
+.testimonial-img img {
+    display: block;
+}
 
  .property-details-reviews .reviews-col-1{
  width: 50%;

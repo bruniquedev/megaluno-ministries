@@ -27,8 +27,13 @@ if($SEODataInfo->author=="About"){
     <div class="section_area m-b-10">
 <div class="aboutarea background-img bg-img-attachment" style="background-image: url('{{ asset("storage/about_images/thumbnails/".$info->filename) }}');">
  <div class="about-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content">
+<div class="about-content p-50p">
 
+<div class="w-100 flex justify-center">
+ <div class="summary_img_wrapper">
+  <img src="<?php echo asset('images/user.png');?>" alt="img" class="summary_img" />
+</div>
+</div>
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$info->headingtext}}</a></span></h1>
 

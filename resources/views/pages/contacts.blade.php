@@ -109,13 +109,13 @@ id="FORM_CONTACT" onsubmit="return User_contactMessage_request(event);" class="a
 
 <div class="flex flex-wrap">
   <div class="form-groupy w-47 m-r-10">
-  <label for="name">Full name <span class="color-danger f-s-17">*</span></label>
+  <label for="Name">Full name <span class="color-danger f-s-17">*</span></label>
   <div class="form-input-group">    
   <input type="text" class="input-control" required="required"  name="Name" id="Name" />
 </div>
 </div>                           
  <div class="form-groupy w-47">
-  <label for="name" id="Emailabel"> Email<span class="color-danger f-s-17">*</span></label>
+  <label for="email" id="Emailabel"> Email<span class="color-danger f-s-17">*</span></label>
   <div class="form-input-group">    
   <input type="email" class="input-control" required="required" name="email" id="email" />
 </div>
@@ -124,7 +124,7 @@ id="FORM_CONTACT" onsubmit="return User_contactMessage_request(event);" class="a
     </div> 
   
   <div class="form-groupy">
-  <label for="name" id="phonelabel"> Phone number<span class="color-danger f-s-13 m-l-5">(Optional)</span></label>
+  <label for="phonenumber" id="phonelabel"> Phone number<span class="color-danger f-s-13 m-l-5">(Optional)</span></label>
   <div class="form-input-group">    
   <input type="text" class="input-control" name="phonenumber" id="phonenumber" />
  </div>
@@ -132,14 +132,14 @@ id="FORM_CONTACT" onsubmit="return User_contactMessage_request(event);" class="a
     </div>
 
       <div class="form-groupy">
-  <label for="name" id="Namelabel">Subject <span class="color-danger f-s-17">*</span></label>
+  <label for="subject" id="Namelabel">Subject <span class="color-danger f-s-17">*</span></label>
   <div class="form-input-group">    
   <input type="text" class="input-control" required="required"  name="subject" id="subject" />
 </div>
                           </div>
 
 <div class="form-groupy">
-<label for="name" id="MessageLabel">Message<span class="color-danger f-s-17">*</span></label>
+<label for="message" id="MessageLabel">Message<span class="color-danger f-s-17">*</span></label>
 <div class="form-input-group"> 
 <textarea class="input-control" required="required" name="message" id="message" rows="3"></textarea>
 </div>
@@ -147,7 +147,7 @@ id="FORM_CONTACT" onsubmit="return User_contactMessage_request(event);" class="a
 </div>
                           
  <div class="center"> 
- <button type="submit" name="submit" class="btn-ui btn-ui-lg btn-ui-skyblue w-full b-r-9999999p" id="submitbutton" >SEND</button>
+ <button type="submit" name="submit" class="btn-ui btn-ui-lg btn-ui-skyblue bg-color-web-primary w-full b-r-9999999p" id="submitbutton" >SEND</button>
 </div> 
                       </form>
 
