@@ -41,6 +41,8 @@
 
 <link href="{{ asset('css/slide_show_format_2.css') }}" rel="stylesheet" type="text/css" />
 
+<link href="{{ asset('css/lightbox_gallery.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/table_custom.css') }}" rel="stylesheet" type="text/css" />
 
@@ -80,6 +82,8 @@
 <script src="{{ asset('custom_js/custom_multi_slider.js') }}" defer></script>
 
 <script src="{{ asset('custom_js/slide_show_format_2.js') }}" defer></script>
+
+<script src="{{ asset('custom_js/lightbox_gallery.js') }}" defer></script>
 
     <script src="{{ asset('custom_js/custom-contact.js') }}" defer></script>
     <script src="{{ asset('custom_js/readmore.js') }}" defer></script>

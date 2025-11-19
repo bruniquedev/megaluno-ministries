@@ -82,6 +82,36 @@ if($SEODataInfo->author=="Gallery"){
 </section>
 
 
+
+ @if(count($DataInfo) > 0) 
+<section class="section_area m-t-20 p-5p bg-color-white">
+
+<div class="flex justify-center  flex-wrap flex-grow section-row-content">
+
+@foreach ($DataInfo as $info)
+
+
+  <!--item-->
+<div class="n-container-item">
+  <a href="javascript:void(0);" class="light-box-preview n-container-img"  data-images="<?php echo asset('storage/gallery_images/thumbnails/'.$info->filename); ?>" data-desc="<?php echo$info->text; ?>">
+  <img src="{{ asset('storage/gallery_images/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
+</a>
+  <div class="n-content">
+    <p class="text-wrapping w-80">
+     <?php echo str_limit($info->text, 10); ?></p>
+  </div>
+</div>
+<!--item-->
+@endforeach
+
+</div>
+</section>
+@endif 
+
+
+
+
+
     </div>
 </section>
 

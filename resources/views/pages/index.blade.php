@@ -395,7 +395,7 @@ if($SEODataInfo->author=="Home"){
               <div class="item-content-mb">
                 <span class="u-icon-rectangle"><i class="ion ion-chatbubbles"></i></span>
                 <h5 class="u-heading-mb-5"> {{$info->name}} </h5>
-                <p class="u-text-mb">{{$info->descriptiontext}}.</p>
+                <p class="u-text-mb text-style">{{$info->descriptiontext}}.</p>
                 <a href="#"><span class="u-icon-mb"><i class="ion ion-quote"></i></span></a>
               </div>
             </div>

@@ -2236,6 +2236,12 @@ color: #a5a2a2;
     color: #111111;
 }
 
+.text-style{
+       color: #2c2929;
+    font-size: 15px;
+    line-height: 1.5; 
+}
+
 .u-repeater-item-mb .item-content-mb a{
     color:#a5a2a2;
 }
