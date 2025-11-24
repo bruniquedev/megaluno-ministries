@@ -1,6 +1,9 @@
 
     
 <div class="navigation" id="navigation">
+
+
+  <div class="nav-first">
    <div class="nav_brand">
   <div class="logo_wrapper" id="logobrand" logourl="{{'storage/logo_images/'.$Logoname }}" brandtext="{{$Brandname}}">
   <img src="<?php echo asset('storage/logos_images/'.$Logoname);?>" alt="logo" class="logo_img" />
@@ -17,6 +20,7 @@
    ?>
 </div>
 </div>
+</div>
 
 <div class="responsive-nav" id="responsive-nav">
 
@@ -24,6 +28,62 @@
 
      <li><a href="{{ route('manage-visitors.index') }}">Visitors <?php if($TodayTotalCountvisitors > 0){ ?>  
       <span class="badge badges messagebadge" id="messagebadge" ><?php echo $TodayTotalCountvisitors; ?></span><?php } ?></a></li>
+
+<!-----dropdown---->
+  <li class="custom-dropdown">
+    <a class="dropbtn">Home 
+      <i class="ion-android-arrow-dropdown"></i>
+    </a>
+    <ul class="custom-dropdown-content">
+<li><a href="{{ route('manage-sliders.index') }}">Slider</a></li>
+<li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
+<li><a href="{{ route('manage-home.index') }}">Home management</a></li>
+<li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
+
+<li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
+<li><a href="{{ route('manage-seo.index') }}">SEO management</a></li>
+
+{{--<!--<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>-->--}}
+    </ul>
+  </li> 
+<!----end -dropdown---->
+
+
+<!-----dropdown---->
+  <li class="custom-dropdown">
+    <a class="dropbtn">Ministries
+      <i class="ion-android-arrow-dropdown"></i>
+    </a>
+    <ul class="custom-dropdown-content">
+  <li><a href="{{ route('manage-ministries.create') }}">Create a ministry info</a></li>
+<li><a href="{{ route('manage-ministries.index') }}">Ministries info</a></li>
+    </ul>
+  </li> 
+<!----end -dropdown---->
+
+<!-----dropdown---->
+  <li class="custom-dropdown">
+    <a class="dropbtn">Involvement
+      <i class="ion-android-arrow-dropdown"></i>
+    </a>
+    <ul class="custom-dropdown-content">
+  <li><a href="{{ route('manage-involvements.create') }}">Create an involvement info</a></li>
+<li><a href="{{ route('manage-involvements.index') }}">Involvements info</a></li>
+    </ul>
+  </li> 
+<!----end -dropdown---->
+
+<!-----dropdown---->
+  <li class="custom-dropdown">
+    <a class="dropbtn">Sermons
+      <i class="ion-android-arrow-dropdown"></i>
+    </a>
+    <ul class="custom-dropdown-content">
+  <li><a href="{{ route('manage-sermons.create') }}">Create a sermon info</a></li>
+<li><a href="{{ route('manage-sermons.index') }}">Sermons info</a></li>
+    </ul>
+  </li> 
+<!----end -dropdown---->
 
 
 <!-----dropdown---->
@@ -97,23 +157,7 @@
 <!----end -dropdown---->
 
 
-<!-----dropdown---->
-  <li class="custom-dropdown">
-    <a class="dropbtn">Home 
-      <i class="ion-android-arrow-dropdown"></i>
-    </a>
-    <ul class="custom-dropdown-content">
-<li><a href="{{ route('manage-sliders.index') }}">Slider</a></li>
-<li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
-<li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 
-<li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
-<li><a href="{{ route('manage-seo.index') }}">SEO management</a></li>
-
-{{--<!--<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>-->--}}
-    </ul>
-  </li> 
-<!----end -dropdown---->
 
 <!-----dropdown---->
   <li class="custom-dropdown">

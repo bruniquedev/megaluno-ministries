@@ -63,7 +63,7 @@ if($SEODataInfo->author=="Home"){
 <!--summary section-->
     <div class="section_area">
 <div class="aboutarea">
- <div class="about-container w-100 animate-element delay6 fadeInLeft-anime "> 
+ <div class="about-container home-summary-container w-100 animate-element delay6 fadeInLeft-anime "> 
 <div class="about-content p-t-5p">
 
 <div class="home-summary flex">
@@ -360,9 +360,9 @@ if($SEODataInfo->author=="Home"){
     <div class="section_area m-t-30">
 <div class="aboutarea background-img pagecontainerarea bg-img-attachment h-500p b-r-1p" style="background-image: url('{{asset("storage/donations_images/thumbnails/".$DataDonationsInfo[0]->filename) }}');">
  <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content pagearea-content bg-color-transparent flex justify-center align-items-center flex-wrap flex-grow w-100">
+<div class="about-content fit-view pagearea-content bg-color-transparent flex justify-center align-items-center flex-wrap flex-grow w-100">
 
-<div class="flex justify-center align-items-center m-t-15 m-b-15 w-100 gallery-btn-container">
+<div class="flex justify-center align-items-center m-t-15 m-b-15 w-full gallery-btn-container">
 <a href="{{ route('gallery.index') }}" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui h-galley-btn">VIEW GALLERY <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
 
@@ -378,23 +378,24 @@ if($SEODataInfo->author=="Home"){
 
 
 @if(count($TestimonialsData) > 0)
-<section class="section_area m-t-20">
+<section class="section_area m-t-20 testimonials-area">
  
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span>TESTIMONIALS</a></span></h1>
 
-    <p class="center m-b-30">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
+    <p class="center m-b-30 tst-desc">Phasellus iaculis posuere velit, congue placerat duawi rhoncus vel. Maecenas tortor orci, aliquet.</p>
 
-<div class="multi-carousel" data-seconds="0" id="MulticarouselTestimonials">
+<div class="multi-carousel" data-seconds="10" id="MulticarouselTestimonials">
   <div class="row-multislider">
    <div class="row-multislider-container justify-center m-t-50 multislide-section">
  
 @foreach ($TestimonialsData as $info) 
   <!--item-->
-        <div class="u-repeater-item-mb container-multislider w-25">
+        <div class="u-repeater-item-mb container-multislider w-25 p-t-50p">
               <div class="item-content-mb">
                 <span class="u-icon-rectangle"><i class="ion ion-chatbubbles"></i></span>
                 <h5 class="u-heading-mb-5"> {{$info->name}} </h5>
+                <h5 class="u-heading-mb-pf">Business <span>-</span> personel</h5>
                 <p class="u-text-mb text-style">{{$info->descriptiontext}}.</p>
                 <a href="#"><span class="u-icon-mb"><i class="ion ion-quote"></i></span></a>
               </div>

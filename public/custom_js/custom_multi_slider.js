@@ -1,30 +1,16 @@
 function createMultiSlider(containerId,IntervalSeconds) {
-  var right = 0;
-  var maxMargin;
-  var jumpMargin = 150;
   let multicarouseltimeout;
+  const sliderContainerToSwipe = document.querySelector(`#${containerId} .row-multislider-container`);
+  let startX = 0;
+let scrollStart = 0;
+let isDragging = false;
+let scrollLeft;
 
   function initializeMultiSlider() {
     if (document.getElementById(containerId) === null) return;
-
-var boxwidth = document.querySelector(`#${containerId} .container-multislider`).offsetWidth;
-var displaywidth = document.querySelector(`#${containerId} .row-multislider`).offsetWidth;
-var children = document.querySelectorAll(`#${containerId} .row-multislider-container > .container-multislider`).length;
-var outerboxwidth = children * boxwidth + (children * 10);
-    document.querySelector(`#${containerId} .row-multislider-container`).style.width = "100%";
-    maxMargin = outerboxwidth-displaywidth;
-    //console.log("boxwidth : "+boxwidth + " displaywidth : "+displaywidth + " children : "+children + " outerboxwidth : "+outerboxwidth + " maxMargin : "+maxMargin);
-    var rowcont = document.querySelector(`#${containerId} .row-multislider-container`);
-    if (right <= -maxMargin) {
-      right = 0; //reset back to 0
-      //console.log(right + " right <= -maxMargin " + maxMargin);
-    }else{
-      right -= jumpMargin;
-      //console.log(right + " right > -maxMargin " + maxMargin);
-    }
   
     if(IntervalSeconds > 0){
-    rowcont.style.marginLeft = right + "px";
+    moveNext();
     multicarouseltimeout = setTimeout(initializeMultiSlider, IntervalSeconds); 
      }
 
@@ -58,28 +44,119 @@ var outerboxwidth = children * boxwidth + (children * 10);
        }
   }
 
-  function slideLeft() {
-    clearTimeout(multicarouseltimeout);
-    var rowcont = document.querySelector(`#${containerId} .row-multislider-container`);
-    if (right <= -maxMargin) {
-      right = 0; //reset back to 0
-    } else {
-      right -= jumpMargin;
-    }
-    rowcont.style.marginLeft = right + "px";
+
+function moveNext() {
+    if(IntervalSeconds > 0){
+   clearTimeout(multicarouseltimeout);
+      }
+  const item = sliderContainerToSwipe.querySelector('.container-multislider');
+  const itemWidth = item.offsetWidth;
+  const visibleWidth = sliderContainerToSwipe.offsetWidth;
+  const maxScroll = sliderContainerToSwipe.scrollWidth - visibleWidth;
+  const scrolledLeft = sliderContainerToSwipe.scrollLeft;
+  const scrollWidth = sliderContainerToSwipe.scrollWidth;
+  const remainingScroll = scrollWidth - (scrolledLeft + visibleWidth);
+
+  // Scroll by 1 item width, but don't exceed maxScroll
+  sliderContainerToSwipe.scrollLeft = Math.min(
+    sliderContainerToSwipe.scrollLeft + itemWidth,
+    maxScroll
+  );
+
+ if (remainingScroll <= 5) {
+    // Loop to beginning
+    sliderContainerToSwipe.scrollLeft = 0;
   }
 
-  function slideRight() {
-    clearTimeout(multicarouseltimeout);
-    var rowcont = document.querySelector(`#${containerId} .row-multislider-container`);
-    if (right == 0) {
-      right = -jumpMargin;
-    } else if (right >= maxMargin) {
+//console.log("maxScroll : " + maxScroll);
+//console.log("remainingScroll : "+ remainingScroll);
+
+}
+
+function movePrev() {
+   clearTimeout(multicarouseltimeout);
+  const item = sliderContainerToSwipe.querySelector('.container-multislider');
+  const itemWidth = item.offsetWidth;
+
+  // Scroll back by 1 item width, but not less than 0
+  sliderContainerToSwipe.scrollLeft = Math.max(
+    sliderContainerToSwipe.scrollLeft - itemWidth,
+    0
+  );
+}
+
+
+
+//normal view swiping for desktops
+sliderContainerToSwipe.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  sliderContainerToSwipe.classList.add('dragging');
+  startX = e.pageX - sliderContainerToSwipe.offsetLeft;
+  scrollLeft = sliderContainerToSwipe.scrollLeft;
+});
+
+sliderContainerToSwipe.addEventListener('mouseleave', () => {
+  isDragging = false;
+  sliderContainerToSwipe.classList.remove('dragging');
+});
+
+sliderContainerToSwipe.addEventListener('mouseup', () => {
+  isDragging = false;
+  sliderContainerToSwipe.classList.remove('dragging');
+});
+
+sliderContainerToSwipe.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  e.preventDefault();
+  const x = e.pageX - sliderContainerToSwipe.offsetLeft;
+  const walk = (x - startX) * 1; // You can adjust speed multiplier
+  sliderContainerToSwipe.scrollLeft = scrollLeft - walk;
+});
+
+
+//This is Mobile basic type of swiping and works well
+/*
+sliderContainerToSwipe.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  scrollStart = sliderContainerToSwipe.scrollLeft;
+}, { passive: true });
+
+sliderContainerToSwipe.addEventListener('touchend', (e) => {
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+  const itemWidth = sliderContainerToSwipe.querySelector('.container-multislider').offsetWidth + 10; // including margin
+
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      // swipe left
+      sliderContainerToSwipe.scrollLeft = scrollStart + itemWidth;
     } else {
-      right += jumpMargin;
+      // swipe right
+      sliderContainerToSwipe.scrollLeft = scrollStart - itemWidth;
     }
-    rowcont.style.marginLeft = right + "px";
   }
+});*/
+
+//Another type of swipping to support mobile where on finger move item moves along:
+sliderContainerToSwipe.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  startX = e.touches[0].pageX - sliderContainerToSwipe.offsetLeft;
+  scrollLeft = sliderContainerToSwipe.scrollLeft;
+});
+
+sliderContainerToSwipe.addEventListener('touchend', () => {
+  isDragging = false;
+});
+
+sliderContainerToSwipe.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const x = e.touches[0].pageX - sliderContainerToSwipe.offsetLeft;
+  const walk = (x - startX) * 1;
+  sliderContainerToSwipe.scrollLeft = scrollLeft - walk;
+});
+
+
+
 
   // Event listeners for mouseover and mouseout
   var multiCarousel = document.getElementById(containerId);
@@ -94,9 +171,10 @@ var outerboxwidth = children * boxwidth + (children * 10);
   var rightControlBtn = document.querySelector(`#${containerId} .right-controlbtn`);
 
   if (leftControlBtn && rightControlBtn) {
-    leftControlBtn.addEventListener('click', slideRight);
-    rightControlBtn.addEventListener('click', slideLeft);
+    leftControlBtn.addEventListener('click', movePrev);
+    rightControlBtn.addEventListener('click', moveNext);
   }
+
 
 
 
@@ -108,11 +186,14 @@ var outerboxwidth = children * boxwidth + (children * 10);
     initializeMultiSlider: initializeMultiSlider,
     showMultiSliderControls: showMultiSliderControls,
     hideMultiSliderControls: hideMultiSliderControls,
-    slideLeft: slideLeft,
-    slideRight: slideRight,
+    moveNext: moveNext,
+    movePrev: movePrev,
+
   };
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
 // Usage
  if(document.getElementsByClassName('multi-carousel')[0]!=null){
  var multicarousels = document.querySelectorAll(".multi-carousel");
@@ -125,7 +206,7 @@ if(target_seconds==null || target_seconds==0 || isNaN(target_seconds)){
 target_seconds=0;
 }
 if(target_id==null){
-console.log("Id of the multi carousel is required on multi-carousel class element");
+//console.log("Id of the multi carousel is required on multi-carousel class element");
 }
 
 //console.log("target_id "+ target_id);
@@ -134,5 +215,7 @@ console.log("Id of the multi carousel is required on multi-carousel class elemen
 createMultiSlider(target_id,target_seconds);
 
  }
-
+//console.log("Multi-slider is visible");
 }
+
+});

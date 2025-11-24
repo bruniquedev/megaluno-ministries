@@ -44,6 +44,10 @@ background: #ffffff;
  }
 
 
+/** {
+    outline: 1px solid red;
+}*/
+
  .main-content-section{
     width: 100%;
 }
@@ -55,9 +59,11 @@ margin: 0 auto;
 
 h1, h2, h3, h4, h5, h6{
      font-family: CenturyGothic-bold;
+     color: #222;
 }
 p{
 font-family: sans-serif;
+color: #222;
 }
 h1,h2,h3,h4,h5,p{
     margin-top: 0px;
@@ -960,7 +966,18 @@ margin-left: 30px !important;
 .p-t-10p{
  padding-top: 10px!important;   
 }
-
+.p-t-20p{
+ padding-top: 20px!important;   
+}
+.p-t-30p{
+ padding-top: 30px!important;   
+}
+.p-t-40p{
+ padding-top: 40px!important;   
+}
+.p-t-50p{
+ padding-top: 50px!important;   
+}
 
 .p-b-5p{
  padding-bottom: 5px!important;   
@@ -2191,7 +2208,7 @@ a.more-btn-eui.h-galley-btn {
 color: #111111;
     background-color: #edf5fc;
     box-shadow: -2px 6px 17px -6px rgba(0,0,0,0.5);
-border-radius: 0px 0px 0px 80px;
+border-radius: 0px 0px 0px 20px;
 border: 1px solid #1a9fca;
 }
 
@@ -2235,6 +2252,14 @@ color: #a5a2a2;
     padding: 5px;
     word-wrap: break-word;
         font-size: 1.25rem;
+    line-height: 1.2;
+        font-weight: 500;
+}
+
+.u-repeater-item-mb .item-content-mb .u-heading-mb-pf{
+ margin: 0px 5px 0px;
+    padding: 5px;
+    word-wrap: break-word;
     line-height: 1.2;
         font-weight: 500;
 }
@@ -2517,6 +2542,7 @@ background-color: #fff;
 /*--/dropdown--*/
 
 /*------Reviews on property-----*/
+
 
 .review-section{
       width: 90%;
@@ -3136,6 +3162,16 @@ visibility: visible;
      word-spacing: 1pt;
         letter-spacing: 1pt;
     }
+
+     #ul-footeritem li a:hover, .contact-footer-ul li a:hover{
+        color: #1a9fca;
+     }
+
+     #ul-footeritem li a:hover:not(.active),  .contact-footer-ul li a:hover:not(.active){
+       color: #1a9fca;
+     }
+
+
     
     .footer-blurb-item #footer-item{
     font-weight: bolder !important;

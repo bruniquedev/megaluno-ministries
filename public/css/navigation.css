@@ -566,7 +566,7 @@ ul.custom-dropdown-content{
     padding: 10px 16px;
     position: fixed;
     z-index: 13;
-    right: 0px;
+    right: -10px;
     top:0px;
     text-decoration: none;
     display: block;

@@ -24,14 +24,9 @@ class AboutController extends Controller
  //controllers have a constructors. For those views whose controllers doesnt have a constructor 
  //in them you dont need to call this        
  parent::__construct();
-        ////this helps in limiting those who are not logged in
-//you can copy and paste this into other controllers where you want to limit login
       
    //register admin guard in the config\auth.php   
 $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
-
-        //go to app\Http\Controllers\Middleware\Authenticate.php in redirectTo function and the page/route
-        //for redirection if user is not logged in return route('adminlogin')
     }
 
 

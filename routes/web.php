@@ -18,8 +18,18 @@ use App\Http\Controllers\PagesControllers\GalleryPageController;
 
 
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
+
+use App\Http\Controllers\AdminPagesControllers\HomesettingsController;
+use App\Http\Controllers\AdminPagesControllers\SermonsController;
+use App\Http\Controllers\AdminPagesControllers\InvolvementsController;
+use App\Http\Controllers\AdminPagesControllers\MinistriesController;
+
 use App\Http\Controllers\AdminPagesControllers\ActivitiesController;
 use App\Http\Controllers\AdminPagesControllers\ProjectsController;
+//use App\Http\Controllers\AdminPagesControllers\ServicesController;
+//use App\Http\Controllers\AdminPagesControllers\AreasservedController;
+
+
 use App\Http\Controllers\AdminPagesControllers\EventsController;
 use App\Http\Controllers\AdminPagesControllers\DonationsController;
 
@@ -88,7 +98,7 @@ Route::resource('gallery',GalleryPageController::class);
 
 Route::get('/contactus', [ContactPageController::class, 'Index'])->name('contact-us');
 Route::post('post-contactmessage-creation', [ContactPageController::class, 'postUserContactMessage'])->name('usercontactmessage.post');
-Route::post('post-booking-creation', [SafarisPackagesPageController::class, 'PostUserBooking'])->name('userbooking.post');
+//Route::post('post-booking-creation', [SafarisPackagesPageController::class, 'PostUserBooking'])->name('userbooking.post');
 
 //Route::get('/services/{name}', [ServicesPageController::class, 'Index'])->name('services');
 //Route::get('areasserved',[AreasPageController::class, 'Index'])->name('areas-served');
@@ -106,20 +116,38 @@ Route::post('post-adminlogin', [AuthController::class, 'postAdminLogin'])->name(
 
 Route::name('')->middleware('visitor')->group(function() {
     
+
 Route::get('/', [HomePageController::class, 'Index'])->name('home');
-Route::get('/about', [AboutPageController::class, 'Index'])->name('about-us');
-Route::get('/donate', [DonationPageController::class, 'Index'])->name('donate');
-Route::get('/programmes', [ActivitiesPageController::class, 'Index'])->name('programmes');
-Route::get('/programme/{id}/{title}', [ActivitiesPageController::class, 'ProgrammeDetails'])->name('programme');
-Route::get('/projects', [ProjectsPageController::class, 'Index'])->name('projects');
-Route::get('/project/{id}/{title}', [ProjectsPageController::class, 'ProjectDetails'])->name('project');
+
+Route::get('/sermons', [SermonsPageController::class, 'Index'])->name('sermons');
+Route::get('/sermon/{id}/{title}', [SermonsPageController::class, 'SermonDetails'])->name('sermon');
+
+Route::get('/ministries', [MinistriesPageController::class, 'Index'])->name('ministries');
+Route::get('/ministry/{id}/{title}', [MinistriesPageController::class, 'MinistryDetails'])->name('ministry');
+
+
+Route::get('/involvements', [InvolvementPageController::class, 'Index'])->name('involvements');
+Route::get('/involvement/{id}/{title}', [InvolvementPageController::class, 'InvolvementDetails'])->name('involvement');
+
+
 Route::get('/events', [EventsPageController::class, 'Index'])->name('events');
 Route::get('/event/{id}/{title}', [EventsPageController::class, 'EventDetails'])->name('event');
+
+
+Route::get('/about', [AboutPageController::class, 'Index'])->name('about-us');
+Route::get('/donate', [DonationPageController::class, 'Index'])->name('donate');
+
+
+Route::get('/testimonials', [TestimonialsPageController::class, 'Index'])->name('client-says');
+Route::post('post-testimonial', [TestimonialsPageController::class, 'postUserTestimonial'])->name('userTestimonial.post');
+
+Route::resource('gallery',GalleryPageController::class);
+
+Route::get('/contactus', [ContactPageController::class, 'Index'])->name('contact-us');
+
+
 //Route::get('/service/{name}', [ServicesPageController::class, 'Index'])->name('service');
 //Route::get('areasserved',[AreasPageController::class, 'Index'])->name('areas-served');
-Route::get('/testimonials', [TestimonialsPageController::class, 'Index'])->name('testimonials');
-Route::get('/contactus', [ContactPageController::class, 'Index'])->name('contact-us');
-Route::resource('gallery',GalleryPageController::class);
     });
 
 
@@ -132,8 +160,14 @@ Auth::routes();
 Route::resource('manage-visitors',VisitorsController::class);
 
 
+Route::resource('manage-home',HomesettingsController::class);
+Route::resource('manage-sermons',SermonsController::class);
+Route::resource('manage-involvements',InvolvementsController::class);
+Route::resource('manage-ministries',MinistriesController::class);
+
 Route::resource('manage-programmes',ActivitiesController::class);
 Route::resource('manage-projects',ProjectsController::class);
+
 Route::resource('manage-events',EventsController::class);
 Route::resource('manage-donations',DonationsController::class);
 Route::get('users-donations', [DonationsController::class,'UsersDonations']);
@@ -189,8 +223,14 @@ Route::resource('manage-about',AboutController::class);
 Route::resource('manage-visitors',VisitorsController::class);
 
 
+Route::resource('manage-home',HomesettingsController::class);
+Route::resource('manage-sermons',SermonsController::class);
+Route::resource('manage-involvements',InvolvementsController::class);
+Route::resource('manage-ministries',MinistriesController::class);
+
 Route::resource('manage-programmes',ActivitiesController::class);
 Route::resource('manage-projects',ProjectsController::class);
+
 Route::resource('manage-events',EventsController::class);
 Route::resource('manage-donations',DonationsController::class);
 Route::get('users-donations', [DonationsController::class,'UsersDonations']);

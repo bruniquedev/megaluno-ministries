@@ -62,8 +62,9 @@ if($ContactsSetupDataInfo->detailtype=="Footer detail"){
 					 <div class="w-15 footer-blurb-item animate-element delay8 fadeInUp-anime">
 						<h3 ><a id="footer-link" href="javascript:void(0);">OTHER LINKS</a></h3>
 						<ul id="ul-footeritem">
-<li><a href="/programmes">Programmes</a></li>					
- <li><a  href="/projects">Projects</a></li>
+<li><a href="/ministries">Ministries</a></li>					
+ <li><a  href="/involvements">Get Involved</a></li>
+ <li><a  href="/sermons">Sermons</a></li>
   <li><a  href="/events">Events</a></li>
   <li><a  href="/donate">Donate</a></li>
 						</ul>
@@ -104,7 +105,7 @@ if($ContactsSetupDataInfo->detailtype=="Footer detail"){
 <?php 
 if($ContactsSetupDataInfo->detailtype=="Address"){ 
   ?>
-<li><i class="ion-ios-location"></i><a href="#">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
+<li><i class="ion-ios-location"></i><a href="javascript:void(0);">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
 <?php } ?>
 <?php 
 if($ContactsSetupDataInfo->detailtype=="Tel"){ 

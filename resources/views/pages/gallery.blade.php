@@ -97,7 +97,7 @@ if($SEODataInfo->author=="Gallery"){
   <img src="{{ asset('storage/gallery_images/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
 </a>
   <div class="n-content">
-    <p class="text-wrapping w-80">
+    <p class="text-wrapping w-80 color-white">
      <?php echo str_limit($info->text, 10); ?></p>
   </div>
 </div>

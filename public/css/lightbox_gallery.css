@@ -121,6 +121,10 @@
   color: white;
 }
 
+.light-caption-container #light-caption{
+  color: white;
+}
+
 .light-demo {
   opacity: 0.6;
 }
@@ -140,7 +144,7 @@ img.light-hover-shadow {
 
 @media screen and (max-width: 600px){
 .light-close {
-    top: 70px !important;
+    top: 50px !important;
   }
   }
 
