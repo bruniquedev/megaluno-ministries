@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container card-In m-t-100 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
  <div class="col-md-12 col-md-12">
 @if (session('success'))

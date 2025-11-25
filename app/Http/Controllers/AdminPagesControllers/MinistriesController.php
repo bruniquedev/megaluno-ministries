@@ -30,7 +30,7 @@ class MinistriesController extends Controller
  parent::__construct();
       
    //register admin guard in the config\auth.php   
-$this->middleware('auth:blessingheartadmin');//un comment if you want to limit
+$this->middleware('auth:megalunaadmin');//un comment if you want to limit
     }
 
 
@@ -61,7 +61,7 @@ $data = content_info::where('page_area_type', 'ministry')->get();
             'headingtext'=>'',
             'filename'=>'',
             'file_width'=>'600',
-            'file_height'=>'350'
+            'file_height'=>'350',
             'iconfile'=>'',
             'icon_width'=>'100',
             'icon_height'=>'100',
@@ -217,5 +217,5 @@ $sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
 
 
 
-    
+
 }

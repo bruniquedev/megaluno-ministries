@@ -42,7 +42,7 @@ return [
         ],
     
 
-    'blessingheartadmin' => [
+    'megalunaadmin' => [
         'driver' => 'session',
         'provider' => 'admins',
     ],

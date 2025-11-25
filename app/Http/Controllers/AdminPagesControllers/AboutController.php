@@ -26,7 +26,7 @@ class AboutController extends Controller
  parent::__construct();
       
    //register admin guard in the config\auth.php   
-$this->middleware('auth:blessingheartadmin');//un comment if you want to limit
+$this->middleware('auth:megalunaadmin');//un comment if you want to limit
     }
 
 

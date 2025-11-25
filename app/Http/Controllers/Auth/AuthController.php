@@ -36,7 +36,7 @@ class AuthController extends Controller
         //var_dump($credentials); die();
        // if(Auth::attempt($credentials)){ // login attempt
        //register admin guard in the config\auth.php  
-        if (Auth::guard('blessingheartadmin')->attempt($credentials)) {
+        if (Auth::guard('megalunaadmin')->attempt($credentials)) {
             return redirect()->intended('manage-visitors')
                         ->withSuccess('You have Successfully loggedin');
         }
@@ -48,9 +48,9 @@ class AuthController extends Controller
     public function Logout()
     {
     
-        if(Auth::guard('blessingheartadmin')->check()) // this means that the admin was logged in.
+        if(Auth::guard('megalunaadmin')->check()) // this means that the admin was logged in.
         {
-            Auth::guard('blessingheartadmin')->logout();
+            Auth::guard('megalunaadmin')->logout();
             return redirect()->route('adminlogin');
         }
     

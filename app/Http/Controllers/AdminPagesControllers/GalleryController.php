@@ -19,7 +19,7 @@ class GalleryController extends Controller
     public function __construct()
     {        
  parent::__construct(); 
-$this->middleware('auth:blessingheartadmin');//un comment if you want to limit
+$this->middleware('auth:megalunaadmin');//un comment if you want to limit
     }
 
 

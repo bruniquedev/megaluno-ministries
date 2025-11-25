@@ -34,7 +34,7 @@ class LogosController extends Controller
 //you can copy and paste this into other controllers where you want to limit login
       
    //register admin guard in the config\auth.php   
-$this->middleware('auth:blessingheartadmin');//un comment if you want to limit
+$this->middleware('auth:megalunaadmin');//un comment if you want to limit
 
         //go to app\Http\Controllers\Middleware\Authenticate.php in redirectTo function and the page/route
         //for redirection if user is not logged in return route('adminlogin')

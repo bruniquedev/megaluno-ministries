@@ -19,6 +19,8 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
     {
         return DB::transaction(function () use ($data, $files, $id) {
 
+            $info = content_info::find($id); 
+
             // Handle main file upload
             if (isset($files['input_file'])) {
 			//handling the file upload
@@ -31,6 +33,14 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files['input_file'];
 			$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+			//delete previous file here
+			if($id!=null && $id > 0){
+			if($info->filename != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->filename);
+			}
+		      }
+               //set new file
                 $data['filename'] = $fileNameToStore;
             }
 
@@ -46,6 +56,14 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files['input_icon'];
 			$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+			//delete previous file here
+			if($id!=null && $id > 0){
+			if($info->iconfile != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->iconfile);
+			}
+		      }
+               //set new file
                 $data['iconfile'] = $fileNameToStore;
             }
 
@@ -63,9 +81,16 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files['input_video'];
 			$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+				//delete previous file here
+			if($id!=null && $id > 0){
+			if($info->featured_video != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->featured_video);
+			}
+		      }
+               //set new file
                 $data['featured_video'] = $fileNameToStore;
             }
-
 
 
             // Create or update the content info row
@@ -82,6 +107,8 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
     {
         foreach ($details as $detail) {
 
+        	$info = content_details::find($detail['id']);
+
             // File uploads
             if (isset($files[$detail['input_filelist']])) {
 
@@ -94,6 +121,15 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files[$detail['input_filelist']];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+               //delete previous file here
+			if($detail['id']!=null && $detail['id'] > 0){
+			if($info->filenamelist != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->filenamelist);
+			}
+		      }
+               //set new file
+
               $detail['filenamelist'] = $fileNameToStore;
             }
 
@@ -110,6 +146,14 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files[$detail['input_iconlist']];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+			          //delete previous file here
+			if($detail['id']!=null && $detail['id'] > 0){
+			if($info->iconfilelist != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->iconfilelist);
+			}
+		      }
+               //set new file
               $detail['iconfilelist'] = $fileNameToStore;
             }
 
@@ -126,6 +170,14 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$fileinput = $files[$detail['input_videolist']];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
+
+			        //delete previous file here
+			if($detail['id']!=null && $detail['id'] > 0){
+			if($info->video_filelist != ''){
+			(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$info->video_filelist);
+			}
+		      }
+               //set new file
               $detail['video_filelist'] = $fileNameToStore;
             }
 
