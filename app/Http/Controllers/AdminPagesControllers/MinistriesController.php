@@ -4,6 +4,13 @@ namespace App\Http\Controllers\AdminPagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ContentService;
+
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;// will enable us access storage 
+use App\Models\content_info;
+use App\Models\content_details;
 
 class MinistriesController extends Controller
 {
@@ -35,7 +42,10 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
      */
     public function index()
     {
-         return view('pagesadmin.ministries');
+
+$data = content_info::where('page_area_type', 'ministry')->get();
+
+         return view('pagesadmin.ministries')->with('DataInfo',$data);;
     }
 
     /**
@@ -50,13 +60,16 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
             'id'=>0,
             'headingtext'=>'',
             'filename'=>'',
-            'widthsize'=>'600',
-            'heightsize'=>'350'
-    
+            'file_width'=>'600',
+            'file_height'=>'350'
+            'iconfile'=>'',
+            'icon_width'=>'100',
+            'icon_height'=>'100',
+            'featured_video'=>''
             );
-            
-            $aboutdetailItems= array();
- return view('pagesadmin.ministry_create')->with('detailItems',$aboutdetailItems)->with('DataToEdit', $Data);
+           
+            $contentdetailItems= array();
+ return view('pagesadmin.ministry_create')->with('detailItems',$contentdetailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -67,7 +80,32 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
      */
     public function store(Request $request)
     {
-        //
+/*
+input_file
+input_icon
+input_video
+
+input_filelist
+input_iconlist
+input_videolist
+*/
+$content = (new ContentService())->saveContentInfo([
+'title' => $request->title,
+'description' => $request->description,
+'page_area_type' => 'ministry',
+],
+$request->allFiles());
+
+
+    (new ContentService())->saveContentDetails(
+        $content->id,                     
+        $request->details,                
+        $request->allFiles()             
+    );
+
+
+  return back()->with('success', 'Content saved!');
+
     }
 
     /**
@@ -89,7 +127,10 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
      */
     public function edit($id)
     {
-        //
+$Data = content_info::find($id);
+$detailItems =DB::select('select * from content_details where related_id=:related_id order by ordersort asc',["related_id"=>$id]);
+
+   return view('pagesadmin.ministry_create')->with('detailItems',$detailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -101,7 +142,24 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
      */
     public function update(Request $request, $id)
     {
-        //
+        $content = (new ContentService())->saveContentInfo([
+        'title' => $request->title,
+        'description' => $request->description,
+        'type' => 'about',
+    ],
+    $request->allFiles(),
+    $id);
+
+
+    (new ContentService())->saveContentDetails(
+        $content->id,
+        $request->details,
+        $request->allFiles()
+    );
+
+
+return back()->with('success', 'Content saved!');
+
     }
 
     /**
@@ -113,5 +171,51 @@ $this->middleware('auth:blessingheartadmin');//un comment if you want to limit
     public function destroy($id)
     {
         //
+             $data = content_info::find($id);
+           if($data->filename != ''){
+            Storage::delete('public/content_uploads/'.$data->filename);
+            Storage::delete('public/content_uploads/thumbnails/'.$data->filename);
+            }
+            if($data->iconfile != ''){
+            Storage::delete('public/content_uploads/icons/'.$data->iconfile);
+            //Storage::delete('public/content_uploads/icons/thumbnails/'.$data->iconfile);
+            }
+             if($data->featured_video != ''){
+            Storage::delete('public/content_uploads/videos/'.$data->featured_video);
+           // Storage::delete('public/content_uploads/videos/thumbnails/'.$data->featured_video);
+            }
+       $deleted = $data->delete();
+
+
+       if($deleted){
+
+$info = content_details::where('related_id', $id)->get();
+if(count($info) >0){
+  foreach($info as $Info){
+
+    if($Info->filenamelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->filenamelist);
+    Storage::delete('public/content_uploads/details/thumbnails/'.$Info->filenamelist);
     }
+    if($Info->iconfilelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->iconfilelist);
+    //Storage::delete('public/content_uploads/details/thumbnails/'.$Info->iconfilelist);
+    }
+     if($Info->video_filelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->video_filelist);
+    // Storage::delete('public/content_uploads/details/thumbnails/'.$Info->video_filelist);
+    }
+
+}
+}
+
+$sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
+       }
+           return back()->with('success', 'Data deleted sucessfully!');
+    }
+
+
+
+
+    
 }
