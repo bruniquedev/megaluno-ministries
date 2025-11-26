@@ -19,6 +19,7 @@ use App\Http\Controllers\PagesControllers\GalleryPageController;
 
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
 
+use App\Http\Controllers\AdminPagesControllers\RemoveImageController;
 use App\Http\Controllers\AdminPagesControllers\HomesettingsController;
 use App\Http\Controllers\AdminPagesControllers\SermonsController;
 use App\Http\Controllers\AdminPagesControllers\InvolvementsController;
@@ -159,7 +160,7 @@ Auth::routes();
 
 Route::resource('manage-visitors',VisitorsController::class);
 
-
+Route::post('/remove-image', [RemoveImageController::class, 'RemoveImage']);
 Route::resource('manage-home',HomesettingsController::class);
 Route::resource('manage-sermons',SermonsController::class);
 Route::resource('manage-involvements',InvolvementsController::class);

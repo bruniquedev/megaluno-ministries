@@ -22,7 +22,7 @@
 <th>id</th>
 <th>Title</th>
 <th>Type</th>
-<th>Image</th>
+<th>Featured Image</th>
 <th>edit</th>
 <th>Delete</th>
 </tr>

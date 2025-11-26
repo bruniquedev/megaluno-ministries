@@ -82,6 +82,7 @@ $data = content_info::where('page_area_type', 'ministry')->get();
     public function store(Request $request)
     {
 /*
+only allowed html and php name attributes for files
 input_file
 input_icon
 input_video

@@ -1,0 +1,158 @@
+/*--------------upload button and previewer-----------*/
+/*-----upload 1-----*/
+
+.btn-upload-1{
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: capitalize;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 14px;
+    outline: 0;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+
+}
+
+.btn-upload-file-1 {
+        color: #fff;
+    background-color: #26a69a;
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+.btn-upload-file-1 i {
+    font-size: 1.3rem;
+        line-height: inherit;
+        padding: 0px;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+    margin: 0px;
+}
+.left {
+    float: left !important;
+}
+i.left {
+    float: left;
+    margin-right: 8px;
+}
+
+.btn-upload-file-1 input[type=file] {
+    position: absolute;
+    top: 0;
+   /* right: 0;*/
+    min-width: 100%;
+    min-height: 100%;
+    /*font-size: 100px;*/
+    text-align: right;
+    filter: alpha(opacity=1);
+   /* opacity: 0;*/
+    outline: none;
+    /*background: white;*/
+    cursor: inherit;
+    display: block;
+
+    left: 0;
+    font-size: 12px;
+    opacity: 1;
+    color: #333;
+}
+
+/*--file upload button styling--*/
+.btn-upload-file-1 input[type="file"]::file-selector-button {
+opacity: 0;
+height: 36px;
+ line-height: 36px;
+    padding: 0 23px;
+    cursor: pointer;
+    }
+
+/*-----/upload 1-----*/
+.custom-img-previewer {
+    margin: 14px 5px 5px 5px;
+    position: relative;
+    /* box-shadow: 0 0 5px #666; */
+    box-shadow: 0px 4px 4px #ddd;
+    height: 150px;
+    display: block;
+    border-radius: 7px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: zoom-in;
+}
+
+.custom-img-previewer .close-img-btn{
+
+    width: 21px;
+    height: 21px;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 15px;
+    color: #000;
+    border: 1px solid;
+    border-radius: 50%;
+    background: #fff;
+    font-weight: 700;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .7;
+    position: absolute;
+      top: -7px;
+    right: -11px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-img-previewer .close-img-btn:hover{
+  color: #fff;
+  background: #FF4F57;
+}
+
+.custom-img-previewer .view-file-btn{
+    background-color: white;
+    font-size: 13px;
+    position: absolute;
+    bottom: -8px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.img-previewerPopover {
+     pointer-events: none; /* IMPORTANT — prevents flicker */
+    position: absolute;
+    top: 10px;
+    left: 100%;
+    width: 300px;
+    height: 200px;
+    display: none;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.img-previewerPopover img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*--------------end upload button and previewer-----------*/

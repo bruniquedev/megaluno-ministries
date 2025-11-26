@@ -187,14 +187,47 @@ function createInput(inputObj) {
         // Create the text for the label
         var labelText = document.createTextNode("Select");
 
+         //create  a previewer
+        var customImgDiv = document.createElement("div");
+        customImgDiv.setAttribute("class", "custom-img-previewer");
+        customImgDiv.style.width = "40px";
+        customImgDiv.style.height = "40px";
+
+        //create  a previewer close btn
+        var imgCloseBtn = document.createElement("span");
+            imgCloseBtn.classList.add("close-img-btn");
+            imgCloseBtn.setAttribute("data-id", "0");
+            imgCloseBtn.setAttribute("data-table", "no");
+            imgCloseBtn.setAttribute("data-column", "no");
+            imgCloseBtn.setAttribute("data-route", "no");
+            imgCloseBtn.textContent="x";
+
+             //create  an open link div
+        var openlinkDiv = document.createElement("div");
+        openlinkDiv.setAttribute("class", "view-file-btn");
+        var openlink = document.createElement("a");
+        openlink.setAttribute("href", "javascript:void(0);");
+        openlink.setAttribute("class", "custom-file-opener");
+        openlink.setAttribute("target", "_blank");
+        openlink.textContent="open";
+
+            //create  a large previewer
+        var previewLargeImgDiv = document.createElement("div");
+        previewLargeImgDiv.setAttribute("class", "img-previewerPopover");
+
         // Create the file input element
 
         // Append elements to their respective parents
         fileInputSpan.appendChild(uploadIcon);
         fileInputSpan.appendChild(labelText);
         fileInputSpan.appendChild(fileInput);
+        customImgDiv.appendChild(imgCloseBtn);
+        openlinkDiv.appendChild(openlink);
+        customImgDiv.appendChild(openlinkDiv);
+        customImgDiv.appendChild(previewLargeImgDiv);
         formGroup.appendChild(inputLabel);
         formGroup.appendChild(fileInputSpan);
+        formGroup.appendChild(customImgDiv);
 
         // Append the form group to the document body
        // document.body.appendChild(formGroup);
@@ -231,12 +264,39 @@ function createInput(inputObj) {
 
          // Create the div for custom image with class "cv-img"
         var customImgDiv = document.createElement("div");
-        customImgDiv.setAttribute("id", "custom-img");
+        customImgDiv.setAttribute("class", "custom-img-previewer");
         customImgDiv.classList.add(linkbtn.getAttribute('data-output'));
         customImgDiv.style.width = "60px";
         customImgDiv.style.height = "50px";
 
+         //create  a previewer close btn
+        var imgCloseBtn = document.createElement("span");
+            imgCloseBtn.classList.add("close-img-btn");
+            imgCloseBtn.setAttribute("data-id", "0");
+            imgCloseBtn.setAttribute("data-table", "no");
+            imgCloseBtn.setAttribute("data-column", "no");
+            imgCloseBtn.setAttribute("data-route", "no");
+            imgCloseBtn.textContent="x";
+            customImgDiv.appendChild(imgCloseBtn);
+
+                //create  an open link div
+        var openlinkDiv = document.createElement("div");
+        openlinkDiv.setAttribute("class", "view-file-btn");
+        var openlink = document.createElement("a");
+        openlink.setAttribute("href", "javascript:void(0);");
+        openlink.setAttribute("class", "custom-file-opener");
+        openlink.setAttribute("target", "_blank");
+         openlink.textContent="open";
+          openlinkDiv.appendChild(openlink);
+        customImgDiv.appendChild(openlinkDiv);
+
+            //create  a large previewer
+        var previewLargeImgDiv = document.createElement("div");
+        previewLargeImgDiv.setAttribute("class", "img-previewerPopover");
+        customImgDiv.appendChild(previewLargeImgDiv);
+
         // Append the form-groupy and custom image divs to the flex div
+
         flexDiv.appendChild(formGroup);
         flexDiv.appendChild(customImgDiv);
 
@@ -319,6 +379,177 @@ dynamicTables.forEach(table => {
         });
         });
        });
+
+
+
+///js to help preview a file in alarge format//////////////////
+document.addEventListener("mouseover", async function (e) {
+    const previewer = e.target.closest(".custom-img-previewer");
+    if (!previewer) return;
+
+    const pop = previewer.querySelector(".img-previewerPopover");
+
+    // Extract background-image URL
+    const bg = window.getComputedStyle(previewer).backgroundImage;
+
+    if (!bg || bg === "none") {
+        pop.innerHTML = `<div style="padding:10px;font-size:12px;color:#666;">No preview available</div>`;
+        pop.style.display = "block";
+        return;
+    }
+
+    // Extract URL, works for blob: and normal URLs
+    const url = bg.slice(5, -2);
+
+    // --- New part: determine if blob is an image ---
+    let isImage = false;
+
+    if (url.startsWith("blob:")) {
+        try {
+            const res = await fetch(url);
+            const blob = await res.blob();
+            isImage = blob.type.startsWith("image/");
+        } catch (error) {
+            isImage = false;
+        }
+    } else {
+        // Normal file: check by extension
+        const ext = url.split('.').pop().toLowerCase();
+        const allowed = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+        isImage = allowed.includes(ext);
+    }
+
+    // --- Display preview ---
+    if (isImage) {
+        pop.innerHTML = `<img src="${url}" alt="preview">`;
+    } else {
+        pop.innerHTML = `
+            <div style="padding:10px;font-size:12px;">
+                <a href="${url}" target="_blank" style="color:#007bff;text-decoration:underline;">
+                    Open file
+                </a>
+            </div>`;
+    }
+
+    pop.style.display = "block";
+});
+
+
+document.addEventListener("mouseout", function (e) {
+    const previewer = e.target.closest(".custom-img-previewer");
+    if (!previewer) return;
+
+    const pop = previewer.querySelector(".img-previewerPopover");
+    pop.style.display = "none";
+});
+
+///end js to help preview a file in alarge format//////////////////
+
+
+
+
+//js to select a file and append it to thumbnail previewer without interrupting normal file selection
+document.addEventListener("change", function (event) {
+    if (!event.target.matches(".input-fileup")) return;
+
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+    const previewer = fileInput.closest(".form-groupy").querySelector(".custom-img-previewer");
+
+    // Clear old preview
+    //previewer.innerHTML = "";
+
+    if (!file) return;
+
+    if (file.type.startsWith("image/")) {
+        // Create thumbnail
+        const url = URL.createObjectURL(file);
+
+        previewer.style.backgroundImage = `url('${url}')`;
+
+    } else {
+        // Not an image → show default message
+      
+    }
+});
+//end js to select a file and append it to thumbnail previewer without interrupting normal file selection
+
+
+//js to clear select a file and delete it from the folder
+document.addEventListener("click", function (event) {
+    if (!event.target.matches(".close-img-btn")) return;
+    const fileDeleteBtn = event.target;
+    const previewer = event.target.closest(".custom-img-previewer");
+
+    const container_elem = event.target.closest(".form-groupy");
+    const fileInput = container_elem.querySelector(".input-fileup");
+
+
+     let id = fileDeleteBtn.getAttribute('data-id');
+    let table = fileDeleteBtn.getAttribute('data-table');
+    let column = fileDeleteBtn.getAttribute('data-column');
+    let route = fileDeleteBtn.getAttribute('data-route');
+     
+      previewer.style.backgroundImage = `url('')`;
+    fileInput.value= null;
+
+    //console.log(fileInput);
+   // console.log(id);
+    //console.log(table);
+    //console.log(column);
+   // console.log(route);
+
+
+if(parseInt(id) > 0){
+
+const requestData = JSON.stringify({ id: id, table: table, column: column });
+ //console.log(requestData);
+var url ="/"+route;
+      ajax_request(url,'',requestData, function (response){
+    if(response.length <=0) return;
+        var datareturned = JSON.parse(response);
+    //console.log(datareturned);
+
+if(datareturned.status==1){
+//do something
+    console.log(datareturned.message);
+}else{
+console.log(datareturned.message);
+}
+
+});
+
+}
+
+});
+//end js to clear select a file and delete it from the folder
+
+
+//re usable ajax function with call back
+ function ajax_request($route,result,data,fn) {
+//console.log(data);
+     
+// Retrieve the CSRF token from the meta tag
+var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var xhr = new XMLHttpRequest();
+ xhr.open('POST',$route, true);
+xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(data);// Send the request
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    var response = xhr.responseText;
+        if(fn){ fn(response); }   
+            
+  }
+};
+    xhr.onerror = function() {
+    // Network-level error occurred
+        console.log("Network error occurred, please try again..");
+     };
+}
+//end reusable ajax function with call back
+
 
 
 }

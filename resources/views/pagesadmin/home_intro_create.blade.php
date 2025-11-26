@@ -20,9 +20,9 @@
 
 
 @if(!isset($DataToEdit['id']) || $DataToEdit['id']==0)
-    <form role="form" method="post" action="{{ route('manage-ministries.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
+    <form role="form" method="post" action="{{ route('manage-home.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
     @else
-    <form action="{{ route('manage-ministries.update', $DataToEdit['id']) }}" method="post" name="FORM" 
+    <form action="{{ route('manage-home.update', $DataToEdit['id']) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @method('PUT')
   @endif
@@ -32,7 +32,7 @@
       <div>
          <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-               <h4 class="h2-title">Save / Create ministry info</h4> 
+               <h4 class="h2-title">Save / Create a home intro info</h4> 
             </div>               
          </div>
 
@@ -50,7 +50,7 @@
             </div>
 
 
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <div class="form-groupy">
                   <label for="text">Description </label>
                   <div class="form-input-group">
@@ -58,29 +58,7 @@
                </div>
                </div>
             </div>    
-
-             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
-               <div class="form-groupy">
-               <div class="input_label">Add image</div>
-               <!--upload field one-->
-               <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
-               <i class="ion ion-upload left"></i>  
-               Select<input type="file" name="input_file"  id="imagefile" accept="image/*" class="text-bold input-fileup">
-               </span>
-               <!--/upload field one-->
-               <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
-                  <span data-id="{{$DataToEdit['id']}}" data-table="content_info" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
-                  <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
-                <div class="img-previewerPopover"></div>
-               </div>
-               </div>
-
-            </div>  
-            
-          
-         
-                                                 
+                                        
         
          </div>
 
@@ -90,13 +68,13 @@
 
    <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <h4 class="h2-title">Ministry details</h4> 
+               <h4 class="h2-title">home intro details</h4> 
             </div>               
          </div>
 
             <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <table class="dynam-table table-container ministry-view-table" addRowBtnTarget="addRowBtnList" RemoveRowsBtnTarget="deleteCheckedRowsBtnList"> 
+               <table class="dynam-table table-container homeintro-view-table" addRowBtnTarget="addRowBtnList" RemoveRowsBtnTarget="deleteCheckedRowsBtnList"> 
                 <thead id="tablehead">
                 <tr class="thead table-light">
                      <th scope="col" width="2%"><input class="dynam-checkAll" type="checkbox"></th>
@@ -109,7 +87,7 @@
         <tbody data-inputs='[
     {"type": "textarea", "attributes": {"name": "detailheadinglist[]", "rows": "3", "label": "Heading", "class": "input-control"}},
     {"type": "textarea", "attributes": {"name": "detaildescriptionlist[]", "rows": "3", "label": "Description", "class": "input-control"}},
-    {"type": "file","attributes": {"name": "input_filelist[]","id": "imagefile","accept": "image/*", "label": "Add image", "class": "text-bold input-control input-fileup" }}
+    {"type": "file","attributes": {"name": "input_iconlist[]","id": "imagefile","accept": "image/*", "label": "Add image", "class": "text-bold input-control input-fileup" }}
 ]' data-idname="itemidlist" data-ordersortname="ordersortlist" >
 
             <!-- Table rows will be dynamically added here -->  
@@ -139,7 +117,7 @@
                <div class="input_label">Add image</div>
                <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
                <i class="ion ion-upload left"></i>  
-               Select<input type="file" name="input_filelist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
+               Select<input type="file" name="input_iconlist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
                </span>
             <div class="custom-img-previewer" style="width:40px;height:40px;">
                <span data-id="0" data-table="content_details" data-column="no" data-route="remove-image" class="close-img-btn" >×</span>
@@ -184,14 +162,14 @@ $count++;
 
 <td data-label="Image">
 <div class="form-groupy">
-<div class="input_label">Add image</div>
+<div class="input_label">Add icon</div>
 <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
 <i class="ion ion-upload left"></i>  
-Select<input type="file" name="input_filelist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
+Select<input type="file" name="input_iconlist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
 </span>
-<div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->filenamelist) }}'); width:40px;height:40px;">
-   <span data-id="<?php echo $ListdetailItem->id; ?>" data-table="content_details" data-column="filenamelist" data-route="remove-image" class="close-img-btn" >×</span>
-   <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->filenamelist) }}' class="custom-file-opener" target="_blank">open</a></div>
+<div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->iconfilelist) }}'); width:40px;height:40px;">
+   <span data-id="<?php echo $ListdetailItem->id; ?>" data-table="content_details" data-column="iconfilelist" data-route="remove-image" class="close-img-btn" >×</span>
+   <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->iconfilelist) }}' class="custom-file-opener" target="_blank">open</a></div>
    <div class="img-previewerPopover"></div>
 </div>
 </div>

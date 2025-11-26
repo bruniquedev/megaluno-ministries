@@ -37,7 +37,8 @@
     <ul class="custom-dropdown-content">
 <li><a href="{{ route('manage-sliders.index') }}">Slider</a></li>
 <li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
-<li><a href="{{ route('manage-home.index') }}">Home management</a></li>
+<li><a href="{{ route('manage-home.create') }}">Create a Home info</a></li>
+<li><a href="{{ route('manage-home.index') }}">Home management info</a></li>
 <li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 
 <li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
