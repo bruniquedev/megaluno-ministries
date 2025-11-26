@@ -107,7 +107,7 @@ foreach ($request->ordersortlist as $i => $ordersort) {
         'ordersort' => $ordersort,
         'headinglist' => $request->detailheadinglist[$i],
         'descriptionlist' => $request->detaildescriptionlist[$i],
-        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'input_iconlist' => $request->input_iconlist[$i] ?? null,
         'sluglist' => Str::slug($request->detailheadinglist[$i])
     ];
 }
@@ -174,7 +174,7 @@ foreach ($request->ordersortlist as $i => $ordersort) {
         'ordersort' => $ordersort,
         'headinglist' => $request->detailheadinglist[$i],
         'descriptionlist' => $request->detaildescriptionlist[$i],
-        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'input_iconlist' => $request->input_iconlist[$i] ?? null,
         'sluglist' => Str::slug($request->detailheadinglist[$i])
     ];
 }

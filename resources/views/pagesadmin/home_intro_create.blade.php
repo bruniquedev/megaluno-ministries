@@ -87,7 +87,7 @@
         <tbody data-inputs='[
     {"type": "textarea", "attributes": {"name": "detailheadinglist[]", "rows": "3", "label": "Heading", "class": "input-control"}},
     {"type": "textarea", "attributes": {"name": "detaildescriptionlist[]", "rows": "3", "label": "Description", "class": "input-control"}},
-    {"type": "file","attributes": {"name": "input_iconlist[]","id": "imagefile","accept": "image/*", "label": "Add image", "class": "text-bold input-control input-fileup" }}
+    {"type": "file","attributes": {"name": "input_iconlist[]","id": "imagefile","accept": "image/*", "label": "Add icon", "class": "text-bold input-control input-fileup" }}
 ]' data-idname="itemidlist" data-ordersortname="ordersortlist" >
 
             <!-- Table rows will be dynamically added here -->  
@@ -114,7 +114,7 @@
                      </td>  
                              <td data-label="Image">
                <div class="form-groupy">
-               <div class="input_label">Add image</div>
+               <div class="input_label">Add icon</div>
                <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
                <i class="ion ion-upload left"></i>  
                Select<input type="file" name="input_iconlist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
@@ -167,9 +167,9 @@ $count++;
 <i class="ion ion-upload left"></i>  
 Select<input type="file" name="input_iconlist[]" id="imagefile" accept="image/*" class="text-bold input-fileup">
 </span>
-<div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->iconfilelist) }}'); width:40px;height:40px;">
+<div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/details/".$ListdetailItem->iconfilelist) }}'); width:40px;height:40px;">
    <span data-id="<?php echo $ListdetailItem->id; ?>" data-table="content_details" data-column="iconfilelist" data-route="remove-image" class="close-img-btn" >×</span>
-   <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->iconfilelist) }}' class="custom-file-opener" target="_blank">open</a></div>
+   <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/details/".$ListdetailItem->iconfilelist) }}' class="custom-file-opener" target="_blank">open</a></div>
    <div class="img-previewerPopover"></div>
 </div>
 </div>
