@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;// will enable us access storage 
 use App\Models\content_info;
 use App\Models\content_details;
-
+use Illuminate\Support\Str;
+use DB;//import if you want to use sql commands directly
 class MinistriesController extends Controller
 {
 
@@ -58,18 +59,18 @@ $data = content_info::where('page_area_type', 'ministry')->get();
        $Data = array(   
 
             'id'=>0,
-            'headingtext'=>'',
+            'title'=>'',
+            'description'=>'',
             'filename'=>'',
             'file_width'=>'600',
             'file_height'=>'350',
             'iconfile'=>'',
             'icon_width'=>'100',
-            'icon_height'=>'100',
-            'featured_video'=>''
+            'icon_height'=>'100'
             );
            
             $contentdetailItems= array();
- return view('pagesadmin.ministry_create')->with('detailItems',$contentdetailItems)->with('DataToEdit', $Data);
+ return view('pagesadmin.ministry_create')->with('ListdetailItems',$contentdetailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -93,14 +94,26 @@ $content = (new ContentService())->saveContentInfo([
 'title' => $request->title,
 'description' => $request->description,
 'page_area_type' => 'ministry',
+'slug' => Str::slug($request->title),
 ],
 $request->allFiles());
 
 
+$details = [];
+foreach ($request->ordersortlist as $i => $ordersort) {
+    $details[] = [
+        'id' => $request->itemidlist[$i] ?? null,
+        'ordersort' => $ordersort,
+        'headinglist' => $request->detailheadinglist[$i],
+        'descriptionlist' => $request->detaildescriptionlist[$i],
+        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'sluglist' => Str::slug($request->detailheadinglist[$i])
+    ];
+}
+
     (new ContentService())->saveContentDetails(
-        $content->id,                     
-        $request->details,                
-        $request->allFiles()             
+       contentId: $content->id,
+       details: $details            
     );
 
 
@@ -130,7 +143,7 @@ $request->allFiles());
 $Data = content_info::find($id);
 $detailItems =DB::select('select * from content_details where related_id=:related_id order by ordersort asc',["related_id"=>$id]);
 
-   return view('pagesadmin.ministry_create')->with('detailItems',$detailItems)->with('DataToEdit', $Data);
+   return view('pagesadmin.ministry_create')->with('ListdetailItems',$detailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -145,16 +158,29 @@ $detailItems =DB::select('select * from content_details where related_id=:relate
         $content = (new ContentService())->saveContentInfo([
         'title' => $request->title,
         'description' => $request->description,
-        'type' => 'about',
+        'page_area_type' => 'ministry',
+        'slug' => Str::slug($request->title),
     ],
     $request->allFiles(),
     $id);
 
 
+
+   $details = [];
+foreach ($request->ordersortlist as $i => $ordersort) {
+    $details[] = [
+        'id' => $request->itemidlist[$i] ?? null,
+        'ordersort' => $ordersort,
+        'headinglist' => $request->detailheadinglist[$i],
+        'descriptionlist' => $request->detaildescriptionlist[$i],
+        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'sluglist' => Str::slug($request->detailheadinglist[$i])
+    ];
+}
+
     (new ContentService())->saveContentDetails(
-        $content->id,
-        $request->details,
-        $request->allFiles()
+       contentId: $content->id,
+       details: $details            
     );
 
 

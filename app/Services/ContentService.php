@@ -22,12 +22,12 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
             $info = content_info::find($id); 
 
             // Handle main file upload
-            if (isset($files['input_file'])) {
+            if (isset($files['input_file']) && !empty($files['input_file'])) {
 			//handling the file upload
 			$upload_dir="content_uploads";
 			$thumbnail_dir="thumbnails";
 			$isToresize=1;
-			$max_width=$data['file_width'];
+			$max_width=600;
 			$fileNameToStore="";
 			if(!empty($files['input_file'])){
 			$fileinput = $files['input_file'];
@@ -45,12 +45,12 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
             }
 
               // Handle icon file upload
-            if (isset($files['input_icon'])) {
+            if (isset($files['input_icon']) && !empty($files['input_icon'])) {
 			//handling the file upload
 			$upload_dir="content_uploads/icons";
 			$thumbnail_dir="thumbnails";
 			$isToresize=0;
-			$max_width=$data['icon_width'];
+			$max_width=100;
 			$fileNameToStore="";
 			if(!empty($files['input_icon'])){
 			$fileinput = $files['input_icon'];
@@ -70,7 +70,7 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 
 
             // Handle video file upload
-            if (isset($files['input_video'])) {
+            if (isset($files['input_video']) && !empty($files['input_video'])) {
 			//handling the file upload
 			$upload_dir="content_uploads/videos";
 			$thumbnail_dir="thumbnails";
@@ -103,22 +103,61 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
         });
     }
 
-    public function saveContentDetails($contentId, array $details, array $files = [])
+    public function saveContentDetails($contentId, array $details)
     {
+
+
+
+//create and Initialize an empty array of selected ids
+//let's first delete ids of items which are not in this array
+  if($contentId!=null && $contentId > 0){
+        
+$selected_ids = array();
+  foreach ($details as $selected){
+    if($selected['id']!=0){
+  $selected_ids[] = $selected['id']; //add id's of submitted form fields
+      }
+      }
+      if(count($selected_ids) > 0){//check if there are any id's in an array
+          // Get the ids separated by comma
+  $in_clause_ids = implode(", ", $selected_ids);
+
+//delete related images of content_details which are about to be deleted
+$sqldetails =DB::select('select * from content_details where related_id=:id AND id NOT IN ('.$in_clause_ids.')',['id'=>$contentId]);
+
+foreach ($sqldetails as $Info){
+if($Info->filenamelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->filenamelist);
+    Storage::delete('public/content_uploads/details/thumbnails/'.$Info->filenamelist);
+    }
+    if($Info->iconfilelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->iconfilelist);
+    //Storage::delete('public/content_uploads/details/thumbnails/'.$Info->iconfilelist);
+    }
+     if($Info->video_filelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->video_filelist);
+    // Storage::delete('public/content_uploads/details/thumbnails/'.$Info->video_filelist);
+    }
+}
+$sqlQuery =DB::delete('Delete from content_details where related_id=:id AND id NOT IN ('.$in_clause_ids.')',['id'=>$contentId]);
+}
+}
+
+
         foreach ($details as $detail) {
 
         	$info = content_details::find($detail['id']);
 
             // File uploads
-            if (isset($files[$detail['input_filelist']])) {
+            if (isset($detail['input_filelist']) && !empty($detail['input_filelist'])) {
 
                 $upload_dir="content_uploads/details";
 			$thumbnail_dir="thumbnails";
 			$isToresize=1;
-			$max_width=$detail['file_widthlist'];
+			$max_width=600;
 			$fileNameToStore="";
-			if(!empty($files[$detail['input_filelist']])){
-			$fileinput = $files[$detail['input_filelist']];
+			if(!empty($detail['input_filelist'])){
+			$fileinput = $detail['input_filelist'];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
 
@@ -135,15 +174,15 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 
 
              // icon File uploads
-            if (isset($files[$detail['input_iconlist']])) {
+            if (isset($detail['input_iconlist']) && !empty($detail['input_iconlist'])) {
 
                 $upload_dir="content_uploads/details";
 			$thumbnail_dir="thumbnails";
 			$isToresize=0;
-			$max_width=$detail['icon_widthlist'];
+			$max_width=100;
 			$fileNameToStore="";
-			if(!empty($files[$detail['input_iconlist']])){
-			$fileinput = $files[$detail['input_iconlist']];
+			if(!empty($detail['input_iconlist'])){
+			$fileinput = $detail['input_iconlist'];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
 
@@ -159,15 +198,15 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 
 
             // icon File uploads
-            if (isset($files[$detail['input_videolist']])) {
+            if (isset($detail['input_videolist']) && !empty($detail['input_videolist'])) {
 
                 $upload_dir="content_uploads/details";
 			$thumbnail_dir="thumbnails";
 			$isToresize=0;
 			$max_width=0;
 			$fileNameToStore="";
-			if(!empty($files[$detail['input_videolist']])){
-			$fileinput = $files[$detail['input_videolist']];
+			if(!empty($detail['input_videolist'])){
+			$fileinput = $detail['input_videolist'];
             $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
 			}
 
@@ -180,14 +219,11 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
                //set new file
               $detail['video_filelist'] = $fileNameToStore;
             }
-
-
+                 
+               $detail['related_id'] = $contentId;
             // Update/create each detail row
             content_details::updateOrCreate(
-                [
-                    'related_id' => $contentId,
-                    'id' => $detail['id'] ?? null
-                ],
+                ['id' => $detail['id'] ?? null],
                 $detail
             );
         }

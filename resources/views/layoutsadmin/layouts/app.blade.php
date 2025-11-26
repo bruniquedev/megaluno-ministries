@@ -84,7 +84,7 @@ These ouble double braces you see  work as echo, in laravel we do'nt use echo bu
     <script src="{{ asset('custom_js/custom.js') }}" defer></script>
     <!--<script src="{{ asset('custom_js/about.js') }}" defer></script>
     <script src="{{ asset('custom_js/service.js') }}" defer></script>-->
-    <script src="{{ asset('dynamicformelements.js') }}" defer></script>
+    <script src="{{ asset('custom_js/dynamicformelements.js') }}" defer></script>
 
     
 

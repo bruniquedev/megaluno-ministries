@@ -20,19 +20,19 @@
 
 
 @if(!isset($DataToEdit['id']) || $DataToEdit['id']==0)
-    <form role="form" method="post" action="{{ route('manage-about.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
+    <form role="form" method="post" action="{{ route('manage-ministries.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
     @else
-    <form action="{{ route('manage-about.update', $DataToEdit['id']) }}" method="post" name="FORM" 
+    <form action="{{ route('manage-ministries.update', $DataToEdit['id']) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @method('PUT')
   @endif
 
     @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   
-      <div class="load-animate animated fadeInUp">
+      <div>
          <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-               <h2 class="h2-title">Save / Create ministry info</h2> 
+               <h4 class="h2-title">Save / Create ministry info</h4> 
             </div>               
          </div>
 
@@ -42,12 +42,22 @@
            
              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="form-groupy">
-                  <label for="text">About heading </label>
+                  <label for="text">Title </label>
                   <div class="form-input-group">
-                  <textarea class="form-control input_box_borderless" rows="2" name="heading" id="heading" ><?php echo $DataToEdit['headingtext']; ?></textarea>
+                  <textarea class="form-control input_box_borderless" rows="2" name="title"><?php echo $DataToEdit['title']; ?></textarea>
                </div>
                </div>
-            </div>  
+            </div>
+
+
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="form-groupy">
+                  <label for="text">Description </label>
+                  <div class="form-input-group">
+                  <textarea class="form-control input_box_borderless" rows="2" name="description"><?php echo $DataToEdit['description']; ?></textarea>
+               </div>
+               </div>
+            </div>    
 
              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
@@ -56,30 +66,15 @@
                <!--upload field one-->
                <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
                <i class="ion ion-upload left"></i>  
-               Select<input type="file" name="input_image"  id="imagefile" class="text-bold">
+               Select<input type="file" name="input_file"  id="imagefile" class="text-bold">
                </span>
                <!--/upload field one-->
                </div>
 
-               <div id="custom-img" style="background-image: url('{{ asset("storage/about_images/".$DataToEdit['filename']) }}'); width:40px;height:40px;"></div>
+               <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;"></div>
             </div>  
             
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <div class="form-groupy">
-                  <label for="text">Image width</label>
-                  <div class="form-input-group">
-                  <input type="number" class="form-control input_box_borderless" name="widthsize" id="widthsize"  value="<?php echo $DataToEdit['widthsize']; ?>" autocomplete="off">
-               </div>
-               </div>
-            </div> 
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <div class="form-groupy">
-                  <label for="text">Image height </label>
-                  <div class="form-input-group">
-                  <input type="number" class="form-control input_box_borderless" name="heightsize" id="heightsize"  value="<?php echo $DataToEdit['heightsize']; ?>" autocomplete="off">
-               </div>
-               </div>
-            </div> 
+          
          
                                                  
         
@@ -91,67 +86,106 @@
 
    <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <h2 class="h2-title">About details</h2> 
+               <h4 class="h2-title">Ministry details</h4> 
             </div>               
          </div>
 
-         <div class="row">
+            <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <table class="table-container" id="detailItem"> 
-                  <tr>
-                     <th width="2%"><input id="checkAll_detail" class="formcontrol" type="checkbox"></th>
-                     <th width="30%">Heading</th>
-                     <th width="68%">Description</th>
-                  </tr>  
+               <table class="dynam-table table-container ministry-view-table" addRowBtnTarget="addRowBtnList" RemoveRowsBtnTarget="deleteCheckedRowsBtnList"> 
+                <thead id="tablehead">
+                <tr class="thead table-light">
+                     <th scope="col" width="2%"><input class="dynam-checkAll" type="checkbox"></th>
+                     <th scope="col" width="25%">Heading</th>
+                     <th scope="col" width="40%">Description</th>
+                     <th scope="col" width="25%">Image</th>
+                     <th scope="col" width="8%">Remove</th>
+                  </tr> 
+                   </thead>
+        <tbody data-inputs='[
+    {"type": "textarea", "attributes": {"name": "detailheadinglist[]", "rows": "3", "label": "Heading", "class": "input-control"}},
+    {"type": "textarea", "attributes": {"name": "detaildescriptionlist[]", "rows": "3", "label": "Description", "class": "input-control"}},
+    {"type": "file","attributes": {"name": "input_filelist[]","id": "imagefile","accept": "image/*", "label": "Add image", "class": "text-bold input-control" }}
+]' data-idname="itemidlist" data-ordersortname="ordersortlist" >
+
+            <!-- Table rows will be dynamically added here -->  
                      <?php  ?>
-                  <?php  if(count($detailItems)<=0){ ?>                 
+                  <?php  if(count($ListdetailItems)<=0){ ?>                 
                   <tr>
-                     <td><input class="itemRow_detail" type="checkbox">
-                          <input type="hidden" name="itemid[]" id="itemid_1" value="0" /></td>
-                    <td>
+                     <td data-label="Check"><input type="checkbox">
+                        <input type="hidden" name="itemidlist[]" value="0" />
+                       <input type="hidden" name="ordersortlist[]" class="ordersortinput" value="0" />
+                    </td>
+                     <td data-label="Heading">
                     <div class="form-groupy">
                     <label for="text">Heading</label>
                     <div class="form-input-group">
-                    <input type="text" class="input-control" name="detailheading[]" id="detailheading_1" /></div>
+                    <textarea class="input-control" rows="3" name="detailheadinglist[]"></textarea>
+                    </div>
                     </div>
                     </td>
-                     <td>
+                     <td data-label="Description">
                       <div class="form-groupy">
                   <label for="text">Description</label>
                   <div class="form-input-group">
-    <textarea class="input-control" rows="2" name="detaildescription[]" id="detaildescription_1" ></textarea></div></div>
+    <textarea class="input-control" rows="3" name="detaildescriptionlist[]"></textarea></div></div>
                      </td>  
-                   
+                             <td data-label="Image">
+               <div class="form-groupy">
+               <div class="input_label">Add image</div>
+               <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+               <i class="ion ion-upload left"></i>  
+               Select<input type="file" name="input_filelist[]" id="imagefile" accept="image/*" class="text-bold">
+               </span>
+               </div>
+            <div id="custom-img" style="width:40px;height:40px;"></div>
+            </td>
+          <td data-label="Remove"><button class="btn-ui btn-ui-xs btn-ui-danger" type="button" ><i  class="ion-android-delete"></i></button></td> 
                   </tr> 
 
 <?php  }else{
 $count = 0;
-if(count($detailItems) > 0){
-foreach($detailItems as $detailItem){
+if(count($ListdetailItems) > 0){
+foreach($ListdetailItems as $ListdetailItem){
 $count++;
  ?>
 
  <tr>
-<td><input class="itemRow_detail" type="checkbox">
-<input type="hidden" name="itemid[]" id="itemid_<?php echo $count; ?>" value="<?php echo $detailItem->id; ?>" /></td>
+<td data-label="Check"><input type="checkbox">
+<input type="hidden" name="itemidlist[]" value="<?php echo $ListdetailItem->id; ?>" />
+<input type="hidden" name="ordersortlist[]" class="ordersortinput" value="<?php echo $ListdetailItem->ordersort; ?>" />
+</td>
 
-<td>
+<td data-label="Heading">
 <div class="form-groupy">
 <label for="text">Heading</label>
 <div class="form-input-group">
-<input type="text" class="input-control" name="detailheading[]" id="detailheading_<?php echo $count; ?>"  value="<?php echo $detailItem->heading; ?>" autocomplete="off" />
-</div>
-</div>
-</td>
-<td>
-<div class="form-groupy">
-<label for="text">About description</label>
-<div class="form-input-group">
-<textarea class="input-control" rows="2" name="detaildescription[]" id="detaildescription_<?php echo $count; ?>" autocomplete="off"><?php echo $detailItem->description; ?></textarea>
+<textarea class="input-control" rows="3" name="detailheadinglist[]"><?php echo $ListdetailItem->headinglist; ?></textarea>
 </div>
 </div>
 </td>
 
+<td data-label="Description">
+<div class="form-groupy">
+<label for="text">Description</label>
+<div class="form-input-group">
+<textarea class="input-control" rows="3" name="detaildescriptionlist[]" autocomplete="off"><?php echo $ListdetailItem->descriptionlist; ?></textarea>
+</div>
+</div>
+</td>
+
+<td data-label="Image">
+<div class="form-groupy">
+<div class="input_label">Add image</div>
+<span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+<i class="ion ion-upload left"></i>  
+Select<input type="file" name="input_filelist[]" id="imagefile" accept="image/*" class="text-bold">
+</span>
+</div>
+<div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/details/thumbnails/".$ListdetailItem->filenamelist) }}'); width:40px;height:40px;"></div>
+</td>
+
+ <td data-label="Remove"><button class="btn-ui btn-ui-xs btn-ui-danger" type="button" ><i  class="ion-android-delete"></i></button></td> 
                                    
                   </tr> 
 
@@ -162,14 +196,15 @@ $count++;
 } ?>
 
 
-
+                 </tbody>
                </table>
             </div>
          </div>
-         <div class="row">
+
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <button class="btn btn-danger delete" id="removeRows_details" type="button"><i  class="ion-android-delete"></i> Delete</button>
-               <button class="btn btn-success" id="addRows_detail" type="button"><i  class=" ion-plus"></i> Add More</button>
+              <button class="btn-ui btn-ui-danger delete" id="deleteCheckedRowsBtnList" type="button"><i  class="ion-android-delete"></i> Delete</button>
+               <button class="btn-ui btn-ui-black" id="addRowBtnList" type="button"><i  class=" ion-plus"></i> Add More</button>
             </div>
          </div>
 
@@ -178,19 +213,15 @@ $count++;
 
 
 
-         <div class="row"> 
+          <div class="row m-t-10"> 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              
               <div class="center">
-            
                <div class="form-group">
                   <input type="hidden" value="<?php echo $DataToEdit['id']; ?>" class="form-control" name="id" />
-                  <button  type="submit" class="btn btn-success submit_btn save-btn"><i  class="ion-android-add-circle"></i> Save </button>                
+                  <button  type="submit" class="btn-ui btn-ui-md btn-ui-success submit_btn save-btn"><i  class="ion-android-add-circle"></i> Save </button>               
                </div>
                </div>
-               
             </div>
-        
          </div>
          <div class="clearfix"></div>              
       </div>
