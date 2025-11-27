@@ -27,8 +27,8 @@ use App\Http\Controllers\AdminPagesControllers\MinistriesController;
 
 use App\Http\Controllers\AdminPagesControllers\ActivitiesController;
 use App\Http\Controllers\AdminPagesControllers\ProjectsController;
-//use App\Http\Controllers\AdminPagesControllers\ServicesController;
-//use App\Http\Controllers\AdminPagesControllers\AreasservedController;
+use App\Http\Controllers\AdminPagesControllers\ServicesController;
+use App\Http\Controllers\AdminPagesControllers\AreasservedController;
 
 
 use App\Http\Controllers\AdminPagesControllers\EventsController;
@@ -191,9 +191,9 @@ Route::resource('manage-socialmedia',SocialmediaController::class);
 
 Route::resource('manage-about',AboutController::class);
 
-//Route::resource('manage-services',ServicesController::class);
+Route::resource('manage-services',ServicesController::class);
 
-//Route::resource('manage-areasserved',AreasservedController::class);
+Route::resource('manage-areasserved',AreasservedController::class);
 
 
 

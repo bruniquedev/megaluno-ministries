@@ -37,14 +37,15 @@
     <ul class="custom-dropdown-content">
 <li><a href="{{ route('manage-sliders.index') }}">Slider</a></li>
 <li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
-<li><a href="{{ route('manage-home.create') }}">Create a Home info</a></li>
-<li><a href="{{ route('manage-home.index') }}">Home management info</a></li>
+<li><a href="{{ route('manage-home.create') }}">Create Intro Home info</a></li>
+<li><a href="{{ route('manage-home.index') }}">Home Intro info</a></li>
+<li><a href="{{ route('manage-home.index') }}">Titles info</a></li>
 <li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 
 <li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
 <li><a href="{{ route('manage-seo.index') }}">SEO management</a></li>
 
-{{--<!--<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>-->--}}
+<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>
     </ul>
   </li> 
 <!----end -dropdown---->
@@ -172,9 +173,9 @@
   </li> 
 <!----end -dropdown---->
 
-{{--
+
 <!-----dropdown---->
-  <!--<li class="custom-dropdown">
+  <li class="custom-dropdown">
     <a class="dropbtn">Services
       <i class="ion-android-arrow-dropdown"></i>
     </a>
@@ -182,9 +183,9 @@
   <li><a href="{{ route('manage-services.create') }}">Create a services</a></li>
 <li><a href="{{ route('manage-services.index') }}">Services</a></li>
     </ul>
-  </li>-->
+  </li>
 <!----end -dropdown---->
---}}
+
 
 
 <li><a href="{{ route('manage-gallery.index') }}">Gallery</a></li>
