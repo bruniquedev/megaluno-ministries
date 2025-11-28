@@ -4,18 +4,36 @@ namespace App\Http\Controllers\AdminPagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
-use App\Models\eventsinfo;
-use App\Models\events_details;
-use App\AppHelper;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ContentService;
+
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;// will enable us access storage 
+use App\Models\content_info;
+use App\Models\content_details;
+use Illuminate\Support\Str;
+use DB;//import if you want to use sql commands directly
 class EventsController extends Controller
 {
-   public function __construct()
-    {      
+   
+
+/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+         //call the parent controller which is the base controller using statement below
+ // to make sure that the global variables in base controller are recieved in views whose 
+ //controllers have a constructors. For those views whose controllers doesnt have a constructor 
+ //in them you dont need to call this        
  parent::__construct();
+      
+   //register admin guard in the config\auth.php   
 $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     }
+
 
 
     /**
@@ -26,9 +44,9 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     public function index()
     {
 
-        $data= eventsinfo::orderBy('id', 'asc')->get();
-        //passing multiple data
-        return view('pagesadmin.event')->with('DataInfo',$data);
+$data = content_info::where('page_area_type', 'event')->get();
+
+         return view('pagesadmin.event')->with('DataInfo',$data);;
     }
 
     /**
@@ -38,18 +56,22 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
      */
     public function create()
     {
+       $Data = array(   
 
-             $Data = array(   
             'id'=>0,
-            'headingtext'=>'',
-            'descriptiontext'=>'',
+            'title'=>'',
+            'description'=>'',
+            'ispublished'=>0,
             'filename'=>'',
-            'widthsize'=>'600',
-            'heightsize'=>'350'
+            'file_width'=>'600',
+            'file_height'=>'350',
+            'iconfile'=>'',
+            'icon_width'=>'100',
+            'icon_height'=>'100'
             );
-            
-            $detailItems= array();
- return view('pagesadmin.event_create')->with('detailItems',$detailItems)->with('DataToEdit', $Data);
+           
+            $contentdetailItems= array();
+ return view('pagesadmin.event_create')->with('ListdetailItems',$contentdetailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -60,44 +82,45 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
      */
     public function store(Request $request)
     {
-      //handling the file upload
-$upload_dir="events_images";
-$thumbnail_dir="thumbnails";
-$isToresize=1;
-$max_width=$request->widthsize;
-$fileNameToStore="nofile.png";
-if(!empty($request->file('input_image'))){
-$fileinput = $request->file('input_image');
-$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
-}       
-    
-           //inserting data
-        $data = new eventsinfo();
-        $data->headingtext = $request->heading; //captured from form
-        $data->descriptiontext = $request->descriptiontext;
-        $data->widthsize = $request->widthsize; //captured from form
-        $data->heightsize = $request->heightsize; //captured from form
-        $data->status = 1;
-        $data->filename = $fileNameToStore; //captured from form
-        $sqlInsert=$data->save();
-        
-        if($sqlInsert){
-    
-          $last_InsertId =$data->id;//this get's the just inserted id;
-    //saving service details
-    for ($i = 0; $i < count($request->detaildescription); $i++) {
-    $detailsdata = new events_details();
-    $detailsdata->related_id=$last_InsertId; 
-    $detailsdata->heading=$request->detailheading[$i]; 
-    $detailsdata->description =$request->detaildescription[$i];
-    $sqlInsertdetails=$detailsdata->save();
-    
-            } //end for loop 
-         
-    
-    }
-         return redirect('manage-events/create')->with('success','Data saved sucessfully '); //create a session variable Success to store
-         //amessage
+/*
+only allowed html and php name attributes for files
+input_file
+input_icon
+input_video
+
+input_filelist
+input_iconlist
+input_videolist
+*/
+$content = (new ContentService())->saveContentInfo([
+'title' => $request->title,
+'description' => $request->description,
+'page_area_type' => 'event',
+'ispublished'=> $request->ispublished,
+'slug' => Str::slug($request->title),
+],
+$request->allFiles());
+
+
+$details = [];
+foreach ($request->ordersortlist as $i => $ordersort) {
+    $details[] = [
+        'id' => $request->itemidlist[$i] ?? null,
+        'ordersort' => $ordersort,
+        'headinglist' => $request->detailheadinglist[$i],
+        'descriptionlist' => $request->detaildescriptionlist[$i],
+        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'sluglist' => Str::slug($request->detailheadinglist[$i])
+    ];
+}
+
+    (new ContentService())->saveContentDetails(
+       contentId: $content->id,
+       details: $details            
+    );
+
+
+  return back()->with('success', 'Content saved!');
 
     }
 
@@ -109,16 +132,7 @@ $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir
      */
     public function show($id)
     {
-           $Data = eventsinfo::find($id);
-            //var_dump($Data); die();
-          if($Data->status==0){
-            $Data->status=1;
-          }else if($Data->status==1){
-            $Data->status=0;
-          }
-          $Data->save();
-
-    return redirect('manage-events')->with('success','Data updated sucessfully ');
+        //
     }
 
     /**
@@ -129,11 +143,10 @@ $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir
      */
     public function edit($id)
     {
-                //returns a view which contains our form to display data to edit
-$Data = eventsinfo::find($id);
-$detailItems =DB::select('select * from events_details where related_id=:related_id order by id asc',["related_id"=>$id]);
+$Data = content_info::find($id);
+$detailItems =DB::select('select * from content_details where related_id=:related_id order by ordersort asc',["related_id"=>$id]);
 
-   return view('pagesadmin.event_create')->with('detailItems',$detailItems)->with('DataToEdit', $Data);
+   return view('pagesadmin.event_create')->with('ListdetailItems',$detailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -145,73 +158,37 @@ $detailItems =DB::select('select * from events_details where related_id=:related
      */
     public function update(Request $request, $id)
     {
-  
-      //handling the file upload
-$upload_dir="events_images";
-$thumbnail_dir="thumbnails";
-$isToresize=1;
-$max_width=$request->widthsize;
-$fileNameToStore="nofile.png";
-if(!empty($request->file('input_image'))){
-$fileinput = $request->file('input_image');
-$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
-}       
-  
-       
-           //updating a service info data
-           $data = eventsinfo::find($id); //so we will have to find a particular data
-           $data->headingtext = $request->heading; //captured from form
-           $data->descriptiontext = $request->descriptiontext;
-           $data->widthsize = $request->widthsize; //captured from form
-           $data->heightsize = $request->heightsize; //captured from form
-           if($request->hasFile('input_image')){
-                        //delete previous file
-(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$data->filename);     
-                $data->filename = $fileNameToStore;
-               }
+        $content = (new ContentService())->saveContentInfo([
+        'title' => $request->title,
+        'description' => $request->description,
+        'page_area_type' => 'event',
+        'ispublished'=> $request->ispublished,
+        'slug' => Str::slug($request->title),
+    ],
+    $request->allFiles(),
+    $id);
 
-  $sqlupdate=$data->save();
-    
-    if($sqlupdate){
- //create and Initialize an empty array of selected ids
-  //let's first delete ids of items which are not in this array
-  $selected_ids = array();
-  foreach ($request->itemid as $selected){
-    if($selected!=0){
-  $selected_ids[] = $selected; //add id's of submitted form fieldds
-      }
-      }
-      if(count($selected_ids) > 0){//check if there are any id's in an array
-          // Get the ids separated by comma
-  $in_clause_ids = implode(", ", $selected_ids);
-$sqlQuery =DB::delete('Delete from events_details where related_id=:id AND id NOT IN ('.$in_clause_ids.')',['id'=>$id]);
+
+
+   $details = [];
+foreach ($request->ordersortlist as $i => $ordersort) {
+    $details[] = [
+        'id' => $request->itemidlist[$i] ?? null,
+        'ordersort' => $ordersort,
+        'headinglist' => $request->detailheadinglist[$i],
+        'descriptionlist' => $request->detaildescriptionlist[$i],
+        'input_filelist' => $request->input_filelist[$i] ?? null,
+        'sluglist' => Str::slug($request->detailheadinglist[$i])
+    ];
 }
-/////////////////////////////////////////////////
 
-        //updating
-for ($i = 0; $i < count($request->detaildescription); $i++) {
+    (new ContentService())->saveContentDetails(
+       contentId: $content->id,
+       details: $details            
+    );
 
-        if($request->itemid[$i] <= 0){
-    //create new data
-  $data = new events_details();
-  $data->related_id=$id; 
-  $data->heading= $request->detailheading[$i];
-  $data->description= $request->detaildescription[$i];
-  $data->save();
- }else{
-  //update
- $data = events_details::find($request->itemid[$i]); 
-  $data->related_id=$id; 
-  $data->heading= $request->detailheading[$i];
-  $data->description= $request->detaildescription[$i];
-  $data->save();  
-}//end else
 
-        } //end for loop   
-}
-//////////////////////////////////////
-return redirect('manage-events/'.$id.'/edit')->with('success','Data updated sucessfully '); //create a session variable Success to store
-//amessage
+return back()->with('success', 'Content saved!');
 
     }
 
@@ -223,20 +200,50 @@ return redirect('manage-events/'.$id.'/edit')->with('success','Data updated suce
      */
     public function destroy($id)
     {
-         $data = eventsinfo::find($id); //so we will have to find a particular post  
-        //here we are going to delete from the database
-           if($data->filename != 'user.png'){
-            Storage::delete('public/events_images/'.$data->filename);
-            Storage::delete('public/events_images/thumbnails/'.$data->filename);
+        //
+             $data = content_info::find($id);
+           if($data->filename != ''){
+            Storage::delete('public/content_uploads/'.$data->filename);
+            Storage::delete('public/content_uploads/thumbnails/'.$data->filename);
+            }
+            if($data->iconfile != ''){
+            Storage::delete('public/content_uploads/icons/'.$data->iconfile);
+            //Storage::delete('public/content_uploads/icons/thumbnails/'.$data->iconfile);
+            }
+             if($data->featured_video != ''){
+            Storage::delete('public/content_uploads/videos/'.$data->featured_video);
+           // Storage::delete('public/content_uploads/videos/thumbnails/'.$data->featured_video);
             }
        $deleted = $data->delete();
 
+
        if($deleted){
-$sqlQuery =DB::delete('delete from events_details where related_id = ?',[$id]);
-       }
-        return redirect('manage-events')->with('success','Data deleted sucessfully '); //create a session variable Success to store
-        //amessage
-        //
+
+$info = content_details::where('related_id', $id)->get();
+if(count($info) >0){
+  foreach($info as $Info){
+
+    if($Info->filenamelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->filenamelist);
+    Storage::delete('public/content_uploads/details/thumbnails/'.$Info->filenamelist);
     }
+    if($Info->iconfilelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->iconfilelist);
+    //Storage::delete('public/content_uploads/details/thumbnails/'.$Info->iconfilelist);
+    }
+     if($Info->video_filelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->video_filelist);
+    // Storage::delete('public/content_uploads/details/thumbnails/'.$Info->video_filelist);
+    }
+
+}
+}
+
+$sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
+       }
+           return back()->with('success', 'Data deleted sucessfully!');
+    }
+
+
 
 }

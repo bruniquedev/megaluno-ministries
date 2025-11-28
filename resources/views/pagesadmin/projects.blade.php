@@ -2,10 +2,10 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center">   
  <div class="col-md-12 col-md-12">
-<h1>Projects info</h1>
+<h4>Ministries info</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -19,12 +19,11 @@
   cellspacing="0" cellpadding="5" style="background: #fff;">
 <thead id="tablehead">
 <tr class="thead table-light">
-<th>No.</th>
-<th>Heading</th>
-<th>Description</th>
-<th>Image</th>
-<th>Status</th>
-<th>View more</th>
+<th>id</th>
+<th>Title</th>
+<th>Type</th>
+<th>Featured Image</th>
+<th>edit</th>
 <th>Delete</th>
 </tr>
 </thead>
@@ -33,31 +32,22 @@
  <?php
 if(count($DataInfo) >0){
   foreach($DataInfo as $Info){
+
 ?>
 <tr>
-<td><?php echo $Info->id;; ?></td>
-<td><?php echo $Info->headingtext; ?></td>
-<td><?php echo $Info->descriptiontext; ?></td>
-<td>  <div id="custom-img" style="background-image: url('{{ asset("storage/projects_images/thumbnails/".$Info->filename) }}'); width:40px;height:40px;"></div></td>
+<td><?php echo $Info->id; ?></td>
+<td><?php echo $Info->title; ?></td>
+<td><?php echo $Info->page_area_type; ?></td>
+<td>  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}'); width:40px;height:40px;"></div></td>
 
-<?php
-$buttonstatus="btn btn-primary btn-xs";
-$statusText="Enable";
-if($Info->status==1){
-$buttonstatus="btn btn-danger btn-xs";
-$statusText="Disable";
-}
 
-?>
-<td><a class="<?php echo $buttonstatus; ?>" id="link1" href="/manage-projects/{{$Info->id}}"><i class="ion ion-edit"></i> <?php echo $statusText; ?></a></td>
-
-<td><a href="/manage-projects/{{$Info->id}}/edit" class="btn btn-primary btn-xs"  title="Edit about info"><span class="ion ion-edit"></span> edit</a></td>
+<td><a href="/manage-projects/{{$Info->id}}/edit" class="btn-ui btn-ui-primary btn-xs"  title="Edit info"><span class="ion ion-edit"></span> edit</a></td>
 <td>
 <form action="{{ route('manage-projects.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-danger btn-xs">
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-xs">
 <i class="ion ion-android-delete"></i>Delete
 </button>
 </form>

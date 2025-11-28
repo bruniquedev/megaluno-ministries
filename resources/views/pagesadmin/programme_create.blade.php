@@ -20,9 +20,9 @@
 
 
 @if(!isset($DataToEdit['id']) || $DataToEdit['id']==0)
-    <form role="form" method="post" action="{{ route('manage-donations.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
+    <form role="form" method="post" action="{{ route('manage-programmes.store') }}" name="FORM" class="about-form" id="about-form" enctype="multipart/form-data">
     @else
-    <form action="{{ route('manage-donations.update', $DataToEdit['id']) }}" method="post" name="FORM" 
+    <form action="{{ route('manage-programmes.update', $DataToEdit['id']) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @method('PUT')
   @endif
@@ -32,7 +32,7 @@
       <div>
          <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-               <h4 class="h2-title">Save / Create Donation info</h4> 
+               <h4 class="h2-title">Save / Create Programme info</h4> 
             </div>               
          </div>
 
@@ -90,7 +90,7 @@
 
    <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <h4 class="h2-title">Donation details</h4> 
+               <h4 class="h2-title">Ministry details</h4> 
             </div>               
          </div>
 

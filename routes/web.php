@@ -25,7 +25,7 @@ use App\Http\Controllers\AdminPagesControllers\SermonsController;
 use App\Http\Controllers\AdminPagesControllers\InvolvementsController;
 use App\Http\Controllers\AdminPagesControllers\MinistriesController;
 
-use App\Http\Controllers\AdminPagesControllers\ActivitiesController;
+use App\Http\Controllers\AdminPagesControllers\ProgrammesController;
 use App\Http\Controllers\AdminPagesControllers\ProjectsController;
 use App\Http\Controllers\AdminPagesControllers\ServicesController;
 use App\Http\Controllers\AdminPagesControllers\AreasservedController;
@@ -166,7 +166,7 @@ Route::resource('manage-sermons',SermonsController::class);
 Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);
 
-Route::resource('manage-programmes',ActivitiesController::class);
+Route::resource('manage-programmes',ProgrammesController::class);
 Route::resource('manage-projects',ProjectsController::class);
 
 Route::resource('manage-events',EventsController::class);
@@ -229,7 +229,7 @@ Route::resource('manage-sermons',SermonsController::class);
 Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);
 
-Route::resource('manage-programmes',ActivitiesController::class);
+Route::resource('manage-programmes',ProgrammesController::class);
 Route::resource('manage-projects',ProjectsController::class);
 
 Route::resource('manage-events',EventsController::class);

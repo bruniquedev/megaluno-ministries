@@ -55,7 +55,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
 <div class="about-content p-0p pagearea-detail-content w-100">
   <h1 class="f-s-20 f-w-500 m-t-30 animate-element delay6 fadeInDown-anime section-heading">
     <span><a href="javascript:void(0);" class="color-black-dark">Book of Psalms</a></span></h1>
-    <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">By Louis Kennedy | March 3, 2025</h5>
+    <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">By Louis Kennedy <span>|</span> March 3, 2025</h5>
     <div class="border-separator w-full"></div>
 
 <div class="head-description m-b-20">

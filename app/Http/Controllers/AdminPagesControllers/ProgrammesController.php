@@ -13,9 +13,10 @@ use App\Models\content_info;
 use App\Models\content_details;
 use Illuminate\Support\Str;
 use DB;//import if you want to use sql commands directly
-class DonationsController extends Controller
+class ProgrammesController extends Controller
 {
-    /**
+   
+/**
      * Create a new controller instance.
      *
      * @return void
@@ -42,9 +43,9 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     public function index()
     {
 
-$data = content_info::where('page_area_type', 'donation')->get();
+$data = content_info::where('page_area_type', 'programe')->get();
 
-         return view('pagesadmin.donation_info')->with('DataInfo',$data);;
+         return view('pagesadmin.programmes')->with('DataInfo',$data);;
     }
 
     /**
@@ -68,7 +69,7 @@ $data = content_info::where('page_area_type', 'donation')->get();
             );
            
             $contentdetailItems= array();
- return view('pagesadmin.donation_info_create')->with('ListdetailItems',$contentdetailItems)->with('DataToEdit', $Data);
+ return view('pagesadmin.programme_create')->with('ListdetailItems',$contentdetailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -92,7 +93,7 @@ input_videolist
 $content = (new ContentService())->saveContentInfo([
 'title' => $request->title,
 'description' => $request->description,
-'page_area_type' => 'donation',
+'page_area_type' => 'programe',
 'slug' => Str::slug($request->title),
 ],
 $request->allFiles());
@@ -142,7 +143,7 @@ foreach ($request->ordersortlist as $i => $ordersort) {
 $Data = content_info::find($id);
 $detailItems =DB::select('select * from content_details where related_id=:related_id order by ordersort asc',["related_id"=>$id]);
 
-   return view('pagesadmin.donation_info_create')->with('ListdetailItems',$detailItems)->with('DataToEdit', $Data);
+   return view('pagesadmin.programme_create')->with('ListdetailItems',$detailItems)->with('DataToEdit', $Data);
     }
 
     /**
@@ -157,7 +158,7 @@ $detailItems =DB::select('select * from content_details where related_id=:relate
         $content = (new ContentService())->saveContentInfo([
         'title' => $request->title,
         'description' => $request->description,
-        'page_area_type' => 'donation',
+        'page_area_type' => 'programe',
         'slug' => Str::slug($request->title),
     ],
     $request->allFiles(),
