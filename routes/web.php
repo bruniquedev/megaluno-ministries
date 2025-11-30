@@ -42,6 +42,7 @@ use App\Http\Controllers\AdminPagesControllers\LogosController;
 use App\Http\Controllers\AdminPagesControllers\PartnersController;
 use App\Http\Controllers\AdminPagesControllers\SocialmediaController;
 use App\Http\Controllers\AdminPagesControllers\AboutController;
+use App\Http\Controllers\AdminPagesControllers\IndividualProfileController;
 use App\Http\Controllers\AdminPagesControllers\ContactsetupController;
 use App\Http\Controllers\AdminPagesControllers\ContactsController;
 use App\Http\Controllers\AdminPagesControllers\ChangepasswordController;
@@ -194,6 +195,7 @@ Route::resource('manage-partnerlogos',PartnersController::class);
 Route::resource('manage-socialmedia',SocialmediaController::class);
 
 Route::resource('manage-about',AboutController::class);
+Route::resource('manage-individual-profile',IndividualProfileController::class);
 
 Route::resource('manage-services',ServicesController::class);
 
@@ -224,6 +226,7 @@ Route::resource('manage-sliders',SlidersController::class);
 Route::resource('manage-logos',LogosController::class);
 Route::resource('manage-socialmedia',SocialmediaController::class);
 Route::resource('manage-about',AboutController::class);
+Route::resource('manage-individual-profile',IndividualProfileController::class);
 
 Route::resource('manage-visitors',VisitorsController::class);
 

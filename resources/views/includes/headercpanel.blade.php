@@ -36,16 +36,10 @@
     </a>
     <ul class="custom-dropdown-content">
 <li><a href="{{ route('manage-sliders.index') }}">Slider</a></li>
-<li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
+<li><a href="{{ route('manage-titles.index') }}">Titles info</a></li>
 <li><a href="{{ route('manage-home.create') }}">Create Intro Home info</a></li>
 <li><a href="{{ route('manage-home.index') }}">Home Intro info</a></li>
-<li><a href="{{ route('manage-titles.index') }}">Titles info</a></li>
-<li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 
-<li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
-<li><a href="{{ route('manage-seo.index') }}">SEO management</a></li>
-
-<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>
     </ul>
   </li> 
 <!----end -dropdown---->
@@ -180,7 +174,9 @@
     </a>
     <ul class="custom-dropdown-content">
   <li><a href="{{ route('manage-about.create') }}">Create about info</a></li>
-<li><a href="{{ route('manage-about.index') }}">About info</a></li>
+  <li><a href="{{ route('manage-about.index') }}">About info</a></li>
+   {{--<li><a href="{{ route('manage-individual-profile.create') }}">Create Individual profile</a></li>
+  <li><a href="{{ route('manage-individual-profile.index') }}">Individuals profiles info</a></li>--}}
     </ul>
   </li> 
 <!----end -dropdown---->
@@ -216,6 +212,7 @@
 <?php if(count($Unreadmessages) > 0){ ?>
   <span class="badge badges messagebadge" id="messagebadge" ><?php echo count($Unreadmessages); ?></span><?php } ?> 
 </a></li>
+<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>
     </ul>
   </li> 
 <!----end -dropdown---->
@@ -224,9 +221,14 @@
 
 <!-----dropdown---->
   <li class="custom-dropdown">
-    <a class="dropbtn">others <i class="ion-android-arrow-dropdown"></i>
+    <a class="dropbtn">Settings & others <i class="ion-android-arrow-dropdown"></i>
     </a>
     <ul class="custom-dropdown-content">
+
+<li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
+<li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
+<li><a href="{{ route('manage-seo.index') }}">SEO management</a></li>
+<li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 <li><a href="{{ route('manage-changepassword.index') }}">Change password</a></li>
 <?php
 if(Auth::user()->admintype=="Super admin"){
