@@ -80,6 +80,23 @@
     font-size: 14px;
 }
 
+.abt-container{
+    flex-direction: column;
+}
+
+  .abt-container .abt-1  .content-container-img img {
+        width: 100%;
+         height: auto!important;
+    }
+  .abt-container .abt-1  .about-content {
+   padding: 10px!important;
+    }
+
+
+
+.abt-container .abt-1{
+    width: 100%!important;
+}
 
 .section-row-mini .col-item,
 .section-row-mini .n-container-item {

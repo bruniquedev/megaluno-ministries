@@ -23,11 +23,23 @@ if($SEODataInfo->author=="About"){
 
  @if(count($AboutinfoData) > 0) 
 @foreach ($AboutinfoData as $info)
+
+ @if($info->filename!="")
 <!--about section-->
     <div class="section_area m-b-10">
-<div class="aboutarea background-img bg-img-attachment" style="background-image: url('{{ asset("storage/about_images/thumbnails/".$info->filename) }}');">
- <div class="about-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content p-50p">
+
+<div class="abt-container flex flex-wrap flex-grow align-items-center w-100">
+<div class="aboutarea abt-1 w-50">
+  <!--with an image-->
+  <div class="m-t-10 m-b-30 content-container-img w-100">
+  <img src='{{asset("storage/about_images/thumbnails/".$info->filename) }}' alt="img" class="about-img img-fluid">
+  </div>
+<!--/with an image-->
+</div>
+
+<div class="aboutarea abt-1 w-50">
+ <div class="about-container animate-element delay6 fadeInLeft-anime w-85"> 
+<div class="about-content p-0p">
 
 <div class="w-100 flex justify-center">
  <div class="summary_img_wrapper">
@@ -50,7 +62,47 @@ if($SEODataInfo->author=="About"){
   </div> 
 </div>
 </div>
+</div>
 <!--/about section-->
+@endif
+
+
+@if($info->filename=="")
+<!--about section-->
+    <div class="section_area m-b-10">
+
+<div class="abt-container">
+<div class="aboutarea abt-1">
+ <div class="about-container animate-element delay6 fadeInLeft-anime w-100"> 
+<div class="about-content p-0p">
+
+<div class="w-100 flex justify-center">
+ <div class="summary_img_wrapper">
+  <img src="<?php echo asset('images/user.png');?>" alt="img" class="summary_img" />
+</div>
+</div>
+  <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
+    <span><a href="javascript:void(0);" class="color-black-dark">{{$info->headingtext}}</a></span></h1>
+
+    <div class="border-separator w-full"></div>
+@if(count($About_detailsData) > 0)
+@foreach($About_detailsData as $About_detail)
+@if($About_detail->about_id==$info->id)
+<p>{{$About_detail->description}}</p> 
+@endif
+@endforeach
+@endif
+
+</div>
+  </div> 
+</div>
+</div>
+</div>
+<!--/about section-->
+@endif
+
+
+
 @endforeach
 @endif
 
