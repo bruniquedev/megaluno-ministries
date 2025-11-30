@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center">   
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE SEO DATA</h3>
+<h4>Save Seo Data</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -35,20 +35,58 @@
   @endif
 <option value=""></option>
 
-{{--
-@if(count($Services_info) > 0)
+
+{{--@if(count($Services_info) > 0)
 @foreach($Services_info as $ServicesInfo)
-<option value="{{$ServicesInfo->name}}">{{$ServicesInfo->name}}</option>
+<option value="{{$ServicesInfo->title}}">{{$ServicesInfo->title}}-{{$ServicesInfo->page_area_type}}</option>
 @endforeach
 @endif--}}
+
+
+@if(count($Sermons_info) > 0)
+@foreach($Sermons_info as $SermonsInfo)
+<option value="{{$SermonsInfo->title}}">{{$SermonsInfo->title}}-{{$SermonsInfo->page_area_type}}</option>
+@endforeach
+@endif
+
+{{--@if(count($Projects_info) > 0)
+@foreach($Projects_info as $ProjectsInfo)
+<option value="{{$ProjectsInfo->title}}">{{$ProjectsInfo->title}}-{{$ProjectsInfo->page_area_type}}</option>
+@endforeach
+@endif--}}
+
+{{--@if(count($Programes_info) > 0)
+@foreach($Programes_info as $ProgramesInfo)
+<option value="{{$ProgramesInfo->title}}">{{$ProgramesInfo->title}}-{{$ProgramesInfo->page_area_type}}</option>
+@endforeach
+@endif--}}
+
+@if(count($Ministries_info) > 0)
+@foreach($Ministries_info as $MinistriesInfo)
+<option value="{{$MinistriesInfo->title}}">{{$MinistriesInfo->title}}-{{$MinistriesInfo->page_area_type}}</option>
+@endforeach
+@endif
+
+@if(count($Involvements_info) > 0)
+@foreach($Involvements_info as $InvolvementsInfo)
+<option value="{{$InvolvementsInfo->title}}">{{$InvolvementsInfo->title}}-{{$InvolvementsInfo->page_area_type}}</option>
+@endforeach
+@endif
+
+@if(count($Event_info) > 0)
+@foreach($Event_info as $EventInfo)
+<option value="{{$EventInfo->title}}">{{$EventInfo->title}}-{{$EventInfo->page_area_type}}</option>
+@endforeach
+@endif
 
 <option value="Home">Home</option>
 <option value="About">About</option>
 <option value="Contact us">Contact us</option>
 <option value="Gallery">Gallery</option>
 <option value="Events">Events</option>
-<option value="Projects">Projects</option>
-<option value="Programmes">Programmes</option>
+<option value="Ministry">Ministry</option>
+<option value="Involvement">Involvement</option>
+<option value="Sermon">Sermon</option>
 <option value="Donation">Donation</option>
 <option value="Testimonials">Testimonials</option>
 </select>
@@ -100,7 +138,7 @@
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage SEO data</h1>
+<h4>Manage SEO data</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}

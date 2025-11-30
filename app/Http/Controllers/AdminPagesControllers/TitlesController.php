@@ -13,11 +13,10 @@ use App\Models\content_info;
 use App\Models\content_details;
 use Illuminate\Support\Str;
 use DB;//import if you want to use sql commands directly
-class AreasservedController extends Controller
-{
-   
 
-/**
+class TitlesController extends Controller
+{
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -41,21 +40,20 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
   ////////////////////////////////////////////////////////////////
 public function index()
 {
-  $data = content_info::where('page_area_type', 'areaserved')->get();   
+  $data = content_info::where('page_area_type', 'pagetitle')->orderBy('title')->get();   
  
   $Data = array(   
 
             'id'=>0,
             'title'=>'',
-            'description'=>'',
-            'link_redirect'=>'',
-            'filename'=>'',
-            'file_width'=>'600',
-            'file_height'=>'350'
+            'heading'=>'',
+            'description'=>''
             );
-  return view('pagesadmin.areas_served')
+  $pages_info = content_info::distinct()->get(['page_area_type']);
+  return view('pagesadmin.titles')
   ->with('DataInfo',$data)
-  ->with('DataToEdit', $Data);
+  ->with('DataToEdit', $Data)
+  ->with('DataPages', $pages_info);
 } 
 
 public function store(Request $request)
@@ -73,10 +71,10 @@ input_videolist
 */
 $content = (new ContentService())->saveContentInfo([
 'title' => $request->title,
+'heading' => $request->heading,
 'description' => $request->description,
-'link_redirect' => $request->link,
-'page_area_type' => 'areaserved',
-'slug' => Str::slug($request->title),
+'page_area_type' => 'pagetitle',
+'slug' => Str::slug($request->heading),
 ],
 $request->allFiles());
 
@@ -97,10 +95,12 @@ return back()->with('success', 'Content saved!');
     public function edit($id)
     {
     $Data =  content_info::find($id);
-        $data = content_info::where('page_area_type', 'areaserved')->get();
-          return view('pagesadmin.areas_served')
+        $data = content_info::where('page_area_type', 'pagetitle')->orderBy('title')->get();
+        $pages_info = content_info::distinct()->get(['page_area_type']);
+          return view('pagesadmin.titles')
           ->with('DataToEdit',$Data)
-          ->with('DataInfo',$data);
+          ->with('DataInfo',$data)
+          ->with('DataPages', $pages_info);
     
     }
 
@@ -117,11 +117,11 @@ return back()->with('success', 'Content saved!');
     {
 
     $content = (new ContentService())->saveContentInfo([
-    'title' => $request->title,
-    'description' => $request->description,
-    'link_redirect' => $request->link,
-    'page_area_type' => 'areaserved',
-    'slug' => Str::slug($request->title),
+'title' => $request->title,
+'heading' => $request->heading,
+'description' => $request->description,
+'page_area_type' => 'pagetitle',
+'slug' => Str::slug($request->heading),
     ],
     $request->allFiles(),
     $id);
@@ -183,8 +183,6 @@ $sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
        }
     return back()->with('success', 'Data deleted sucessfully!');
     }
-
-
 
 
 }

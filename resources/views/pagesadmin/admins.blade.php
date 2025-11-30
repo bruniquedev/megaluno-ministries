@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE ADMINS INFO</h3>
+<h4>Save Admins Info</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -119,7 +119,7 @@ id="fullname" name="fullname"  >
 
 
  <div class="col-md-9 col-md-9">
-<h3>Manage admins info</h3>
+<h4>Manage admins info</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}

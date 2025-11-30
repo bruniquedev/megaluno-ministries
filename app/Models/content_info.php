@@ -15,6 +15,7 @@ protected $fillable = [
         'heading',
         'slug',
         'description',
+        'link_redirect',
         'filename',
         'file_width',
         'file_height',

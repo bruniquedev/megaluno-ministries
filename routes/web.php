@@ -21,6 +21,7 @@ use App\Http\Controllers\AdminPagesControllers\VisitorsController;
 
 use App\Http\Controllers\AdminPagesControllers\RemoveImageController;
 use App\Http\Controllers\AdminPagesControllers\HomesettingsController;
+use App\Http\Controllers\AdminPagesControllers\TitlesController;
 use App\Http\Controllers\AdminPagesControllers\SermonsController;
 use App\Http\Controllers\AdminPagesControllers\InvolvementsController;
 use App\Http\Controllers\AdminPagesControllers\MinistriesController;
@@ -162,6 +163,7 @@ Route::resource('manage-visitors',VisitorsController::class);
 
 Route::post('/remove-image', [RemoveImageController::class, 'RemoveImage']);
 Route::resource('manage-home',HomesettingsController::class);
+Route::resource('manage-titles',TitlesController::class);
 Route::resource('manage-sermons',SermonsController::class);
 Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);
@@ -225,6 +227,7 @@ Route::resource('manage-visitors',VisitorsController::class);
 
 
 Route::resource('manage-home',HomesettingsController::class);
+Route::resource('manage-titles',TitlesController::class);
 Route::resource('manage-sermons',SermonsController::class);
 Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);

@@ -19,6 +19,7 @@ class CreateContentInfoTable extends Migration
             $table->string('heading')->nullable();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
+            $table->mediumText('link_redirect')->nullable();
             $table->mediumText('filename')->nullable();
             $table->integer('file_width')->default(0);
             $table->integer('file_height')->default(0);

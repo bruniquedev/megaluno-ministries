@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE SLIDER IMAGE</h3>
+<h4>Save Slider Image</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -34,7 +34,7 @@
 </div>
   
     <div class="form-groupy">
-<label for="name" id="MessageLabel">Message</label>
+<label for="name" id="MessageLabel">Description text</label>
  <div class="form-input-group"> 
 <textarea required="required"  
  class="input-control" name="descriptiontext" id="descriptiontext"  rows="3">{{$DataToEdit['text']}}</textarea>
@@ -42,15 +42,23 @@
 </div>
 
 
-  <div class="form-groupy">
-            <div class="input_label">Add image</div>
-                   <!--upload field one-->
-   <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
-        <i class="ion ion-upload left"></i>  
-        Select<input type="file" name="imagefile"  id="imagefile" class="text-bold">
+   <div class="form-groupy">
+    <div class="input_label">Add image</div>
+    <!--upload field one-->
+    <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+    <i class="ion ion-upload left"></i>  
+    Select<input type="file" name="imagefile"  id="imagefile" accept="image/*" class="text-bold input-fileup">
     </span>
-       <!--/upload field one-->
-</div>
+    <!--/upload field one-->
+    <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/slider_images/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
+      <span data-id="{{$DataToEdit['id']}}" data-table="slider" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
+      <div class="view-file-btn" ><a href='{{ asset("storage/slider_images/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
+    <div class="img-previewerPopover"></div>
+    </div>
+    </div>
+
+
+
 
 <div class="form-groupy">
 <label for="text">Create a button text (optional)</label>
@@ -91,7 +99,7 @@
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage slider</h1>
+<h4>Manage slider</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -103,7 +111,7 @@
   cellspacing="0" cellpadding="5" style="background: #fff;">
 <thead id="tablehead">
 <tr class="thead table-light">
-<th>ID</th>
+<th>Id</th>
 <th>Heading</th>
 <th>Description</th>
 <th>Button text</th>

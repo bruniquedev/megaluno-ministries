@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center">   
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE AREAS SERVED</h3>
+<h4>Save Locations served</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -25,45 +25,62 @@
 
     @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
 
-
-  <div class="form-groupy">
-<label for="text">Area name</label>
-<div class="form-input-group">
-<input type="text" required="required" value="{{$DataToEdit['headingtext']}}"  id="headingtext" class="form-control input_box" name="headingtext"   />
-</div>
-</div> 
-
-
   
        <div class="form-groupy">
-  <label for="name" id="name">Area description text here</label>
-  <div class="form-input-group">   
-<textarea required="required" class="form-control input_box" name="descriptiontext" id="descriptiontext" 
-  rows="6" >{{$DataToEdit['descriptiontext']}}</textarea>
+  <label for="name" id="name">Location name</label> 
+    <div class="form-input-group">  
+<input type="text" required="required" class="input-control" name="title" id="title" value="{{$DataToEdit['title']}}" />
+</div>
+   </div>
+
+
+    <div class="form-groupy">
+<label for="name" id="MessageLabel">Description</label>
+  <div class="form-input-group">
+<textarea required="required"  
+ class="input-control" name="description" id="description"  rows="5">
+ {{$DataToEdit['description']}}</textarea>
 </div>
 </div>
 
 
-         <div class="form-groupy">
-  <label for="name" id="name">Paste area map code here</label> 
-  <div class="form-input-group">  
-<textarea required="required" class="form-control input_box" name="areamapcode" id="areamapcode" rows="6" >{{$DataToEdit['areamapcode']}}</textarea>
+    <div class="form-groupy">
+<label for="name" id="MessageLabel">Map iframe</label>
+  <div class="form-input-group">
+<textarea required="required"  
+ class="input-control" name="link" id="link"  rows="5">
+ {{$DataToEdit['link_redirect']}}</textarea>
 </div>
 </div>
-
 
 
    <div class="form-groupy">
-<!--<label for="text">ID</label>-->
-<div class="form-input-group">
-<input type="hidden" required="required" readonly="readonly" value="{{$DataToEdit['id']}}"  id="id" class="input_box" name="id"/>
+    <div class="input_label">Add image</div>
+    <!--upload field one-->
+    <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+    <i class="ion ion-upload left"></i>  
+    Select<input type="file" name="input_file"  id="imagefile" accept="image/*" class="text-bold input-fileup">
+    </span>
+    <!--/upload field one-->
+    <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
+      <span data-id="{{$DataToEdit['id']}}" data-table="content_info" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
+      <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
+    <div class="img-previewerPopover"></div>
+    </div>
+    </div>
+
+
+
+<div class="form-groupy">
+  <div class="form-input-group">
+<input type="hidden" required="required" readonly="readonly" value="{{$DataToEdit['id']}}" 
+id="id"  name="id">
 </div>
 </div> 
 
    <div class="form-groupy">
-  <div class="form-input-group">
- <button type="submit" name="submitbutton" class="btn btn-primary" id="submit_button" >SAVE</button>
- </div>         
+     <div class="form-input-group">
+ <button type="submit" name="submitbutton" class="btn btn-primary" id="submit_button" >SAVE</button>    </div>     
 </div>
 
 </form>
@@ -76,7 +93,7 @@
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage Areas served data</h1>
+<h4>Manage Locations served</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -89,9 +106,10 @@
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>Id</th>
-<th>Area name</th>
+<th>Location</th>
 <th>Description</th>
-<th>Area map code</th>
+<th>Map iframe</th>
+<th>Image</th>
 <th>Delete</th>
 <th>Update</th>
 </tr>
@@ -99,17 +117,21 @@
 
 <tbody id="tablebody">
    
-
-
 @if(count($DataInfo) > 0)
 <!--iterate through an array-->
 @foreach($DataInfo as $Info)
 
 <tr>
-<td>{{$Info->id}}</td>    
-<td>{{$Info->headingtext}}</td>
-<td>{{$Info->descriptiontext}}</td>   
-<td><?php if($Info->areamapcode !=""){ echo "Available"; } ?></td>
+<td>{{$Info->id}}</td>
+<td>{{$Info->title}}</td>
+<td>{{$Info->description}}</td>
+<td><?php if($Info->link_redirect !=""){ echo "Available"; } ?></td>
+<td>
+  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}'); height: 80px;">
+<!--<img src="{{ asset('storage/partners_images/'.$Info->filename) }}" width="200px" hight="200px" alt="{{$Info->filename}}" />-->
+<!--<img src="/storage/partners_images/{{$Info->filename}}" width="100%" height="100%" alt="{{$Info->filename}}" />-->
+  </div>
+</td>
 <td>
 <form action="{{ route('manage-areasserved.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
@@ -127,6 +149,7 @@
 @endforeach
 @endif
  
+ 
 </tbody>
 </table>
 </div>
@@ -138,8 +161,8 @@
 
 
 
-       </div><!---end row-->
-        </div>
+     </div><!---end row-->
+      </div>
 
 
 

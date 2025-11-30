@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE TESTIMONIALS</h3>
+<h4>Save Testimonials</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -34,6 +34,14 @@
   <div class="form-input-group">    
 <input type="text" required="required" class="input-control" name="testifiersName" 
 id="testifiersName" value="{{$DataToEdit['name']}}"  />
+</div>
+   </div>
+
+             <div class="form-groupy">
+  <label for="name" id="name">Job/Title</label>
+  <div class="form-input-group">    
+<input type="text" required="required" class="input-control" name="jobtitle" 
+id="jobtitle" value="{{$DataToEdit['job_title']}}"  />
 </div>
    </div>
   
@@ -94,7 +102,7 @@ id="testifiersName" value="{{$DataToEdit['name']}}"  />
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage testimonials</h1>
+<h4>Manage testimonials</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -106,11 +114,12 @@ id="testifiersName" value="{{$DataToEdit['name']}}"  />
   cellspacing="0" cellpadding="5" style="background: #fff;">
 <thead id="tablehead">
 <tr class="thead table-light">
-<th>ID</th>
-<th>NAME </th>
-<th>EMAIL</th>
-<th>MESSAGE</th>
-<th>RATINGS</th>
+<th>Id</th>
+<th>Name</th>
+<th>Job</th>
+<th>Email</th>
+<th>Message</th>
+<th>Ratings</th>
 <th>Delete</th>
 <th>Update</th>
 <th>Status</th>
@@ -126,6 +135,7 @@ id="testifiersName" value="{{$DataToEdit['name']}}"  />
 <tr>
 <td>{{$testimonials->id}}</td>
 <td>{{$testimonials->name}}</td>
+<td>{{$testimonials->job_title}}</td>
 <td>{{$testimonials->email}}</td>
 <td>{{$testimonials->descriptiontext}}</td>
 <td>{{$testimonials->ratings}}</td>

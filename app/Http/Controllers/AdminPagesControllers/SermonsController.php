@@ -43,7 +43,7 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     public function index()
     {
 
-$data = content_info::where('page_area_type', 'sermons')->get();
+$data = content_info::where('page_area_type', 'sermon')->get();
 
          return view('pagesadmin.sermons')->with('DataInfo',$data);;
     }
@@ -106,7 +106,7 @@ $content = (new ContentService())->saveContentInfo([
 'description' => $request->description,
 'publisher' => $request->publisher,
 'day_date' => $request->day_date,
-'page_area_type' => 'sermons',
+'page_area_type' => 'sermon',
 'slug' => Str::slug($request->title),
 ],
 $request->allFiles());
@@ -176,7 +176,7 @@ $detailItems =DB::select('select * from content_details where related_id=:relate
         'description' => $request->description,
         'publisher' => $request->publisher,
         'day_date' => $request->day_date,
-        'page_area_type' => 'sermons',
+        'page_area_type' => 'sermon',
         'slug' => Str::slug($request->title),
     ],
     $request->allFiles(),

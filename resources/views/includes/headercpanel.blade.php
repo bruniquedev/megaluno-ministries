@@ -39,7 +39,7 @@
 <li><a href="{{ route('manage-logos.index') }}">Logo management</a></li>
 <li><a href="{{ route('manage-home.create') }}">Create Intro Home info</a></li>
 <li><a href="{{ route('manage-home.index') }}">Home Intro info</a></li>
-<li><a href="{{ route('manage-home.index') }}">Titles info</a></li>
+<li><a href="{{ route('manage-titles.index') }}">Titles info</a></li>
 <li><a href="{{ route('manage-partnerlogos.index') }}">Partners management</a></li>
 
 <li><a href="{{ route('manage-socialmedia.index') }}">Social media management</a></li>
@@ -89,7 +89,7 @@
 
 
 <!-----dropdown---->
-  <li class="custom-dropdown">
+ {{-- <li class="custom-dropdown">
     <a class="dropbtn">Programmes
       <i class="ion-android-arrow-dropdown"></i>
     </a>
@@ -97,11 +97,11 @@
   <li><a href="{{ route('manage-programmes.create') }}">Create a programme info</a></li>
 <li><a href="{{ route('manage-programmes.index') }}">Programmes info</a></li>
     </ul>
-  </li> 
+  </li> --}}
 <!----end -dropdown---->
 
 <!-----dropdown---->
-  <li class="custom-dropdown">
+  {{--<li class="custom-dropdown">
     <a class="dropbtn">Projects
       <i class="ion-android-arrow-dropdown"></i>
     </a>
@@ -109,7 +109,7 @@
   <li><a href="{{ route('manage-projects.create') }}">Create project info</a></li>
 <li><a href="{{ route('manage-projects.index') }}">Projects info</a></li>
     </ul>
-  </li> 
+  </li> --}}
 <!----end -dropdown---->
 
 <!-----dropdown---->
@@ -132,7 +132,7 @@
       <i class="ion-android-arrow-dropdown"></i>
     </a>
     <ul class="custom-dropdown-content">
- <li><a href="/users-donations">Visitors Donations
+ <li><a href="/users-donations">Donors
  <?php if(count($Unreaddonations) > 0){ ?> 
   <span class="badge badges testsbadge" id="testsbadge" ><?php echo count($Unreaddonations); ?></span> <?php } ?> 
 </a></li>
@@ -175,7 +175,7 @@
 
 
 <!-----dropdown---->
-  <li class="custom-dropdown">
+  {{--<li class="custom-dropdown">
     <a class="dropbtn">Services
       <i class="ion-android-arrow-dropdown"></i>
     </a>
@@ -183,7 +183,7 @@
   <li><a href="{{ route('manage-services.create') }}">Create a services</a></li>
 <li><a href="{{ route('manage-services.index') }}">Services</a></li>
     </ul>
-  </li>
+  </li>--}}
 <!----end -dropdown---->
 
 

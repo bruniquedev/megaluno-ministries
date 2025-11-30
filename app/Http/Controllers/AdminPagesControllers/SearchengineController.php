@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AdminPagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\seo;
+use App\Models\content_info;
+use App\Models\content_details;
 use DB;//import if you want to use sql commands directly
 
 class SearchengineController extends Controller
@@ -40,10 +42,25 @@ public function index()
   //for editting in the same form purposes
   $Data = array('descriptiontext' =>'','keywordstext' =>'','author' =>'','title' =>'','id' =>0);
 
-  $Services_info =DB::select('select * from servicesinfo');
+
+  $Services_info = content_info::where('page_area_type', 'service')->get();
+  $Sermons_info = content_info::where('page_area_type', 'sermon')->get();
+  $Projects_info = content_info::where('page_area_type', 'project')->get();
+  $programes_info = content_info::where('page_area_type', 'programe')->get();
+  $Ministries_info = content_info::where('page_area_type', 'ministry')->get();
+  $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
+  $Event_info = content_info::where('page_area_type', 'event')->get();
   //var_dump($data);
   //passing multiple data
-  return view('pagesadmin.searchengineoptimisation')->with('DataInfo',$data)->with('Services_info',$Services_info)->with('DataToEdit', $Data);
+  return view('pagesadmin.searchengineoptimisation')->with('DataInfo',$data)
+  ->with('Services_info',$Services_info)
+  ->with('Sermons_info',$Sermons_info)
+  ->with('Projects_info',$Projects_info)
+  ->with('Programes_info',$programes_info)
+  ->with('Ministries_info',$Ministries_info)
+  ->with('Involvements_info',$Involvements_info)
+  ->with('Event_info',$Event_info)
+  ->with('DataToEdit', $Data);
 } 
 
 public function store(Request $request)
@@ -91,11 +108,25 @@ public function store(Request $request)
         //returns a view which contains our form to display data to edit
         $Data = seo::find($id);
         $data =DB::select('select * from seo order by id desc');
-          $Services_info =DB::select('select * from servicesinfo');
+$Services_info = content_info::where('page_area_type', 'service')->get();
+  $Sermons_info = content_info::where('page_area_type', 'sermon')->get();
+  $Projects_info = content_info::where('page_area_type', 'project')->get();
+  $programes_info = content_info::where('page_area_type', 'programe')->get();
+  $Ministries_info = content_info::where('page_area_type', 'ministry')->get();
+  $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
+  $Event_info = content_info::where('page_area_type', 'event')->get();
         //var_dump($data);
         //pass data to page for editting
          //passing multiple data
-          return view('pagesadmin.searchengineoptimisation')->with('DataToEdit',$Data)->with('Services_info',$Services_info)->with('DataInfo',$data);
+          return view('pagesadmin.searchengineoptimisation')->with('DataToEdit',$Data)
+  ->with('Services_info',$Services_info)
+  ->with('Sermons_info',$Sermons_info)
+  ->with('Projects_info',$Projects_info)
+  ->with('Programes_info',$programes_info)
+  ->with('Ministries_info',$Ministries_info)
+  ->with('Involvements_info',$Involvements_info)
+  ->with('Event_info',$Event_info)
+          ->with('DataInfo',$data);
     
     }
 

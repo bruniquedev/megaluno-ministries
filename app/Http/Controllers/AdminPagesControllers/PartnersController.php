@@ -4,11 +4,15 @@ namespace App\Http\Controllers\AdminPagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ContentService;
 
-use App\Models\partners;
-use App\AppHelper;
-use DB;
-use Illuminate\Support\Facades\Storage;
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;// will enable us access storage 
+use App\Models\content_info;
+use App\Models\content_details;
+use Illuminate\Support\Str;
+use DB;//import if you want to use sql commands directly
 
 class PartnersController extends Controller
 {
@@ -27,13 +31,17 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
      */
     public function index()
     {
-         //USING sql command directly, you must first import "use DB;" 
-      $data =DB::select('select * from partners order by id desc');
-              
-      //for editting in the same form purposes
-      $Data = array('text' =>'','filename' =>'','link' =>'', 'id' =>0);
-      //var_dump($data);
-      //passing multiple data
+     $data = content_info::where('page_area_type', 'partner')->get();   
+ 
+  $Data = array(   
+
+            'id'=>0,
+            'title'=>'',
+            'description'=>'',
+            'iconfile'=>'',
+            'icon_width'=>'100',
+            'icon_height'=>'100'
+            );
       return view('pagesadmin.partners')->with('DataInfo',$data)->with('DataToEdit', $Data);
     }
 
@@ -56,25 +64,25 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     public function store(Request $request)
     {
 
-$upload_dir="partners_images";
-$thumbnail_dir="thumbnails";
-$isToresize=0;
-$max_width=1000;
-$fileNameToStore="nofile.png";
-if(!empty($request->file('imagefile'))){
-$fileinput = $request->file('imagefile');
-$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
-}
+       /*
+only allowed html and php name attributes for files
+input_file
+input_icon
+input_video
 
-    
-           //inserting data
-        $data = new partners();
-        $data->text = $request->descriptiontext; //captured from form
-        $data->filename = $fileNameToStore; //captured from form
-        $data->link = $request->link; //captured from form
-        $data->save();
-         return redirect('manage-partnerlogos')->with('success','Data saved sucessfully '); //create a session variable Success to store
-         //amessage
+input_filelist
+input_iconlist
+input_videolist
+*/
+$content = (new ContentService())->saveContentInfo([
+'title' => $request->title,
+'description' => $request->link,
+'page_area_type' => 'partner',
+'slug' => Str::slug($request->title),
+],
+$request->allFiles());
+
+return back()->with('success', 'Content saved!');
     }
 
     /**
@@ -96,10 +104,8 @@ $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir
      */
     public function edit($id)
     {
-          //returns a view which contains our form to display data to edit
-            $Data = partners::find($id);
-            $data =DB::select('select * from partners order by id desc');
-            //var_dump($data);
+    $Data =  content_info::find($id);
+        $data = content_info::where('page_area_type', 'partner')->get();
               return view('pagesadmin.partners')->with('DataToEdit',$Data)->with('DataInfo',$data);
     }
 
@@ -112,34 +118,17 @@ $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir
      */
     public function update(Request $request, $id)
     {
-        $upload_dir="partners_images";
-$thumbnail_dir="thumbnails";
-$isToresize=0;
-$max_width=1000;
-$fileNameToStore="nofile.png";
-if(!empty($request->file('imagefile'))){
-$fileinput = $request->file('imagefile');
-$fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir,$isToresize,$max_width,$fileinput);
-}
+  $content = (new ContentService())->saveContentInfo([
+        'title' => $request->title,
+        'description' => $request->link,
+        'page_area_type' => 'partner',
+        'slug' => Str::slug($request->title),
+    ],
+    $request->allFiles(),
+    $id);
 
-            
-    
-               //updating a testimonials data
-               $data = partners::find($id); //so we will have to find a particular data
-               $data->text = $request->descriptiontext; //captured from form
-                $data->link = $request->link; //captured from
-                 //check if user has opted to upload the file
-                 if($request->hasFile('imagefile')){
 
-      //delete previous file
-(new AppHelper())->DeleteFileHelper($upload_dir,$thumbnail_dir,$data->filename);  
-                    $data->filename = $fileNameToStore;
-                   }
-               $data->save();
-    
-        //DB::update('update student set first_name = ?,last_name=?,city_name=?,email=? where id = ?',[$first_name,$last_name,$city_name,$email,$id]);
-                return redirect('manage-partnerlogos')->with('success','Data updated sucessfully '); //create a session variable Success to store
-                //amessage
+return back()->with('success', 'Content saved!');
     }
 
     /**
@@ -150,17 +139,50 @@ $fileNameToStore = (new AppHelper())->StoreFileHelper($upload_dir,$thumbnail_dir
      */
     public function destroy($id)
     {
-          $data = partners::find($id); //so we will have to find a particular post  
-            //here we are going to delete from the database
-    
-               //if slider_images in db not equal to noimage.jpg
-               if($data->filename != 'user.png'){
-                Storage::delete('public/partners_images/'.$data->filename);
-                }
-                
-            $data->delete();
-            return redirect('manage-partnerlogos')->with('success','Data deleted sucessfully '); //create a session variable Success to store
-            //amessage
-            //
+           //
+             $data = content_info::find($id);
+           if($data->filename != ''){
+            Storage::delete('public/content_uploads/'.$data->filename);
+            Storage::delete('public/content_uploads/thumbnails/'.$data->filename);
+            }
+            if($data->iconfile != ''){
+            Storage::delete('public/content_uploads/icons/'.$data->iconfile);
+            //Storage::delete('public/content_uploads/icons/thumbnails/'.$data->iconfile);
+            }
+             if($data->featured_video != ''){
+            Storage::delete('public/content_uploads/videos/'.$data->featured_video);
+           // Storage::delete('public/content_uploads/videos/thumbnails/'.$data->featured_video);
+            }
+       $deleted = $data->delete();
+
+
+       if($deleted){
+
+$info = content_details::where('related_id', $id)->get();
+if(count($info) >0){
+  foreach($info as $Info){
+
+    if($Info->filenamelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->filenamelist);
+    Storage::delete('public/content_uploads/details/thumbnails/'.$Info->filenamelist);
     }
+    if($Info->iconfilelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->iconfilelist);
+    //Storage::delete('public/content_uploads/details/thumbnails/'.$Info->iconfilelist);
+    }
+     if($Info->video_filelist != ''){
+    Storage::delete('public/content_uploads/details/'.$Info->video_filelist);
+    // Storage::delete('public/content_uploads/details/thumbnails/'.$Info->video_filelist);
+    }
+
+}
+}
+
+$sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
+       }
+    return back()->with('success', 'Data deleted sucessfully!');
+    }
+
+
+    
 }

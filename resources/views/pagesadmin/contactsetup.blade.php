@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE CONTACT INFO</h3>
+<h4>Save Contact Info</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -27,7 +27,7 @@
 
 
 	      <div class="form-groupy">
-  <label for="name" id="name">Choose type</label> 
+  <label for="name">Choose type</label> 
   <div class="form-input-group">  
 <select class="input-control" name="type" style="font-weight:bold;">
 @if($DataToEdit['detailtype']!="")
@@ -47,7 +47,7 @@
 
   
    <div class="form-groupy">
-<label for="name" id="MessageLabel">Message info</label>
+<label for="name">Message info</label>
 <div class="form-input-group">
 <textarea required="required"  
  class="input-control" name="descriptiontext" id="descriptiontext"  rows="3">
@@ -97,7 +97,7 @@ id="id"  name="id">
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage contacts info</h1>
+<h4>Manage contacts info</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}

@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
  <div class="col-md-12 col-md-12">
@@ -18,7 +18,7 @@
         <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3 class="text-center">Change password</h3>
+<h4 class="text-center">Change password</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 <?php $username=""; ?>

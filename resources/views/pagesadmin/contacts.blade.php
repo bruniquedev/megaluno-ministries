@@ -2,13 +2,13 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         	
 
 
  <div class="col-md-12 col-md-12">
-<h1>Manage visitors contacts</h1>
+<h4>Manage visitors contacts</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;// will enable us access storage 
 use App\Models\content_info;
 use App\Models\content_details;
+use App\Models\donations;
 use Illuminate\Support\Str;
 use DB;//import if you want to use sql commands directly
 class DonationsController extends Controller
@@ -237,6 +238,32 @@ if(count($info) >0){
 $sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
        }
            return back()->with('success', 'Data deleted sucessfully!');
+    }
+
+
+
+     public function UsersDonations()
+    {
+
+        $data= donations::orderBy('id', 'desc')->get();
+        //passing multiple data
+        return view('pagesadmin.donations_records')->with('DataInfo',$data);
+    }
+
+     public function Update_donationstatus($id)
+    {
+        //returns a view which contains our form to display data to edit
+        $Data = donations::find($id);
+            //var_dump($Data); die();
+          if($Data->status==0){
+            $Data->status=1;
+          }else if($Data->status==1){
+            $Data->status=0;
+          }
+          $Data->save();
+
+    return redirect('users-donations')->with('success','Data updated sucessfully '); //create a session variable Success to store
+    
     }
 
 

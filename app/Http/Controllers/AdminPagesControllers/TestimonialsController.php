@@ -46,7 +46,7 @@ public function index()
   $data =DB::select('select * from testimonials order by id desc');
 
   //for editting in the same form purposes
-  $Data = array('ratings'=>'','name' =>'', 'email' =>'', 
+  $Data = array('ratings'=>'','name' =>'','job_title' =>'', 'email' =>'', 
   'descriptiontext' => '', 'id' =>0);
   //var_dump($data);
   //passing multiple data
@@ -62,6 +62,7 @@ $currentDate=date_format($date,"Y-m-d H:i:s");//24hr
        //inserting data
     $data = new testimonials;
     $data->name = $request->testifiersName; //captured from form
+    $data->job_title = $request->jobtitle;
     $data->email = $request->email;//captured from form
     $data->descriptiontext = $request->descriptiontext;//captured from form
     $data->ratings = $request->type;//captured from form
@@ -141,6 +142,7 @@ $currentDate=date_format($date,"Y-m-d H:i:s");//24hr
            //updating a testimonials data
            $data = testimonials::find($id); //so we will have to find a particular data
            $data->name = $request->testifiersName; //captured from form
+           $data->job_title = $request->jobtitle;
            $data->email = $request->email;//captured from form
            $data->descriptiontext = $request->descriptiontext;//captured from form
            $data->ratings = $request->type;//captured from form

@@ -11,53 +11,57 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h4>Save Social media</h4>
+<h4>Save Pages Titles</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
 @if(!isset($DataToEdit['id']) || $DataToEdit['id']==0)
-    <form role="form" method="post" action="{{ route('manage-socialmedia.store') }}" name="FORM" enctype="multipart/form-data">
+    <form role="form" method="post" action="{{ route('manage-titles.store') }}" name="FORM" enctype="multipart/form-data">
     @else
-    <form action="{{ route('manage-socialmedia.update', $DataToEdit['id']) }}" method="post" name="FORM" 
+    <form action="{{ route('manage-titles.update', $DataToEdit['id']) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @method('PUT')
   @endif
 
     @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
 
+
+
+    <div class="form-groupy">
+  <label for="name" id="name">Choose page</label> 
+  <div class="form-input-group">   
+<select required="required"  class=" input-control" name="title">
+@if($DataToEdit['title']!="")
+  <option value="{{$DataToEdit['title']}}" selected>{{$DataToEdit['title']}}</option>
+  @endif
+<option value=""></option>
+@if(count($DataPages) > 0)
+@foreach($DataPages as $TitleInfo)
+<option value="{{$TitleInfo->page_area_type}}">{{$TitleInfo->page_area_type}}</option>
+@endforeach
+@endif
+</select>
+</div>
+   </div>
   
        <div class="form-groupy">
-  <label for="name" id="name">Social media name</label> 
+  <label for="name" id="name">Heading</label> 
     <div class="form-input-group">  
-<input type="text" required="required" class="input-control" name="title" id="title" value="{{$DataToEdit['title']}}" />
+<input type="text" required="required" class="input-control" name="heading" id="heading" value="{{$DataToEdit['heading']}}" />
 </div>
    </div>
 
 
     <div class="form-groupy">
-<label for="name" id="MessageLabel">Add social link</label>
+<label for="name" id="MessageLabel">Description</label>
   <div class="form-input-group">
 <textarea required="required"  
- class="input-control" name="link" id="link"  rows="5">
+ class="input-control" name="description" id="description"  rows="5">
  {{$DataToEdit['description']}}</textarea>
 </div>
 </div>
 
 
-   <div class="form-groupy">
-    <div class="input_label">Add social logo</div>
-    <!--upload field one-->
-    <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
-    <i class="ion ion-upload left"></i>  
-    Select<input type="file" name="input_icon"  id="imagefile" accept="image/*" class="text-bold input-fileup">
-    </span>
-    <!--/upload field one-->
-    <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/icons/".$DataToEdit["iconfile"]) }}'); width:40px;height:40px;">
-      <span data-id="{{$DataToEdit['id']}}" data-table="content_info" data-column="iconfile" data-route="remove-image" class="close-img-btn" >×</span>
-      <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/icons/".$DataToEdit["iconfile"]) }}' class="custom-file-opener" target="_blank">open</a></div>
-    <div class="img-previewerPopover"></div>
-    </div>
-    </div>
 
 
 
@@ -83,7 +87,7 @@ id="id"  name="id">
 
 
  <div class="col-md-9 col-md-9">
-<h4>Manage social media</h4>
+<h4>Manage Pages Titles</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -96,9 +100,9 @@ id="id"  name="id">
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>Id</th>
-<th>Social Name</th>
-<th>Link</th>
-<th>Logo</th>
+<th>Title area</th>
+<th>Heading</th>
+<th>Description</th>
 <th>Delete</th>
 <th>Update</th>
 </tr>
@@ -113,15 +117,10 @@ id="id"  name="id">
 <tr>
 <td>{{$Info->id}}</td>
 <td>{{$Info->title}}</td>
+<td>{{$Info->heading}}</td>
 <td>{{$Info->description}}</td>
 <td>
-  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/icons/".$Info->iconfile) }}'); height: 80px;">
-<!--<img src="{{ asset('storage/partners_images/'.$Info->filename) }}" width="200px" hight="200px" alt="{{$Info->filename}}" />-->
-<!--<img src="/storage/partners_images/{{$Info->filename}}" width="100%" height="100%" alt="{{$Info->filename}}" />-->
-  </div>
-</td>
-<td>
-<form action="{{ route('manage-socialmedia.destroy', $Info->id) }}" method="post" name="FORM" 
+<form action="{{ route('manage-titles.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
@@ -131,7 +130,7 @@ id="id"  name="id">
 </form>
 </td>
 
-<td><a class="btn btn-primary btn-xs" id="link1" href="/manage-socialmedia/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
+<td><a class="btn btn-primary btn-xs" id="link1" href="/manage-titles/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
 </tr>
 
 @endforeach

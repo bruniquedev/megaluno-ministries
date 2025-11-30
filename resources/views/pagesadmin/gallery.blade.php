@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         
 
@@ -11,7 +11,7 @@
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading" id="panel panel_containerhead1">
-<h3>SAVE GALLERY IMAGE</h3>
+<h4>Save Gallery Image</h4>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -25,25 +25,35 @@
 
     @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
 
-
-  <div class="form-groupy">
-            <div class="input_label">Add image</div>
-                   <!--upload field one-->
-   <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
-        <i class="ion ion-upload left"></i>  
-        Select<input type="file" name="imagefile"  id="imagefile" class="text-bold">
-    </span>
-       <!--/upload field one-->
-</div>
-
-  
     <div class="form-groupy">
-<label for="name" id="MessageLabel">Description</label>
-<div class="form-input-group">
-<textarea required="required"  
- class="input-control" name="descriptiontext" id="descriptiontext"  rows="2">{{$DataToEdit['text']}}</textarea>
-</div>
-</div>
+      <label for="text">Title </label>
+      <div class="form-input-group">
+      <textarea class="form-control input_box_borderless" rows="2" name="title"><?php echo $DataToEdit['title']; ?></textarea>
+   </div>
+   </div>
+            
+    <div class="form-groupy">
+      <label for="text">Description </label>
+      <div class="form-input-group">
+      <textarea class="form-control input_box_borderless" rows="2" name="description"><?php echo $DataToEdit['description']; ?></textarea>
+    </div>
+    </div>
+
+    <div class="form-groupy">
+    <div class="input_label">Add image</div>
+    <!--upload field one-->
+    <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+    <i class="ion ion-upload left"></i>  
+    Select<input type="file" name="input_file"  id="imagefile" accept="image/*" class="text-bold input-fileup">
+    </span>
+    <!--/upload field one-->
+    <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
+      <span data-id="{{$DataToEdit['id']}}" data-table="content_info" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
+      <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
+    <div class="img-previewerPopover"></div>
+    </div>
+    </div>
+
 
 
 
@@ -70,7 +80,7 @@
 
 
  <div class="col-md-9 col-md-9">
-<h1>Manage gallery</h1>
+<h4>Manage gallery</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}
@@ -82,9 +92,11 @@
   cellspacing="0" cellpadding="5" style="background: #fff;"> 
 <thead id="tablehead">
 <tr class="thead table-light">
-<th>ID</th>
+<th>Id</th>
+<th>Title</th>
 <th>Description</th>
-<th>IMAGE</th>
+<th>Type</th>
+<th>Image</th>
 <th>Delete</th>
 <th>Update</th>
 </tr>
@@ -92,36 +104,36 @@
 
 <tbody id="tablebody">
   
+ <?php
+if(count($DataInfo) >0){
+  foreach($DataInfo as $Info){
 
-@if(count($DataInfo) > 0)
-<!--iterate through an array-->
-@foreach($DataInfo as $Info)
-
+?>
 <tr>
-<td>{{$Info->id}}</td>
-<td>
-<div id="custom-img" style="background-image: url('{{ asset("storage/gallery_images/thumbnails/".$Info->filename) }}'); height:50px; width: 50px;"></div>
-<!--<img src="{{ asset('storage/slider_images/'.$Info->filename) }}" width="200px" hight="200px" alt="{{$Info->filename}}" />-->
-<!--<img src="/storage/slider_images/{{$Info->filename}}" width="100%" height="100%" alt="{{$Info->filename}}" />-->
-</td>
-<td>{{$Info->text}}</td>
+<td><?php echo $Info->id; ?></td>
+<td><?php echo $Info->title; ?></td>
+<td><?php echo $Info->description; ?></td>
+<td><?php echo $Info->page_area_type; ?></td>
+<td>  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}'); width:40px;height:40px;"></div></td>
 
+
+<td><a href="/manage-gallery/{{$Info->id}}/edit" class="btn-ui btn-ui-primary btn-xs"  title="Edit info"><span class="ion ion-edit"></span> edit</a></td>
 <td>
 <form action="{{ route('manage-gallery.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-ui btn-danger btn-xs">
-<i class="ion ion-android-delete"></i> Delete
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-xs">
+<i class="ion ion-android-delete"></i>Delete
 </button>
 </form>
 </td>
-
-<td><a class="btn btn-ui btn-primary btn-xs" id="link1" href="/manage-gallery/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
 </tr>
 
-@endforeach
-@endif
+<?php
+}
+}
+ ?>
  
  
 </tbody>

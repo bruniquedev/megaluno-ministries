@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-100 m-b-50" >
+<div class="container-fluid card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 
 
 <div class="col-md-2 col-md-2">
@@ -10,11 +10,11 @@
 
   <table class="table-container" 
   cellspacing="0" cellpadding="5" style="background: #fff;">
-  <h4 id="heading4" align="center"> SUMMARY VIEWS : <?php echo $CountTotalofVisits; ?> </h4>
+  <h4 id="heading4" align="center"> Summary Views : <?php echo $CountTotalofVisits; ?> </h4>
 <thead id="tablehead">
 <tr class="thead table-light">
-<th scope="col">PAGES</th>
-<th scope="col">TOTALS</th>  
+<th scope="col">Pages</th>
+<th scope="col">Totals</th>  
 </tr>
 </thead>
 <tbody id="tablebody">
@@ -34,7 +34,7 @@
  </div>       
  <div class="col-md-10 col-md-10">
 
-<h1>Visitors tracking</h1>
+<h4>Visitors tracking</h4>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
 {{ session('success') }}

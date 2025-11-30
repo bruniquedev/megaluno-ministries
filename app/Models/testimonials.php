@@ -13,6 +13,7 @@ class testimonials extends Model
     public $timestamps = false;
 protected $fillable = [
 'name',
+'job_title',
 'email',
 'reviewdate',
 'descriptiontext',
