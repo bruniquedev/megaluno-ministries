@@ -26,36 +26,36 @@
     @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
 
     <div class="form-groupy">
-<label for="name" id="MessageLabel">Heading text</label>
+<label for="name">Heading text</label>
  <div class="form-input-group"> 
 <textarea required="required"  
- class="input-control" name="headingtext" id="headingtext"  rows="2">{{$DataToEdit['headingtext']}}</textarea>
+ class="input-control" name="headingtext" id="headingtext"  rows="2">{{$DataToEdit['heading']}}</textarea>
 </div>
 </div>
   
     <div class="form-groupy">
-<label for="name" id="MessageLabel">Description text</label>
+<label for="name">Description text</label>
  <div class="form-input-group"> 
 <textarea required="required"  
- class="input-control" name="descriptiontext" id="descriptiontext"  rows="3">{{$DataToEdit['text']}}</textarea>
+ class="input-control" name="descriptiontext" id="descriptiontext"  rows="3">{{$DataToEdit['description']}}</textarea>
 </div>
 </div>
 
 
-   <div class="form-groupy">
-    <div class="input_label">Add image</div>
-    <!--upload field one-->
-    <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
-    <i class="ion ion-upload left"></i>  
-    Select<input type="file" name="imagefile"  id="imagefile" accept="image/*" class="text-bold input-fileup">
-    </span>
-    <!--/upload field one-->
-    <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/slider_images/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
-      <span data-id="{{$DataToEdit['id']}}" data-table="slider" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
-      <div class="view-file-btn" ><a href='{{ asset("storage/slider_images/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
-    <div class="img-previewerPopover"></div>
-    </div>
-    </div>
+      <div class="form-groupy">
+               <div class="input_label">Add image</div>
+               <!--upload field one-->
+               <span class="btn-upload-1 btn-upload-file-1 btn-ui-black">
+               <i class="ion ion-upload left"></i>  
+               Select<input type="file" name="input_file"  id="imagefile" accept="image/*" class="text-bold input-fileup">
+               </span>
+               <!--/upload field one-->
+               <div class="custom-img-previewer" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}'); width:40px;height:40px;">
+                  <span data-id="{{$DataToEdit['id']}}" data-table="content_info" data-column="filename" data-route="remove-image" class="close-img-btn" >×</span>
+                  <div class="view-file-btn" ><a href='{{ asset("storage/content_uploads/thumbnails/".$DataToEdit["filename"]) }}' class="custom-file-opener" target="_blank">open</a></div>
+                <div class="img-previewerPopover"></div>
+               </div>
+               </div>
 
 
 
@@ -63,21 +63,20 @@
 <div class="form-groupy">
 <label for="text">Create a button text (optional)</label>
  <div class="form-input-group"> 
-<input type="text"   value="{{$DataToEdit['buttontext']}}" id="buttontext" class="input" name="buttontext">
+<input type="text"   value="{{$DataToEdit['title']}}" id="buttontext" class="input" name="buttontext">
 </div>
 </div>
 
     <div class="form-groupy">   
-<label for="name" id="MessageLabel">Create a button link (optional)</label>
+<label for="name">Create a button link (optional)</label>
  <div class="form-input-group"> 
 <textarea   
  class="input-control" name="buttonlink" id="buttonlink"  rows="2"
-  style=" font-weight:bold;">{{$DataToEdit['buttonlink']}}</textarea>
+  style=" font-weight:bold;">{{$DataToEdit['link_redirect']}}</textarea>
 </div>
 </div>
 
 <div class="form-groupy">
-<!--<label for="text">ID</label>-->
  <div class="form-input-group"> 
 <input type="hidden" required="required" readonly="readonly" value="{{$DataToEdit['id']}}" id="id" class="input_box" name="id">
 </div>
@@ -115,7 +114,8 @@
 <th>Heading</th>
 <th>Description</th>
 <th>Button text</th>
-<th>IMAGE</th>
+<th>Button Link</th>
+<th>Image</th>
 <th>Delete</th>
 <th>Update</th>
 </tr>
@@ -130,11 +130,12 @@
 
 <tr>
 <td>{{$Info->id}}</td>
-<td>{{$Info->headingtext}}</td>
-<td>{{$Info->text}}</td>
-<td>{{$Info->buttontext}}</td>
+<td>{{$Info->heading}}</td>
+<td>{{$Info->description}}</td>
+<td>{{$Info->title}}</td>
+<td>{{$Info->link_redirect}}</td>
 <td>
-<div id="custom-img" style="background-image: url('{{ asset("storage/slider_images/thumbnails/".$Info->filename) }}');"></div>
+<div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}');"></div>
 <!--<img src="{{ asset('storage/slider_images/'.$Info->filename) }}" width="200px" hight="200px" alt="{{$Info->filename}}" />-->
 <!--<img src="/storage/slider_images/{{$Info->filename}}" width="100%" height="100%" alt="{{$Info->filename}}" />-->
 </td>

@@ -102,6 +102,18 @@
 
 <!-----dropdown---->
   {{--<li class="custom-dropdown">
+    <a class="dropbtn">Activities
+      <i class="ion-android-arrow-dropdown"></i>
+    </a>
+    <ul class="custom-dropdown-content">
+  <li><a href="{{ route('manage-activities.create') }}">Create an activity info</a></li>
+<li><a href="{{ route('manage-activities.index') }}">Activity info</a></li>
+    </ul>
+  </li> --}}
+<!----end -dropdown---->
+
+<!-----dropdown---->
+  {{--<li class="custom-dropdown">
     <a class="dropbtn">Projects
       <i class="ion-android-arrow-dropdown"></i>
     </a>

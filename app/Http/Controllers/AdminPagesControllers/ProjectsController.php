@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AdminPagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ContentService;
+use App\Traits\HandlesDeletion;
+use App\Traits\HasContentDefaults;
 
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,9 @@ use Illuminate\Support\Str;
 use DB;//import if you want to use sql commands directly
 class ProjectsController extends Controller
 {
+
+  use HandlesDeletion;    
+use HasContentDefaults;    
    
 /**
      * Create a new controller instance.
@@ -55,21 +60,22 @@ $data = content_info::where('page_area_type', 'project')->get();
      */
     public function create()
     {
-       $Data = array(   
+      //Override Only What You Want if you want to change something in the HasContentDefaults trait
 
-            'id'=>0,
-            'title'=>'',
-            'description'=>'',
-            'filename'=>'',
-            'file_width'=>'600',
-            'file_height'=>'350',
-            'iconfile'=>'',
-            'icon_width'=>'100',
-            'icon_height'=>'100'
-            );
-           
-            $contentdetailItems= array();
- return view('pagesadmin.project_create')->with('ListdetailItems',$contentdetailItems)->with('DataToEdit', $Data);
+// Base default values
+    $defaults = HasContentDefaults::defaultContent();
+     // Custom overrides or if you want to set some new defaults different from that of a trait
+    $custom = [
+        'ispublished' => 1, // overriding default
+        'title' => ''  
+    ];
+    // Merge both
+    $Data = array_merge($defaults, $custom);
+
+return view('pagesadmin.project_create', [
+        'DataToEdit' => $Data,
+        'ListdetailItems' => $this->defaultDetailItems()
+    ]);
     }
 
     /**
@@ -194,49 +200,12 @@ return back()->with('success', 'Content saved!');
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function destroy($id)
     {
-        //
-             $data = content_info::find($id);
-           if($data->filename != ''){
-            Storage::delete('public/content_uploads/'.$data->filename);
-            Storage::delete('public/content_uploads/thumbnails/'.$data->filename);
-            }
-            if($data->iconfile != ''){
-            Storage::delete('public/content_uploads/icons/'.$data->iconfile);
-            //Storage::delete('public/content_uploads/icons/thumbnails/'.$data->iconfile);
-            }
-             if($data->featured_video != ''){
-            Storage::delete('public/content_uploads/videos/'.$data->featured_video);
-           // Storage::delete('public/content_uploads/videos/thumbnails/'.$data->featured_video);
-            }
-       $deleted = $data->delete();
 
-
-       if($deleted){
-
-$info = content_details::where('related_id', $id)->get();
-if(count($info) >0){
-  foreach($info as $Info){
-
-    if($Info->filenamelist != ''){
-    Storage::delete('public/content_uploads/details/'.$Info->filenamelist);
-    Storage::delete('public/content_uploads/details/thumbnails/'.$Info->filenamelist);
-    }
-    if($Info->iconfilelist != ''){
-    Storage::delete('public/content_uploads/details/'.$Info->iconfilelist);
-    //Storage::delete('public/content_uploads/details/thumbnails/'.$Info->iconfilelist);
-    }
-     if($Info->video_filelist != ''){
-    Storage::delete('public/content_uploads/details/'.$Info->video_filelist);
-    // Storage::delete('public/content_uploads/details/thumbnails/'.$Info->video_filelist);
-    }
-
-}
-}
-
-$sqlQuery =DB::delete('delete from content_details where related_id = ?',[$id]);
-       }
+        $this->deleteById('content_info', $id);
+    
+          
            return back()->with('success', 'Data deleted sucessfully!');
     }
 

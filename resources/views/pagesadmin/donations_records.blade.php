@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-150 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         	
 
@@ -63,7 +63,7 @@ if ($Info->donationstatus == 1) {
 <td>{{$Info->createddate}}</td>
 <td>
 
-<form action="{{ route('users-donations.destroy', $Info->id) }}" method="post" name="FORM" 
+<form action="{{ route('users-donations.destroydonation', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')

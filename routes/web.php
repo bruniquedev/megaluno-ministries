@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminPagesControllers\MinistriesController;
 
 use App\Http\Controllers\AdminPagesControllers\ProgrammesController;
 use App\Http\Controllers\AdminPagesControllers\ProjectsController;
+use App\Http\Controllers\AdminPagesControllers\ActivitiesController;
 use App\Http\Controllers\AdminPagesControllers\ServicesController;
 use App\Http\Controllers\AdminPagesControllers\AreasservedController;
 
@@ -169,13 +170,14 @@ Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);
 
 Route::resource('manage-programmes',ProgrammesController::class);
+Route::resource('manage-activities',ActivitiesController::class);
 Route::resource('manage-projects',ProjectsController::class);
 
 Route::resource('manage-events',EventsController::class);
 Route::resource('manage-donations',DonationsController::class);
 Route::get('users-donations', [DonationsController::class,'UsersDonations']);
 Route::get('update-donationstatus/{id}', [DonationsController::class,'Update_donationstatus']);
-
+Route::delete('/users-donations/{id}', [DonationsController::class, 'destroydonation'])->name('users-donations.destroydonation');
 
 
 
@@ -233,19 +235,23 @@ Route::resource('manage-involvements',InvolvementsController::class);
 Route::resource('manage-ministries',MinistriesController::class);
 
 Route::resource('manage-programmes',ProgrammesController::class);
+Route::resource('manage-activities',ActivitiesController::class);
 Route::resource('manage-projects',ProjectsController::class);
 
 Route::resource('manage-events',EventsController::class);
 Route::resource('manage-donations',DonationsController::class);
 Route::get('users-donations', [DonationsController::class,'UsersDonations']);
 Route::get('update-donationstatus/{id}', [DonationsController::class,'Update_donationstatus']);
-//Route::resource('manage-services',ServicesController::class);
+
+Route::delete('/users-donations/{id}', [DonationsController::class, 'destroydonation'])->name('users-donations.destroydonation');
+
+Route::resource('manage-services',ServicesController::class);
 
 Route::resource('manage-contact-setup',ContactsetupController::class);
 Route::resource('manage-contacts',ContactsController::class);
 Route::resource('manage-seo',SearchengineController::class);
 
-//Route::resource('manage-areasserved',AreasservedController::class);
+Route::resource('manage-areasserved',AreasservedController::class);
 Route::resource('manage-gallery',GalleryController::class);
 
 Route::resource('manage-changepassword',ChangepasswordController::class);

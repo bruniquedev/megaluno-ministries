@@ -61,6 +61,12 @@
 @endforeach
 @endif--}}
 
+{{--@if(count($Activity_info) > 0)
+@foreach($Activity_info as $ActivityInfo)
+<option value="{{$ActivityInfo->title}}">{{$ActivityInfo->title}}-{{$ActivityInfo->page_area_type}}</option>
+@endforeach
+@endif--}}
+
 @if(count($Ministries_info) > 0)
 @foreach($Ministries_info as $MinistriesInfo)
 <option value="{{$MinistriesInfo->title}}">{{$MinistriesInfo->title}}-{{$MinistriesInfo->page_area_type}}</option>

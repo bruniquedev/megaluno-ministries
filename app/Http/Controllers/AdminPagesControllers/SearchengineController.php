@@ -50,6 +50,8 @@ public function index()
   $Ministries_info = content_info::where('page_area_type', 'ministry')->get();
   $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
   $Event_info = content_info::where('page_area_type', 'event')->get();
+  $Activity_info = content_info::where('page_area_type', 'activity')->get();
+  
   //var_dump($data);
   //passing multiple data
   return view('pagesadmin.searchengineoptimisation')->with('DataInfo',$data)
@@ -60,6 +62,7 @@ public function index()
   ->with('Ministries_info',$Ministries_info)
   ->with('Involvements_info',$Involvements_info)
   ->with('Event_info',$Event_info)
+  ->with('Activity_info',$Activity_info)
   ->with('DataToEdit', $Data);
 } 
 
@@ -115,6 +118,7 @@ $Services_info = content_info::where('page_area_type', 'service')->get();
   $Ministries_info = content_info::where('page_area_type', 'ministry')->get();
   $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
   $Event_info = content_info::where('page_area_type', 'event')->get();
+  $Activity_info = content_info::where('page_area_type', 'activity')->get();
         //var_dump($data);
         //pass data to page for editting
          //passing multiple data
@@ -126,7 +130,8 @@ $Services_info = content_info::where('page_area_type', 'service')->get();
   ->with('Ministries_info',$Ministries_info)
   ->with('Involvements_info',$Involvements_info)
   ->with('Event_info',$Event_info)
-          ->with('DataInfo',$data);
+  ->with('Activity_info',$Activity_info)
+  ->with('DataInfo',$data);
     
     }
 
