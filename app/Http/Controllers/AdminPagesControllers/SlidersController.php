@@ -75,6 +75,8 @@ input_filelist
 input_iconlist
 input_videolist
 */
+
+
 $content = (new ContentService())->saveContentInfo([
 'heading' => $request->headingtext,
 'description' => $request->descriptiontext,
@@ -82,6 +84,8 @@ $content = (new ContentService())->saveContentInfo([
 'link_redirect' => $request->buttonlink,
 'page_area_type' => 'slider',
 'slug' => Str::slug($request->heading),
+'isToresize' => 1,
+'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -126,6 +130,8 @@ $content = (new ContentService())->saveContentInfo([
     'link_redirect' => $request->buttonlink,
     'page_area_type' => 'slider',
     'slug' => Str::slug($request->heading),
+    'isToresize' => 1,
+    'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);

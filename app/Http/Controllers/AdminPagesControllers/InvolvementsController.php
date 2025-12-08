@@ -101,6 +101,8 @@ $content = (new ContentService())->saveContentInfo([
 'description' => $request->description,
 'page_area_type' => 'involvement',
 'slug' => Str::slug($request->title),
+'isToresize' => 1,
+'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -113,7 +115,9 @@ foreach ($request->ordersortlist as $i => $ordersort) {
         'headinglist' => $request->detailheadinglist[$i],
         'descriptionlist' => $request->detaildescriptionlist[$i],
         'input_filelist' => $request->input_filelist[$i] ?? null,
-        'sluglist' => Str::slug($request->detailheadinglist[$i])
+        'sluglist' => Str::slug($request->detailheadinglist[$i]),
+        'isToresize' => 1,
+        'max_width' => 1000
     ];
 }
 
@@ -166,6 +170,8 @@ $detailItems =DB::select('select * from content_details where related_id=:relate
         'description' => $request->description,
         'page_area_type' => 'involvement',
         'slug' => Str::slug($request->title),
+        'isToresize' => 1,
+        'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);
@@ -180,7 +186,9 @@ foreach ($request->ordersortlist as $i => $ordersort) {
         'headinglist' => $request->detailheadinglist[$i],
         'descriptionlist' => $request->detaildescriptionlist[$i],
         'input_filelist' => $request->input_filelist[$i] ?? null,
-        'sluglist' => Str::slug($request->detailheadinglist[$i])
+        'sluglist' => Str::slug($request->detailheadinglist[$i]),
+        'isToresize' => 1,
+        'max_width' => 1000
     ];
 }
 

@@ -19,19 +19,19 @@ $animate_position="slide-animate-right";
   $animate_position="slide-animate-left";
 } ?>
  
-  <div class="mySlides {{$animate_position}}" style="background-image: url('{{"storage/slider_images/thumbnails/".$SliderInfo->filename }}');">
+  <div class="mySlides {{$animate_position}}" style="background-image: url('{{"storage/content_uploads/thumbnails/".$SliderInfo->filename }}');">
 <div class="slider-caption mobile-relative-slider-caption animate-element delay4 fadeInDown-animation fadeInDown">
-<h3 class="animate-element delay9 fadeInDown-animation fadeInDown mobile-relative-slider-caption-heading f-w-500 f-s-90 font-century-bold">{{$SliderInfo->headingtext}}</h3> 
- <?php if($SliderInfo->text!=""){ ?>
-<p class="text-para animate-element delay9 fadeInUp-animation fadeInUp mobile-relative-slider-caption-desc f-w-500">{{$SliderInfo->text}}</p><?php } ?>
+<h3 class="animate-element delay9 fadeInDown-animation fadeInDown mobile-relative-slider-caption-heading f-w-500 f-s-90 font-century-bold">{{$SliderInfo->heading}}</h3> 
+ <?php if($SliderInfo->description!=""){ ?>
+<p class="text-para animate-element delay9 fadeInUp-animation fadeInUp mobile-relative-slider-caption-desc f-w-500">{{$SliderInfo->description}}</p><?php } ?>
  <?php
    $buttontext="More details...";
    $buttonlink="javascript:void(0);";
-  if($SliderInfo->buttonlink!=""){ 
-   $buttonlink=$SliderInfo->buttonlink;
+  if($SliderInfo->link_redirect!=""){ 
+   $buttonlink=$SliderInfo->link_redirect;
    }
-    if($SliderInfo->buttontext!=""){ 
-   $buttontext=$SliderInfo->buttontext;
+    if($SliderInfo->title!=""){ 
+   $buttontext=$SliderInfo->title;
   ?>
 <div class="btn-slider animate-element delay9 fadeInDown-animation fadeInDown m-t-20"><a class="get-touch-btn mobile-relative-slider-get-touch-btn" href="{{$buttonlink}}">{{$buttontext}}</a></div>
 <?php } ?>

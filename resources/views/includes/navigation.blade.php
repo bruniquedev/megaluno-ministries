@@ -11,8 +11,8 @@
 <div class="nav-first">
 
 <div class="nav_brand">
-  <div class="logo_wrapper" id="logobrand" logourl="{{'storage/logo_images/'.$Logoname }}" brandtext="{{$Brandname}}">
-  <img src="{{ asset('storage/logos_images/'.$Logoname) }}" alt="logo" class="logo_img" />
+  <div class="logo_wrapper" id="logobrand" logourl="{{'storage/content_uploads/icons/'.$LogoIcon }}" brandtext="{{$Brandname}}">
+  <img src="{{ asset('storage/content_uploads/icons/'.$LogoIcon) }}" alt="logo" class="logo_img" />
 </div>
 
    <div class="brand_text font-century-bold">
@@ -84,9 +84,9 @@ if($ContactsSetupDataInfo->detailtype=="Tel"){
   <a href="/ministries" class="dropbtn">
 <i class="ion ion-drag"></i> Ministries<i class="m-l-3 ion-ios-arrow-down"></i></a>
     <ul class="custom-dropdown-content">
-@if(count($Projectsinfo) > 0) 
-@foreach ($Projectsinfo as $info)
-<li><a  href="/ministry/{{$info->id}}/{{Str::slug($info->headingtext)}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->headingtext}}</a></li>
+@if(count($MinistriesInfoData) > 0) 
+@foreach ($MinistriesInfoData as $info)
+<li><a  href="/ministry/{{$info->id}}/{{$info->slug}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->title}}</a></li>
 @endforeach
 @endif  
     </ul>
@@ -98,9 +98,9 @@ if($ContactsSetupDataInfo->detailtype=="Tel"){
   <a href="/involvements" class="dropbtn">
 <i class="ion ion-android-favorite-outline"></i> Get Involved<i class="m-l-3 ion-ios-arrow-down"></i></a>
     <ul class="custom-dropdown-content">
-@if(count($Activitiesinfo) > 0) 
-@foreach ($Activitiesinfo as $info) 
-<li><a  href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->headingtext}}</a></li>
+@if(count($InvolvementInfoData) > 0) 
+@foreach ($InvolvementInfoData as $info) 
+<li><a  href="/involvement/{{$info->id}}/{{$info->slug}}"><i class="ion ion-ios-arrow-forward"></i> {{$info->title}}</a></li>
 @endforeach
 @endif 
     </ul>

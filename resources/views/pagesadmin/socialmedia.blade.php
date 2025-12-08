@@ -10,8 +10,9 @@
 
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
-<div class="panel_container-heading" id="panel panel_containerhead1">
-<h4>Save Social media</h4>
+<div class="panel_container-heading flex align-items-center flex-grow">
+<h4 class="m-r-10">Save Social media</h4>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -115,7 +116,7 @@ id="id"  name="id">
 <td>{{$Info->title}}</td>
 <td>{{$Info->description}}</td>
 <td>
-  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/icons/".$Info->iconfile) }}'); height: 80px;">
+  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/icons/".$Info->iconfile) }}'); width: 30px;height: 30px;">
 <!--<img src="{{ asset('storage/partners_images/'.$Info->filename) }}" width="200px" hight="200px" alt="{{$Info->filename}}" />-->
 <!--<img src="/storage/partners_images/{{$Info->filename}}" width="100%" height="100%" alt="{{$Info->filename}}" />-->
   </div>

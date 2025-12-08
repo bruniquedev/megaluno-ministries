@@ -74,6 +74,8 @@ $content = (new ContentService())->saveContentInfo([
 'description' => $request->link,
 'page_area_type' => 'sociallink',
 'slug' => Str::slug($request->title),
+        'isToresize' => 1,
+        'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -113,6 +115,8 @@ return back()->with('success', 'Content saved!');
         'description' => $request->link,
         'page_area_type' => 'sociallink',
         'slug' => Str::slug($request->title),
+        'isToresize' => 1,
+        'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);

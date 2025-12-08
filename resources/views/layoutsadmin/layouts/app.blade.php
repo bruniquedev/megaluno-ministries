@@ -6,19 +6,11 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @if(count($WebsiteLogoData) > 0)
-<!--iterate through an array-->
-<?php $counter=0; ?>
-@foreach($WebsiteLogoData as $WebsiteLogoDataInfo)
-<?php 
-   $counter++;
-   if($counter==1){
-  ?>
-<link rel="icon" href="{{ asset('storage/logos_images/'.$WebsiteLogoDataInfo->filename) }}" type="image/gif" sizes="20x16">
-<link href="{{ asset('storage/logos_images/'.$WebsiteLogoDataInfo->filename) }}" rel="icon">
-  <link href="{{ asset('storage/logos_images/'.$WebsiteLogoDataInfo->filename) }}" rel="apple-touch-icon">
-<?php } ?>
-@endforeach
+    @if($LogoIcon))
+<link rel="icon" href="{{ asset('storage/content_uploads/icons/'.$LogoIcon) }}" type="image/gif" sizes="20x16">
+<link href="{{ asset('storage/content_uploads/icons/'.$LogoIcon) }}" rel="icon">
+  <link href="{{ asset('storage/content_uploads/icons/'.$LogoIcon) }}" rel="apple-touch-icon">
+
 @endif
     
     <!--This is the app name which is configured from .env file on APP_NAME.

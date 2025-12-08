@@ -76,6 +76,8 @@ $content = (new ContentService())->saveContentInfo([
 'title' => $request->title,
 'page_area_type' => 'logo',
 'slug' => Str::slug($request->title),
+'isToresize' => 1,
+'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -130,6 +132,8 @@ return back()->with('success', 'Content saved!');
         'title' => $request->title,
         'page_area_type' => 'logo',
         'slug' => Str::slug($request->title),
+        'isToresize' => 1,
+        'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);

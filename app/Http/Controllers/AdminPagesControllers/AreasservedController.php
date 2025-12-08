@@ -83,6 +83,8 @@ $content = (new ContentService())->saveContentInfo([
 'link_redirect' => $request->link,
 'page_area_type' => 'areaserved',
 'slug' => Str::slug($request->title),
+'isToresize' => 1,
+'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -128,6 +130,8 @@ return back()->with('success', 'Content saved!');
     'link_redirect' => $request->link,
     'page_area_type' => 'areaserved',
     'slug' => Str::slug($request->title),
+            'isToresize' => 1,
+        'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);

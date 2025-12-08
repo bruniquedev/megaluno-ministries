@@ -26,8 +26,8 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			//handling the file upload
 			$upload_dir="content_uploads";
 			$thumbnail_dir="thumbnails";
-			$isToresize=1;
-			$max_width=600;
+			$isToresize=$data['isToresize'];
+			$max_width=$data['max_width'];
 			$fileNameToStore="";
 			if(!empty($files['input_file'])){
 			$fileinput = $files['input_file'];
@@ -50,7 +50,7 @@ public function saveContentInfo(array $data, array $files = [], $id = null)
 			$upload_dir="content_uploads/icons";
 			$thumbnail_dir="thumbnails";
 			$isToresize=0;
-			$max_width=100;
+			$max_width=0;
 			$fileNameToStore="";
 			if(!empty($files['input_icon'])){
 			$fileinput = $files['input_icon'];
@@ -153,8 +153,8 @@ $sqlQuery =DB::delete('Delete from content_details where related_id=:id AND id N
 
                 $upload_dir="content_uploads/details";
 			$thumbnail_dir="thumbnails";
-			$isToresize=1;
-			$max_width=600;
+			$isToresize=$detail['isToresize'];
+			$max_width=$detail['max_width'];
 			$fileNameToStore="";
 			if(!empty($detail['input_filelist'])){
 			$fileinput = $detail['input_filelist'];
@@ -179,7 +179,7 @@ $sqlQuery =DB::delete('Delete from content_details where related_id=:id AND id N
                 $upload_dir="content_uploads/details";
 			$thumbnail_dir="thumbnails";
 			$isToresize=0;
-			$max_width=100;
+			$max_width=0;
 			$fileNameToStore="";
 			if(!empty($detail['input_iconlist'])){
 			$fileinput = $detail['input_iconlist'];

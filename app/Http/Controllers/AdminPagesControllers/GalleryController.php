@@ -78,6 +78,8 @@ $content = (new ContentService())->saveContentInfo([
 'description' => $request->description,
 'page_area_type' => 'gallery',
 'slug' => Str::slug($request->title),
+'isToresize' => 1,
+'max_width' => 1000,
 ],
 $request->allFiles());
 
@@ -123,6 +125,8 @@ $content = (new ContentService())->saveContentInfo([
         'description' => $request->description,
         'page_area_type' => 'gallery',
         'slug' => Str::slug($request->title),
+        'isToresize' => 1,
+        'max_width' => 1000,
     ],
     $request->allFiles(),
     $id);

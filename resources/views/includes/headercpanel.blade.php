@@ -5,8 +5,8 @@
 
   <div class="nav-first">
    <div class="nav_brand">
-  <div class="logo_wrapper" id="logobrand" logourl="{{'storage/logo_images/'.$Logoname }}" brandtext="{{$Brandname}}">
-  <img src="<?php echo asset('storage/logos_images/'.$Logoname);?>" alt="logo" class="logo_img" />
+  <div class="logo_wrapper" id="logobrand" logourl="{{'storage/content_uploads/icons/'.$LogoIcon }}" brandtext="{{$Brandname}}">
+  <img src="<?php echo asset('storage/content_uploads/icons/'.$LogoIcon);?>" alt="logo" class="logo_img" />
 </div>
 
    <div class="brand_text">
