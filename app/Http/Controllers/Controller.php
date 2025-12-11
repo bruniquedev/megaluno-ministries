@@ -28,6 +28,7 @@ class Controller extends BaseController
             $WebsiteLogoData = content_info::where('page_area_type', 'logo')->where('ispublished', 1)->first();
             $ContactsSetupData =DB::select("SELECT * FROM contacts ORDER BY FIELD(detailtype, 'Tel', 'WhatsApp number', 'Email', 'WhatsApp link', 'Address', 'Map', 'Footer detail')");
             $SocialLinksData = content_info::where('page_area_type', 'sociallink')->where('ispublished', 1)->get();
+           // dd($SocialLinksData);
             $SEOData =DB::select('select * from seo');
             $PartnersData = content_info::where('page_area_type', 'partner')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 

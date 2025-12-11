@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="nav_social_brands flex flex-wrap justify-right" id="nav_social_brands">
+<div class="nav_social_brands flex flex-wrap justify-right align-items-center" id="nav_social_brands">
 
 @if(count($ContactsSetupData) > 0)
 <!--iterate through an array-->
@@ -60,9 +60,10 @@ if($ContactsSetupDataInfo->detailtype=="Tel"){
 
 @if(count($SocialLinksData) > 0)
 <!--iterate through an array-->
-@foreach($SocialLinksData as $SocialLinksDataInfo)
-<a class="navbar-brand-social-header" title="{{$SocialLinksDataInfo->socialtype}}" href="{{$SocialLinksDataInfo->descriptiontext}}" target="_blank" > 
-<i class="ion ion-socials {{$SocialLinksDataInfo->socialtype}}"></i></a>
+@foreach($SocialLinksData as $SocialInfo)
+<a class="navbar-brand-social-header" title="{{$SocialInfo->title}}" href="{{$SocialInfo->description}}" target="_blank" > 
+    <img class="img-contain w-30p" src='{{ asset("storage/content_uploads/icons/".$SocialInfo->iconfile) }}' />
+ </a>
 @endforeach
 @endif
 

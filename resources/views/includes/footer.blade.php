@@ -79,8 +79,8 @@ if($ContactsSetupDataInfo->detailtype=="Footer detail"){
 @if(count($SocialLinksData) > 0)
 <!--iterate through an array-->
 @foreach($SocialLinksData as $SocialLinksDataInfo)               		
-<a class="navbar-brand-social-footer" href="{{$SocialLinksDataInfo->descriptiontext}}" target="_blank" > 
-<i class="{{$SocialLinksDataInfo->socialtype}} ion"></i>
+<a class="navbar-brand-social-footer" href="{{$SocialLinksDataInfo->title}}" target="_blank" > 
+<img class="img-contain w-30p" src='{{ asset("storage/content_uploads/icons/".$SocialLinksDataInfo->iconfile) }}' />
 </a>
 @endforeach
 @endif
@@ -140,9 +140,9 @@ if($ContactsSetupDataInfo->detailtype=="Email"){
 						@foreach($PartnersData as $PartnersDataInfo)
 					   <div class="partner-logo">
             <div class="partner_logo_wrapper center">
-              <img src="{{ asset('storage/partners_images/'.$PartnersDataInfo->filename) }}" alt="logo" class="partnerlogo_img img-responsive img-rounded"/>
+              <img src="{{ asset('storage/content_uploads/icons/'.$PartnersDataInfo->iconfile) }}" alt="logo" class="partnerlogo_img img-responsive img-rounded"/>
              </div>
-             <div class="partner-text center"><a href="{{$PartnersDataInfo->link}}" class="text_decoration" target="_blank">{{$PartnersDataInfo->text}}</a></div>
+             <div class="partner-text center"><a href="{{$PartnersDataInfo->link}}" class="text_decoration" target="_blank">{{$PartnersDataInfo->title}}</a></div>
             </div>
 						@endforeach
 						@endif

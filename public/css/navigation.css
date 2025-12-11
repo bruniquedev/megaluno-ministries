@@ -327,7 +327,7 @@ li.donate-btn a:hover,li.donate-btn a.active, li.donate-btn .active  {
 .nav_social_brands #link1_email,
 .nav_social_brands #link1_phone{
 margin-right: 5px;
-margin-top: 9px;
+margin-top: 0px;
 color: #fff;
 }
 
