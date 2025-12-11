@@ -29,6 +29,7 @@ protected $fillable = [
         'post_views',
         'ispublished', 
         'publisher',
+        'sorted_order',
         'page_area_type'
         ];
 }

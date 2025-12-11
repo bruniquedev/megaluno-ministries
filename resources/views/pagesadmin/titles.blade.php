@@ -36,6 +36,7 @@
   <option value="{{$DataToEdit['title']}}" selected>{{$DataToEdit['title']}}</option>
   @endif
 <option value=""></option>
+<option value="testimonial">testimonial</option>
 @if(count($DataPages) > 0)
 @foreach($DataPages as $TitleInfo)
 <option value="{{$TitleInfo->page_area_type}}">{{$TitleInfo->page_area_type}}</option>

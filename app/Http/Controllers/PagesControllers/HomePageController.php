@@ -28,43 +28,49 @@ class HomePageController extends Controller
    
        //var_dump($title);
       
- $SliderData =content_info::where('page_area_type', 'slider')->where('ispublished', 1)->get();;
+ $SliderData =content_info::where('page_area_type', 'slider')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();;
 /////////////////////////////////////
 
- $HomeIntroData = content_info::where('page_area_type', 'home')->where('ispublished', 1)->get();
+ $HomeIntroData = content_info::where('page_area_type', 'home')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 //$HomeIntro_detailsData = content_details::where('ispublishedlist', 1)->get();
-$HomeIntro_detailsData = DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'home')->where('content_info.ispublished', 1)->get();
+$HomeIntro_detailsData = DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'home')->where('content_info.ispublished', 1)->orderBy('content_details.ordersort', 'asc')->get();
 //dd($HomeIntro_detailsData);
 //////////////////////////////////////
 
-$SermonsData = content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->orderBy('id', 'asc')->limit(3)->get();
+$SermonsData = content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->limit(3)->get();
+//dd($SermonsData);
 //////////////////////////////////////////
 
-$AboutinfoData = content_info::where('page_area_type', 'about')->where('ispublished', 1)->first();
+$AboutinfoData = content_info::where('page_area_type', 'about')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->first();
 
-$About_detailsData =  DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'about')->where('content_info.ispublished', 1)->orderBy('content_info.id', 'asc')->first();
+$About_detailsData =  DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'about')->where('content_info.ispublished', 1)->orderBy('content_details.ordersort', 'asc')->first();
 //dd($About_detailsData);
 /////////
 //////
-$DataDonationsInfo= content_info::where('page_area_type', 'donation')->where('ispublished', 1)->orderBy('id', 'asc')->limit(1)->get();
-$Donation_detailsData = DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'donation')->where('content_info.ispublished', 1)->orderBy('content_info.id', 'asc')->limit(2)->get();
+$DataDonationsInfo= content_info::where('page_area_type', 'donation')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->first();
+$Donation_detailsData = DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'donation')->where('content_info.ispublished', 1)->orderBy('content_details.ordersort', 'asc')->limit(2)->get();
+//dd($Donation_detailsData);
 //////////////////////////////////////
 
-$MinistriesData = content_info::where('page_area_type', 'ministry')->where('ispublished', 1)->orderBy('id', 'asc')->limit(3)->get();
+$MinistriesData = content_info::where('page_area_type', 'ministry')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->limit(3)->get();
+//dd($MinistriesData);
 //////////////////////////////////////////
 
-$InvolvementData = content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->orderBy('id', 'asc')->limit(3)->get();
+$InvolvementData = content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->limit(3)->get();
 //////////////////////////////////////////
 
 /////////////////////
-$Eventsinfodata = content_info::where('page_area_type', 'event')->where('ispublished', 1)->orderBy('id', 'asc')->limit(3)->get();
+$Eventsinfodata = content_info::where('page_area_type', 'event')->where('ispublished', "0")->orderBy('sorted_order', 'asc')->limit(3)->get();
+//dd($Eventsinfodata);
 /////////////////////////////////
+
+$GalleryinfoData = content_info::where('page_area_type', 'gallery')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->first();
 
 
 //////////////////////////////////////////
 $TestimonialsData =DB::select('select  * from testimonials where status=1 limit 4');
 //////////////////////////////////////////////////////////
-
+//dd($TestimonialsData);
 
     $title ="Home";
      return view('pages.index')->with('title',$title)
@@ -79,6 +85,7 @@ $TestimonialsData =DB::select('select  * from testimonials where status=1 limit 
      ->with('MinistriesData',$MinistriesData)
      ->with('InvolvementData',$InvolvementData)
      ->with('Eventsinfodata',$Eventsinfodata)
+     ->with('GalleryinfoData',$GalleryinfoData)
      ->with('TestimonialsData',$TestimonialsData);
 
     

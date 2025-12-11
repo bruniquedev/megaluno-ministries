@@ -29,10 +29,10 @@ class Controller extends BaseController
             $ContactsSetupData =DB::select("SELECT * FROM contacts ORDER BY FIELD(detailtype, 'Tel', 'WhatsApp number', 'Email', 'WhatsApp link', 'Address', 'Map', 'Footer detail')");
             $SocialLinksData = content_info::where('page_area_type', 'sociallink')->where('ispublished', 1)->get();
             $SEOData =DB::select('select * from seo');
-            $PartnersData = content_info::where('page_area_type', 'partner')->where('ispublished', 1)->get();
+            $PartnersData = content_info::where('page_area_type', 'partner')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 
-                $Ministriesinfodata= content_info::where('page_area_type', 'ministry')->where('ispublished', 1)->orderBy('id', 'asc')->get();
-                $Involvementinfodata= content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->orderBy('id', 'asc')->get();
+                $Ministriesinfodata= content_info::where('page_area_type', 'ministry')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
+                $Involvementinfodata= content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 
                  $visittime= date('Y-m-d');
                  $TodayTotalCountvisitors =DB::select('select distinct userip from pageview where visitdate =:visitdate', ['visitdate' => $visittime]);

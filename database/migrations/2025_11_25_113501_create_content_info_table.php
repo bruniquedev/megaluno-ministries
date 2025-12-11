@@ -34,6 +34,7 @@ class CreateContentInfoTable extends Migration
             $table->enum('ispublished', [1,0])->default('1');
             $table->string('publisher')->nullable();
             $table->string('page_area_type')->nullable();
+            $table->integer('sorted_order')->default(0);
             $table->timestamps();
         });
     }

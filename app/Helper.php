@@ -1,5 +1,21 @@
 <?php
 
+ function Title_and_description($page){
+  $results = DB::table('content_info')->where('title',$page)->where('page_area_type','pagetitle')->orderBy('sorted_order', 'asc')->first();
+if($results!=null){
+    $heading = $results->heading;
+    $description = $results->description;
+    return ['heading' => $heading, 'description' => $description];
+    // Usage in blade
+/*$values = Title_and_description($page,$feature,$accid);
+$result1 = $values['value1'];
+$result2 = $values['value2'];*/
+
+}
+   return ['heading' => '', 'description' => ''];//may be zero
+    } 
+
+
 
 function Is_internet_connected(){
       $host = 'www.google.com';
