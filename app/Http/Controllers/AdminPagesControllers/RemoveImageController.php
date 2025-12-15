@@ -18,6 +18,28 @@ use App\Models\content_details;
 
 class RemoveImageController extends Controller
 {
+
+
+/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+         //call the parent controller which is the base controller using statement below
+ // to make sure that the global variables in base controller are recieved in views whose 
+ //controllers have a constructors. For those views whose controllers doesnt have a constructor 
+ //in them you dont need to call this        
+ parent::__construct();
+      
+   //register admin guard in the config\auth.php   
+$this->middleware('auth:megalunaadmin');//un comment if you want to limit
+    }
+
+
+
+    
     /**
      * Display a listing of the resource.
      *

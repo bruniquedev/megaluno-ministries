@@ -82,7 +82,6 @@
     <script src="{{ asset('custom_js/reviews_pagination.js') }}" defer></script>
     <script src="{{ asset('custom_js/modal-popup-light.js') }}" defer></script>
     <script src="{{ asset('custom_js/custom_search.js') }}" defer></script>
-    <script src="{{ asset('custom_js/booking.js') }}" defer></script>
 
 
 

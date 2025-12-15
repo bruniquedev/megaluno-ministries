@@ -66,6 +66,7 @@
 
 
 
+
 /*------my small drop down----------*/
 .dropdown-ui{
     position: relative;
@@ -176,8 +177,22 @@ ul.dropdown-content-ui li.active, ul.dropdown-content-ui li a.active{
 
 
 
+/* Smooth row movement */
+.drag-handle {
+    cursor: grab;
+    user-select: none;
+    font-size: 18px;
+    padding: 6px 10px;
+}
 
+.drag-handle:active {
+    cursor: grabbing;
+}
 
+[data-sortable-row] {
+    transition: transform 160ms ease;
+    transition: transform 160ms ease, background-color 160ms ease;
+}
 
 
 

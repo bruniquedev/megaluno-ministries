@@ -48,7 +48,7 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
     public function index()
     {
 
-$data = content_info::where('page_area_type', 'programe')->get();
+$data = content_info::where('page_area_type', 'programe')->orderBy('sorted_order', 'asc')->get();
 
          return view('pagesadmin.programmes')->with('DataInfo',$data);;
     }

@@ -40,7 +40,7 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
    ////////////////////////////////////////////////////////////////
 public function index()
 {
-     $data = content_info::where('page_area_type', 'gallery')->get();   
+     $data = content_info::where('page_area_type', 'gallery')->orderBy('sorted_order', 'asc')->get();   
  
  //Override Only What You Want if you want to change something in the HasContentDefaults trait
 
@@ -102,7 +102,7 @@ $request->allFiles());
     public function edit($id)
     {
         $Data =  content_info::find($id);
-        $data = content_info::where('page_area_type', 'gallery')->get();  
+        $data = content_info::where('page_area_type', 'gallery')->orderBy('sorted_order', 'asc')->get();  
           return view('pagesadmin.gallery')->with('DataToEdit',$Data)->with('DataInfo',$data);
     
     }

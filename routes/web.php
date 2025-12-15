@@ -20,6 +20,7 @@ use App\Http\Controllers\PagesControllers\GalleryPageController;
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
 
 use App\Http\Controllers\AdminPagesControllers\RemoveImageController;
+use App\Http\Controllers\AdminPagesControllers\SortTableController;
 use App\Http\Controllers\AdminPagesControllers\HomesettingsController;
 use App\Http\Controllers\AdminPagesControllers\TitlesController;
 use App\Http\Controllers\AdminPagesControllers\SermonsController;
@@ -164,6 +165,7 @@ Auth::routes();
 Route::resource('manage-visitors',VisitorsController::class);
 
 Route::post('/remove-image', [RemoveImageController::class, 'RemoveImage']);
+Route::post('/sort-table', [SortTableController::class, 'update'])->name('sort.update');
 Route::resource('manage-home',HomesettingsController::class);
 Route::resource('manage-titles',TitlesController::class);
 Route::resource('manage-sermons',SermonsController::class);

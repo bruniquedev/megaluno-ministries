@@ -39,7 +39,7 @@ $this->middleware('auth:megalunaadmin');
      */
     public function index()
     {
-         $data = content_info::where('page_area_type', 'logo')->get();   
+         $data = content_info::where('page_area_type', 'logo')->orderBy('sorted_order', 'asc')->get();   
  
  //Override Only What You Want if you want to change something in the HasContentDefaults trait
 
@@ -94,7 +94,7 @@ return back()->with('success', 'Content saved!');
         public function edit($id)
         {
          $Data =  content_info::find($id);
-        $data = content_info::where('page_area_type', 'logo')->get();
+        $data = content_info::where('page_area_type', 'logo')->orderBy('sorted_order', 'asc')->get();
               return view('pagesadmin.logos')->with('DataToEdit',$Data)->with('DataInfo',$data);
         
         }

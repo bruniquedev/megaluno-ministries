@@ -89,8 +89,11 @@
 @endif
 
 <div class="table-responsive">
- <table class="table-container" 
-  cellspacing="0" cellpadding="5" style="background: #fff;"> 
+ <table class="table-container"  
+    data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="content_info"
+    data-column="sorted_order"> 
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>Id</th>
@@ -98,8 +101,9 @@
 <th>Description</th>
 <th>Type</th>
 <th>Image</th>
-<th>Delete</th>
 <th>Update</th>
+<th>Delete</th>
+<th>Sort</th>
 </tr>
 </thead>
 
@@ -110,14 +114,14 @@ if(count($DataInfo) >0){
   foreach($DataInfo as $Info){
 
 ?>
-<tr>
+<tr data-sortable-row
+    data-id="{{ $Info->id }}"
+    draggable="true">
 <td><?php echo $Info->id; ?></td>
 <td><?php echo $Info->title; ?></td>
 <td><?php echo $Info->description; ?></td>
 <td><?php echo $Info->page_area_type; ?></td>
 <td>  <div id="custom-img" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}'); width:40px;height:40px;"></div></td>
-
-
 <td><a href="/manage-gallery/{{$Info->id}}/edit" class="btn-ui btn-ui-primary btn-xs"  title="Edit info"><span class="ion ion-edit"></span> edit</a></td>
 <td>
 <form action="{{ route('manage-gallery.destroy', $Info->id) }}" method="post" name="FORM" 
@@ -129,6 +133,7 @@ if(count($DataInfo) >0){
 </button>
 </form>
 </td>
+<td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 
 <?php

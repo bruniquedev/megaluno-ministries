@@ -43,7 +43,7 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
    ////////////////////////////////////////////////////////////////
 public function index()
 {
-    $data = content_info::where('page_area_type', 'slider')->get();   
+    $data = content_info::where('page_area_type', 'slider')->orderBy('sorted_order', 'asc')->get();   
  
     //Override Only What You Want if you want to change something in the HasContentDefaults trait
 
@@ -106,7 +106,7 @@ return back()->with('success', 'Content saved!');
     public function edit($id)
     {
      $Data =  content_info::find($id);
-        $data = content_info::where('page_area_type', 'slider')->get();
+        $data = content_info::where('page_area_type', 'slider')->orderBy('sorted_order', 'asc')->get();
           return view('pagesadmin.sliders')->with('DataToEdit',$Data)->with('DataInfo',$data);
     
     }
