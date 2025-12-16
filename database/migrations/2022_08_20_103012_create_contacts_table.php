@@ -19,6 +19,7 @@ class CreateContactsTable extends Migration
             $table->string('addontext',200)->nullable();
             $table->integer('priority')->default(0);
             $table->mediumText('descriptiontext')->nullable();//manually added
+            $table->integer('sorted_order')->default(0);
         });
     }
 

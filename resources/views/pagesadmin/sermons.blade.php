@@ -19,7 +19,10 @@
 <input type="text" id="searchInput" class="searchInput form-control input_box" onkeyup="searchTableByMultipleColumns()" placeholder="Search table..." title="Type in a keyword">
 <div class="table-responsive">
   <table class="table-container" id="search-table"
-  cellspacing="0" cellpadding="5" style="background: #fff;">
+      data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="content_info"
+    data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>id</th>
@@ -31,6 +34,7 @@
 <th>published on</th>
 <th>edit</th>
 <th>Delete</th>
+<th>Sort</th>
 </tr>
 </thead>
 
@@ -40,7 +44,9 @@ if(count($DataInfo) >0){
   foreach($DataInfo as $Info){
 
 ?>
-<tr>
+<tr data-sortable-row
+    data-id="{{ $Info->id }}"
+    draggable="true">
 <td><?php echo $Info->id; ?></td>
 <td><?php echo $Info->title; ?></td>
 <td><?php echo $Info->heading; ?></td>
@@ -60,6 +66,7 @@ if(count($DataInfo) >0){
 </button>
 </form>
 </td>
+<td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 
 <?php

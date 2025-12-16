@@ -106,17 +106,21 @@ id="id"  name="id">
 @endif
 
 <div class="table-responsive">
-  <table class="table-container" 
-  cellspacing="0" cellpadding="5" style="background: #fff;">
+  <table class="table-container" id="search-table"
+      data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="contacts"
+    data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
-<th>ID</th>
-<th>TYPE</th>
-<th>DESCRIPTION</th>
-<th>ADDON TEXT</th>
-<th>PRIORITY</th>
+<th>Id</th>
+<th>Type</th>
+<th>Description</th>
+<th>Addon Text</th>
+<th>Priority</th>
 <th>Delete</th>
 <th>Update</th>
+<th>Sort</th>
 </tr>
 </thead>
 
@@ -138,7 +142,9 @@ if($Info->priority=="2"){$prioritytext="Medium";}
 if($Info->priority=="0"){$prioritytext="Low";}
 ?>
 
-<tr>
+<tr data-sortable-row
+    data-id="{{ $Info->id }}"
+    draggable="true">
 <td>{{$Info->id}}</td>
 <td>{{$Info->detailtype}}</td>
 <td>{{$valuetext}}</td>
@@ -156,6 +162,7 @@ if($Info->priority=="0"){$prioritytext="Low";}
 </td>
 
 <td><a class="btn btn-primary btn-xs" id="link1" href="/manage-contact-setup/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
+<td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 
 @endforeach

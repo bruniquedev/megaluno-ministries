@@ -23,6 +23,7 @@ class CreatePageviewsTable extends Migration
               $table->string('latitude')->nullable();//manually added
               $table->string('longitude')->nullable();//manually added
               $table->string('visitdate')->nullable();//manually added
+              $table->integer('sorted_order')->default(0);
         });
     }
 

@@ -89,7 +89,7 @@
 @endif
 
 <div class="table-responsive">
- <table class="table-container"  
+ <table class="table-container" id="search-table"  
     data-sortable-table
     data-sort-url="{{ route('sort.update') }}"
     data-model="content_info"

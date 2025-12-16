@@ -20,6 +20,8 @@ protected $fillable = [
 'username',
 'password',
 'regdate',
+'sorted_order',
 'status'
+
 ];
 }

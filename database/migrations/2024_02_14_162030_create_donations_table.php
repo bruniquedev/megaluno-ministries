@@ -24,6 +24,7 @@ $table->string('donorphonenumber',200)->nullable();
 $table->text('addondetails')->nullable();
 $table->string('createddate',200)->nullable();
 $table->integer('status')->default(0);
+$table->integer('sorted_order')->default(0);
         });
     }
 

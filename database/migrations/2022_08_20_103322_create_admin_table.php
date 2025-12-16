@@ -24,6 +24,7 @@ class CreateAdminTable extends Migration
             $table->text('password')->nullable();//manually added
             $table->string('regdate')->nullable();//manually added
             $table->string('status')->nullable();//manually added
+            $table->integer('sorted_order')->default(0);
 
         });
     }

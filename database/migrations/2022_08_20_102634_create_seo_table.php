@@ -19,6 +19,7 @@ class CreateSeoTable extends Migration
             $table->text('keywordstext')->nullable();//manually added
             $table->text('author')->nullable();//manually added
             $table->text('title')->nullable();//manually added
+            $table->integer('sorted_order')->default(0);
         });
     }
 

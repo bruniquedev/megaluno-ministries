@@ -17,6 +17,7 @@ protected $fillable = [
 'subject',
 'messagetext',
 'messagedate',
+'sorted_order',
 'seenstatus'
  ];
 }

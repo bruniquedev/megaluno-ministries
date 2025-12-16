@@ -14,6 +14,7 @@ protected $fillable = [
 'detailtype',
 'addontext',
 'priority',
+'sorted_order',
 'descriptiontext'
  ];
 }

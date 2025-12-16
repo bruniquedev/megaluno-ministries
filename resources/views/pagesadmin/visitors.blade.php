@@ -49,7 +49,12 @@
 </button>
 </form>
 
-  <table class="table-container" 
+  <table class="table-container"
+  id="search-table"
+      data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="pageview"
+    data-column="sorted_order" 
   cellspacing="0" cellpadding="5" style="background: #fff;">
 <h4 id="heading4" align="center">Today total visitors : <span class="usersbadge"><?php echo $TodayTotalCountvisitors;?></span></h4>
 <h4 id="heading4" align="center">Total visitors : <?php echo $Countvisitorsdata; ?></h4>
@@ -64,6 +69,7 @@
       <th scope="col">LATITUDE</th>
       <th scope="col">LONGITUDE</th>
       <th scope="col">DATE</th>
+      <th scope="col">Sort</th>
 </tr>
 </thead>
 
@@ -71,7 +77,9 @@
 @if(count($getUserIpsdata) > 0)
 <!--iterate through an array-->
 @foreach($getUserIpsdata as $Info)
-<tr>
+<tr data-sortable-row
+    data-id="{{ $Info->id }}"
+    draggable="true">
 <td>{{$Info->id}}</td>
 <td>{{$Info->userip}}</td>
 <td>{{$Info->page}}</td>
@@ -81,6 +89,7 @@
 <td>{{$Info->latitude}}</td>
 <td>{{$Info->longitude}}</td>
 <td>{{$Info->visitdate}}</td>
+<td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>   
 @endforeach
 @endif 

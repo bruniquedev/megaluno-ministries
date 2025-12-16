@@ -19,8 +19,11 @@
 @endif
 
 <div class="table-responsive">
-  <table class="table-container" 
-  cellspacing="0" cellpadding="5" style="background: #fff;">
+  <table class="table-container" id="search-table"
+      data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="messages"
+    data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>Id</th>
@@ -33,6 +36,7 @@
 <th>Recieved date</th>
 <th>Delete</th>
 <th>Update</th>
+<th>Sort</th>
 </tr>
 </thead>
 
@@ -53,7 +57,9 @@ if ($Info->seenstatus == 1) {
 }
 ?>
 
-<tr>
+<tr data-sortable-row
+    data-id="{{ $Info->id }}"
+    draggable="true">
 <td>{{$Info->id}}</td>
 <td>{{$Info->sendername}}</td>
 <td>{{$Info->sendermail}}</td>
@@ -76,6 +82,7 @@ if ($Info->seenstatus == 1) {
 
 <td><a class="{{$status}}" id="link1" href="/manage-contacts/{{$Info->id}}/edit">
 	<i class="ion ion-edit"></i> {{$updateButtonText}}</a></td>
+  <td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 
 @endforeach

@@ -19,6 +19,7 @@ protected $fillable = [
 'donorphonenumber',
 'addondetails',
 'createddate',
+'sorted_order',
 'status'
  ];
 }

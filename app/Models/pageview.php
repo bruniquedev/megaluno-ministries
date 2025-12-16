@@ -19,6 +19,7 @@ class pageview extends Model
 'countrycode',
 'latitude',
 'longitude',
+'sorted_order',
 'visitdate'
  ];
 

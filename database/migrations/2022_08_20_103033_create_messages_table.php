@@ -22,6 +22,7 @@ class CreateMessagesTable extends Migration
             $table->string('messagetext')->nullable();//manually added
             $table->string('messagedate')->nullable();//manually added
             $table->integer('seenstatus')->nullable();//manually added
+            $table->integer('sorted_order')->default(0);
         });
     }
 

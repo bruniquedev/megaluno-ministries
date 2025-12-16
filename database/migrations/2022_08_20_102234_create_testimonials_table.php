@@ -22,6 +22,7 @@ $table->string('reviewdate',200)->nullable();//manually added
 $table->mediumText('descriptiontext')->nullable();//manually added
 $table->integer('status')->default(0);//manually added
 $table->integer('ratings')->default(0);//manually added
+$table->integer('sorted_order')->default(0);
         });
     }
 

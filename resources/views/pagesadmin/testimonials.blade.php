@@ -111,8 +111,11 @@ id="jobtitle" value="{{$DataToEdit['job_title']}}"  />
 @endif
 
 <div class="table-responsive">
-  <table class="table-container" 
-  cellspacing="0" cellpadding="5" style="background: #fff;">
+  <table class="table-container" id="search-table"
+      data-sortable-table
+    data-sort-url="{{ route('sort.update') }}"
+    data-model="testimonials"
+    data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
 <th>Id</th>
@@ -124,6 +127,7 @@ id="jobtitle" value="{{$DataToEdit['job_title']}}"  />
 <th>Delete</th>
 <th>Update</th>
 <th>Status</th>
+<th>Sort</th>
 </tr>
 </thead>
 
@@ -133,7 +137,9 @@ id="jobtitle" value="{{$DataToEdit['job_title']}}"  />
 <!--iterate through an array-->
 @foreach($Datatestimonials as $testimonials)
 
-<tr>
+<tr data-sortable-row
+    data-id="{{ $testimonials->id }}"
+    draggable="true">
 <td>{{$testimonials->id}}</td>
 <td>{{$testimonials->name}}</td>
 <td>{{$testimonials->job_title}}</td>
@@ -163,6 +169,7 @@ $statusText="Deny";
 
 ?>
 <td><a class="<?php echo $buttonstatus; ?>" id="link1" href="/update-testimonialstatus/{{$testimonials->id}}"><i class="ion ion-edit"></i> <?php echo $statusText; ?></a></td>
+<td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 
 @endforeach

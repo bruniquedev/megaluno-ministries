@@ -14,6 +14,7 @@ protected $fillable = [
 'descriptiontext',
 'keywordstext',
 'author',
+'sorted_order',
 'title'
 ];
 }
