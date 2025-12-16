@@ -4,12 +4,21 @@ namespace App\Http\Controllers\AdminPagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\testimonials;//must be imported
-use DB;//import if you want to use sql commands directly
+use App\Services\ContentService;
+use App\Traits\HandlesDeletion;
+use App\Traits\HasContentDefaults;
+
 use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;// will enable us access storage 
+use App\Models\content_info;
+use App\Models\content_details;
+use Illuminate\Support\Str;
+use DB;//import if you want to use sql commands directly
 class TestimonialsController extends Controller
 {
-
+ use HandlesDeletion;    
+use HasContentDefaults; 
 
  /**
      * Create a new controller instance.
@@ -17,20 +26,10 @@ class TestimonialsController extends Controller
      * @return void
      */
     public function __construct()
-    {
-       //call the parent controller which is the base controller using statement below
- // to make sure that the global variables in base controller are recieved in views whose 
- //controllers have a constructors. For those views whose controllers doesnt have a constructor 
- //in them you dont need to call this        
+    {      
  parent::__construct();
-        ////this helps in limiting those who are not logged in
-//you can copy and paste this into other controllers where you want to limit login
-      
-   //register admin guard in the config\auth.php   
-$this->middleware('auth:megalunaadmin');//un comment if you want to limit
-
-        //go to app\Http\Controllers\Middleware\Authenticate.php in redirectTo function and the page/route
-        //for redirection if user is not logged in return route('adminlogin')
+        
+$this->middleware('auth:megalunaadmin');
     }
 
 
@@ -42,54 +41,63 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
    ////////////////////////////////////////////////////////////////
 public function index()
 {
-  //USING sql command directly, you must first import "use DB;" 
-  $data =DB::select('select * from testimonials order by id desc');
 
-  //for editting in the same form purposes
-  $Data = array('ratings'=>'','name' =>'','job_title' =>'', 'email' =>'', 
-  'descriptiontext' => '', 'id' =>0);
-  //var_dump($data);
-  //passing multiple data
-  return view('pagesadmin.testimonials')->with('Datatestimonials',$data)->with('DataToEdit', $Data);
+
+   $data = content_info::where('page_area_type', 'review')->orderBy('sorted_order', 'asc')->get();   
+ 
+ //Override Only What You Want if you want to change something in the HasContentDefaults trait
+
+// Base default values
+    $defaults = HasContentDefaults::defaultContent();
+     // Custom overrides or if you want to set some new defaults different from that of a trait
+    $custom = [
+        'ispublished' => "0", // overriding default
+        'title' => ''  
+    ];
+    // Merge both
+    $Data = array_merge($defaults, $custom);
+
+return view('pagesadmin.testimonials', [
+        'DataToEdit' => $Data,
+        'DataInfo' => $data
+    ]);
 } 
+
 public function store(Request $request)
 {
-    $date=new DateTime('NOW');
-//$currentDate=date_format($date,"Y-m-d"); 
-$currentDate=date_format($date,"Y-m-d H:i:s");//24hr
-    //let's try to store our data using tinker like commands here
-    //
-       //inserting data
-    $data = new testimonials;
-    $data->name = $request->testifiersName; //captured from form
-    $data->job_title = $request->jobtitle;
-    $data->email = $request->email;//captured from form
-    $data->descriptiontext = $request->descriptiontext;//captured from form
-    $data->ratings = $request->type;//captured from form
-    $data->status =0;
-    $data->reviewdate = $currentDate;
-    $data->save();
-     return redirect('manage-testimonials')->with('success','Data saved sucessfully '); //create a session variable Success to store
-     //amessage
+$date=new DateTime('NOW');
+$currentDate=date_format($date,"Y-m-d H:i:s");
+        /*
+only allowed html and php name attributes for files
+input_file
+input_icon
+input_video
+
+input_filelist
+input_iconlist
+input_videolist
+*/
+$content = (new ContentService())->saveContentInfo([
+'heading' => $request->name,   
+'title' => $request->jobtitle,
+'description' => $request->descriptiontext,
+'email_address' => $request->email,
+'ratings' => $request->ratings,
+'day_date' => $currentDate,
+'ispublished' => "0",
+'page_area_type' => 'review',
+'isToresize' => 1,
+'max_width' => 1000,
+],
+$request->allFiles());
+
+
+
+  return back()->with('success', 'Content saved!');
+
 }
 
- /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = testimonials::find($id); //so we will have to find a particular post  
-        //here we are going to delete from the database
-        $data->delete();
-        return redirect('manage-testimonials')->with('success','Data deleted sucessfully '); //create a session variable Success to store
-        //amessage
-        //
-    }
-
-
+ 
 
 
  /**
@@ -100,30 +108,26 @@ $currentDate=date_format($date,"Y-m-d H:i:s");//24hr
      */
     public function edit($id)
     {
-        //returns a view which contains our form to display data to edit
-        $Data = testimonials::find($id);
-        $data =DB::select('select * from testimonials order by id desc');
-        //var_dump($data);
-        //pass data to page for editting
-//passing multiple data
-          return view('pagesadmin.testimonials')->with('DataToEdit',$Data)->with('Datatestimonials',$data);
-    
+
+        $Data =  content_info::find($id);
+        $data = content_info::where('page_area_type', 'review')->orderBy('sorted_order', 'asc')->get();  
+          return view('pagesadmin.testimonials')->with('DataToEdit',$Data)->with('DataInfo',$data);
     }
 
 
       public function update_testimoniastatus($id)
     {
         //returns a view which contains our form to display data to edit
-        $Data = testimonials::find($id);
+        $Data = content_info::find($id);
             //var_dump($Data); die();
-          if($Data->status==0){
-            $Data->status=1;
-          }else if($Data->status==1){
-            $Data->status=0;
+          if($Data->ispublished==0){
+            $Data->ispublished="1";
+          }else if($Data->ispublished==1){
+            $Data->ispublished="0";
           }
           $Data->save();
 
-    return redirect('manage-testimonials')->with('success','Data updated sucessfully '); //create a session variable Success to store
+   return back()->with('success', 'Content updated!');
     
     }
 
@@ -139,20 +143,35 @@ $currentDate=date_format($date,"Y-m-d H:i:s");//24hr
     public function update(Request $request, $id)
     {
 
-           //updating a testimonials data
-           $data = testimonials::find($id); //so we will have to find a particular data
-           $data->name = $request->testifiersName; //captured from form
-           $data->job_title = $request->jobtitle;
-           $data->email = $request->email;//captured from form
-           $data->descriptiontext = $request->descriptiontext;//captured from form
-           $data->ratings = $request->type;//captured from form
-           $data->save();
+       $content = (new ContentService())->saveContentInfo([
+        'heading' => $request->name,   
+        'title' => $request->jobtitle,
+        'description' => $request->descriptiontext,
+        'email_address' => $request->email,
+        'ratings' => $request->ratings,
+        'page_area_type' => 'review',
+        'isToresize' => 1,
+        'max_width' => 1000,
+    ],
+    $request->allFiles(),
+    $id);
 
-    //DB::update('update student set first_name = ?,last_name=?,city_name=?,email=? where id = ?',[$first_name,$last_name,$city_name,$email,$id]);
-            return redirect('manage-testimonials')->with('success','Data updated sucessfully '); //create a session variable Success to store
-            //amessage
+
+return back()->with('success', 'Content saved!');
     }
 
+
+/**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+         $this->deleteById('content_info', $id);
+           return back()->with('success', 'Data deleted sucessfully!');
+    }
 
 
 

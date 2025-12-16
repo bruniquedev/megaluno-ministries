@@ -15,10 +15,11 @@ class CreateContentInfoTable extends Migration
     {
         Schema::create('content_info', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('heading')->nullable();
+            $table->mediumText('title')->nullable();
+            $table->mediumText('heading')->nullable();
             $table->string('slug')->nullable();
-            $table->text('description')->nullable();
+            $table->mediumText('description')->nullable();
+            $table->string('detail_type')->nullable();
             $table->mediumText('link_redirect')->nullable();
             $table->mediumText('filename')->nullable();
             $table->integer('file_width')->default(0);
@@ -31,6 +32,10 @@ class CreateContentInfoTable extends Migration
             $table->string('day_date')->nullable();
             $table->string('time_of_date')->nullable();
             $table->integer('post_views')->default(0);
+            $table->integer('ratings')->default(0);
+            $table->text('email_address')->nullable();
+            $table->text('phone_number')->nullable();
+            $table->integer('status')->default(0);
             $table->enum('ispublished', [1,0])->default('1');
             $table->string('publisher')->nullable();
             $table->string('page_area_type')->nullable();

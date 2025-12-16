@@ -7,7 +7,7 @@
  <div class="col-md-12 col-md-12">
   <div class="panel_container-heading flex align-items-center flex-grow">
 <h4 class="m-r-10">Programme info</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-programmes.create') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>
 @if (session('success'))
 <div class="alert alert-success" role="alert">

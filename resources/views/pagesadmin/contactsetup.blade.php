@@ -12,7 +12,7 @@
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading flex align-items-center flex-grow">
 <h4 class="m-r-10">Save Contact Info</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-contact-setup.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -30,9 +30,9 @@
 	      <div class="form-groupy">
   <label for="name">Choose type</label> 
   <div class="form-input-group">  
-<select class="input-control" name="type" style="font-weight:bold;">
-@if($DataToEdit['detailtype']!="")
-  <option value="{{$DataToEdit['detailtype']}}" selected>{{$DataToEdit['detailtype']}}</option>
+<select class="input-control" name="type">
+@if($DataToEdit['detail_type']!="")
+  <option value="{{$DataToEdit['detail_type']}}" selected>{{$DataToEdit['detail_type']}}</option>
   @endif
   <option></option>
 <option>Address</option>
@@ -48,18 +48,18 @@
 
   
    <div class="form-groupy">
-<label for="name">Message info</label>
+<label for="name">Detail type info</label>
 <div class="form-input-group">
 <textarea required="required"  
  class="input-control" name="descriptiontext" id="descriptiontext"  rows="3">
- {{$DataToEdit['descriptiontext']}}</textarea>
+ {{$DataToEdit['description']}}</textarea>
 </div>
 </div>
 
 <div class="form-groupy">
 <label for="text">Additional text</label>
 <div class="form-input-group">
-<input type="text"  value="{{$DataToEdit['addontext']}}"  name="addontext">
+<input type="text"  value="{{$DataToEdit['title']}}"  name="addontext">
 </div>
 </div>
 
@@ -68,9 +68,9 @@
 <div class="form-input-group">
 <select name="priority" id="priority" class="input-control select-h" required="required">
 <option value="">Select</option>
-<option value="1" <?php if($DataToEdit['priority']=="1"){echo" selected ";} ?> >High</option> 
-<option value="2" <?php if($DataToEdit['priority']=="2"){echo" selected ";} ?> >Medium</option> 
-<option value="0" <?php if($DataToEdit['priority']=="0"){echo" selected ";} ?> >Low</option> 
+<option value="1" <?php if($DataToEdit['status']=="1"){echo" selected ";} ?> >High</option> 
+<option value="2" <?php if($DataToEdit['status']=="2"){echo" selected ";} ?> >Medium</option> 
+<option value="0" <?php if($DataToEdit['status']=="0"){echo" selected ";} ?> >Low</option> 
 </select>
 </div>
 </div>
@@ -109,7 +109,7 @@ id="id"  name="id">
   <table class="table-container" id="search-table"
       data-sortable-table
     data-sort-url="{{ route('sort.update') }}"
-    data-model="contacts"
+    data-model="content_info"
     data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
@@ -132,30 +132,30 @@ id="id"  name="id">
 @foreach($DataInfo as $Info)
 
 <?php  
-$valuetext=$Info->descriptiontext;
-if($Info->detailtype=="Map" || $Info->detailtype=="WhatsApp link" || $Info->detailtype=="Footer detail"){
+$valuetext=$Info->description;
+if($Info->detail_type=="Map" || $Info->detail_type=="WhatsApp link" || $Info->detail_type=="Footer detail"){
 $valuetext="Available";
 }
 $prioritytext="";
-if($Info->priority=="1"){$prioritytext="High";}
-if($Info->priority=="2"){$prioritytext="Medium";}
-if($Info->priority=="0"){$prioritytext="Low";}
+if($Info->status=="1"){$prioritytext="High";}
+if($Info->status=="2"){$prioritytext="Medium";}
+if($Info->status=="0"){$prioritytext="Low";}
 ?>
 
 <tr data-sortable-row
     data-id="{{ $Info->id }}"
     draggable="true">
 <td>{{$Info->id}}</td>
-<td>{{$Info->detailtype}}</td>
+<td>{{$Info->detail_type}}</td>
 <td>{{$valuetext}}</td>
-<td>{{$Info->addontext}}</td>
+<td>{{$Info->title}}</td>
 <td>{{$prioritytext}}</td>
 <td>
 <form action="{{ route('manage-contact-setup.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-danger btn-xs">
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-ui-xs">
 <i class="ion ion-android-delete"></i> Delete
 </button>
 </form>

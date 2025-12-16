@@ -1635,6 +1635,7 @@ box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
 }
 
 .form-groupy label{
+    font-weight: 500;
 }
  .form-input-group{
 display: flex;

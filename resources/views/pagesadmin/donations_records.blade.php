@@ -10,7 +10,7 @@
  <div class="col-md-12 col-md-12">
   <div class="panel_container-heading flex align-items-center flex-grow">
 <h4 class="m-r-10">Manage Donors & Donations</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('users-donations.index') }}"><i class="ion ion-android-refresh"></i> Refresh</a>
 </div>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
@@ -48,11 +48,11 @@
 @foreach($DataInfo as $Info)
 
 <?php
-$status = "btn btn-danger btn-xs";
+$status = "btn-ui btn-ui-danger btn-ui-xs";
 $statustext = "unseen";
 $updateButtonText = "To seen";
 if ($Info->donationstatus == 1) {
-  $status = "btn btn-primary btn-xs";
+  $status = "btn-ui btn-ui-primary btn-ui-xs";
   $statustext = "seen";
   $updateButtonText = "To unseen";
 }
@@ -76,7 +76,7 @@ if ($Info->donationstatus == 1) {
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-danger btn-xs">
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-ui-xs">
 <i class="ion ion-android-delete"></i> Delete
 </button>
 </form>

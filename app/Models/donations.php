@@ -11,6 +11,7 @@ class donations extends Model
         protected $table ='donations';
 public $timestamps = false;
 protected $fillable = [
+'contentinfo_id',
 'reference',
 'amount',
 'donationstatus',

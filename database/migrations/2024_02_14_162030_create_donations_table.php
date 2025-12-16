@@ -15,6 +15,7 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
+ $table->integer('contentinfo_id')->default(0);           
 $table->text('reference')->nullable();
 $table->decimal('amount',11,2)->default(0); 
 $table->integer('donationstatus')->default(0); 

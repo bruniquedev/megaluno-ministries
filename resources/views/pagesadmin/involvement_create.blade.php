@@ -34,7 +34,7 @@
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                <div class="panel_container-heading flex align-items-center flex-grow">
                <h4 class="h2-title m-r-10">Save / Create involvement info</h4> 
-               <a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+               <a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-involvements.create') }}"><i class="ion ion-android-add-circle"></i> Create</a>
             </div>
             </div>               
          </div>

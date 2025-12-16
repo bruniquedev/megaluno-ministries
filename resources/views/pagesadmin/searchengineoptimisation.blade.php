@@ -12,7 +12,7 @@
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading flex align-items-center flex-grow">
 <h4 class="m-r-10">Save Seo Data</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-seo.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -30,9 +30,9 @@
       <div class="form-groupy">
   <label for="name" id="name">Choose page</label> 
   <div class="form-input-group">   
-<select required="required"  class="selectpicker input-control " data-live-search="true" name="author">
-@if($DataToEdit['author']!="")
-  <option value="{{$DataToEdit['author']}}" selected>{{$DataToEdit['author']}}</option>
+<select required="required"  class=" input-control "  name="author">
+@if($DataToEdit['detail_type']!="")
+  <option value="{{$DataToEdit['detail_type']}}" selected>{{$DataToEdit['detail_type']}}</option>
   @endif
 <option value=""></option>
 
@@ -88,7 +88,7 @@
 
 <option value="Home">Home</option>
 <option value="About">About</option>
-<option value="Contact us">Contact us</option>
+<option value="Contact-us">Contact-us</option>
 <option value="Gallery">Gallery</option>
 <option value="Events">Events</option>
 <option value="Ministry">Ministry</option>
@@ -111,19 +111,18 @@
   <label for="name" id="name">Meta description</label>
   <div class="form-input-group">    
 <textarea required="required" class="input-control " name="descriptiontext" id="descriptiontext" 
-  rows="2" >{{$DataToEdit['descriptiontext']}}</textarea></div></div>
+  rows="2" >{{$DataToEdit['description']}}</textarea></div></div>
 
 
         <div class="form-groupy">
   <label for="name" id="name">Meta keywords</label>
   <div class="form-input-group">    
-<textarea required="required" class="input-control " name="keywordstext" id="keywordstext" rows="2" >{{$DataToEdit['keywordstext']}}</textarea></div></div>
+<textarea required="required" class="input-control " name="keywordstext" id="keywordstext" rows="2" >{{$DataToEdit['heading']}}</textarea></div></div>
 
 
 
 
    <div class="form-groupy">
-<!--<label for="text">ID</label>-->
 <div class="form-input-group"> 
 <input type="hidden" required="required" readonly="readonly" value="{{$DataToEdit['id']}}"  id="id" class="" name="id" />
 </div>
@@ -131,7 +130,7 @@
 
    <div class="form-groupy">
   <div class="form-input-group">  
- <button type="submit" name="submitbutton" class="btn btn-primary" id="submit_button" >SAVE</button>   
+ <button type="submit" name="submitbutton" class="btn-ui btn-ui-primary" id="submit_button" >SAVE</button>   
 </div>      
 </div>
 
@@ -156,7 +155,7 @@
   <table class="table-container" id="search-table"
       data-sortable-table
     data-sort-url="{{ route('sort.update') }}"
-    data-model="seo"
+    data-model="content_info"
     data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
@@ -184,21 +183,21 @@
     draggable="true">
 <td>{{$Info->id}}</td>    
 <td>{{$Info->title}}</td>
-<td>{{$Info->author}}</td>   
-<td>{{$Info->descriptiontext}}</td>
-<td>{{$Info->keywordstext}}</td>
+<td>{{$Info->detail_type}}</td>   
+<td>{{$Info->description}}</td>
+<td>{{$Info->heading}}</td>
 <td>
 <form action="{{ route('manage-seo.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-danger btn-xs">
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-ui-xs">
 <i class="ion ion-android-delete"></i> Delete
 </button>
 </form>
 </td>
 
-<td><a class="btn btn-primary btn-xs" id="link1" href="/manage-seo/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
+<td><a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="/manage-seo/{{$Info->id}}/edit"><i class="ion ion-edit"></i> Edit</a></td>
 <td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
 

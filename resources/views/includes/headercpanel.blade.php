@@ -212,7 +212,7 @@
 <?php if(count($Unreadmessages) > 0){ ?>
   <span class="badge badges messagebadge" id="messagebadge" ><?php echo count($Unreadmessages); ?></span><?php } ?> 
 </a></li>
-<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>
+<!----<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>---->
     </ul>
   </li> 
 <!----end -dropdown---->

@@ -4,14 +4,22 @@ namespace App\Http\Controllers\AdminPagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\seo;
+use App\Services\ContentService;
+use App\Traits\HandlesDeletion;
+use App\Traits\HasContentDefaults;
+
+use DateTime;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;// will enable us access storage 
 use App\Models\content_info;
 use App\Models\content_details;
+use Illuminate\Support\Str;
 use DB;//import if you want to use sql commands directly
 
 class SearchengineController extends Controller
 {
-
+ use HandlesDeletion;    
+use HasContentDefaults; 
  /**
      * Create a new controller instance.
      *
@@ -20,9 +28,7 @@ class SearchengineController extends Controller
     public function __construct()
     {
       
- parent::__construct();
-   
-   //register admin guard in the config\auth.php   
+ parent::__construct(); 
 $this->middleware('auth:megalunaadmin');//un comment if you want to limit
 
     }
@@ -36,14 +42,24 @@ $this->middleware('auth:megalunaadmin');//un comment if you want to limit
   ////////////////////////////////////////////////////////////////
 public function index()
 {
-  //USING sql command directly, you must first import "use DB;" 
-  $data =DB::select('select * from seo order by id desc');
-        
-  //for editting in the same form purposes
-  $Data = array('descriptiontext' =>'','keywordstext' =>'','author' =>'','title' =>'','id' =>0);
 
 
-  $Services_info = content_info::where('page_area_type', 'service')->get();
+
+ $data = content_info::where('page_area_type', 'seo')->orderBy('sorted_order', 'asc')->get();   
+ 
+ //Override Only What You Want if you want to change something in the HasContentDefaults trait
+
+// Base default values
+    $defaults = HasContentDefaults::defaultContent();
+     // Custom overrides or if you want to set some new defaults different from that of a trait
+    $custom = [
+        'ispublished' => "0", // overriding default
+        'title' => ''  
+    ];
+    // Merge both
+    $Data = array_merge($defaults, $custom);
+
+     $Services_info = content_info::where('page_area_type', 'service')->get();
   $Sermons_info = content_info::where('page_area_type', 'sermon')->get();
   $Projects_info = content_info::where('page_area_type', 'project')->get();
   $programes_info = content_info::where('page_area_type', 'programe')->get();
@@ -51,51 +67,43 @@ public function index()
   $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
   $Event_info = content_info::where('page_area_type', 'event')->get();
   $Activity_info = content_info::where('page_area_type', 'activity')->get();
-  
-  //var_dump($data);
-  //passing multiple data
-  return view('pagesadmin.searchengineoptimisation')->with('DataInfo',$data)
-  ->with('Services_info',$Services_info)
-  ->with('Sermons_info',$Sermons_info)
-  ->with('Projects_info',$Projects_info)
-  ->with('Programes_info',$programes_info)
-  ->with('Ministries_info',$Ministries_info)
-  ->with('Involvements_info',$Involvements_info)
-  ->with('Event_info',$Event_info)
-  ->with('Activity_info',$Activity_info)
-  ->with('DataToEdit', $Data);
+
+return view('pagesadmin.searchengineoptimisation', [
+        'DataToEdit' => $Data,
+        'DataInfo' => $data,
+        'Services_info'  => $Services_info,
+        'Sermons_info' => $Sermons_info,
+        'Projects_info' => $Projects_info,
+        'Programes_info' => $programes_info,
+        'Ministries_info' => $Ministries_info,
+        'Involvements_info' => $Involvements_info,
+        'Event_info' => $Event_info,
+        'Activity_info' => $Activity_info
+    ]);
+
 } 
 
 public function store(Request $request)
 {
 
-       //inserting data
-    $data = new seo();
-    $data->title = $request->title; //captured from form
-    $data->descriptiontext = $request->descriptiontext; //captured from form
-      $data->keywordstext = $request->keywordstext; //captured from form
-        $data->author = $request->author; //captured from form
-    $data->save();
-     return redirect('manage-seo')->with('success','Data saved sucessfully '); //create a session variable Success to store
-     //amessage
+$content = (new ContentService())->saveContentInfo([
+'detail_type' => $request->author,
+'title' => $request->title,
+'heading' => $request->keywordstext,   
+'description' => $request->descriptiontext,
+'page_area_type' => 'seo',
+'isToresize' => 1,
+'max_width' => 1000,
+],
+$request->allFiles());
+
+
+
+  return back()->with('success', 'Content saved!');
+
 }
 
- /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = seo::find($id); //so we will have to find a particular post  
-        //here we are going to delete from the database
-
-        $data->delete();
-        return redirect('manage-seo')->with('success','Data deleted sucessfully '); //create a session variable Success to store
-        //amessage
-        //
-    }
+ 
 
 
 
@@ -108,10 +116,10 @@ public function store(Request $request)
      */
     public function edit($id)
     {
-        //returns a view which contains our form to display data to edit
-        $Data = seo::find($id);
-        $data =DB::select('select * from seo order by id desc');
-$Services_info = content_info::where('page_area_type', 'service')->get();
+
+$Data =  content_info::find($id);
+$data = content_info::where('page_area_type', 'seo')->orderBy('sorted_order', 'asc')->get(); 
+ $Services_info = content_info::where('page_area_type', 'service')->get();
   $Sermons_info = content_info::where('page_area_type', 'sermon')->get();
   $Projects_info = content_info::where('page_area_type', 'project')->get();
   $programes_info = content_info::where('page_area_type', 'programe')->get();
@@ -119,19 +127,18 @@ $Services_info = content_info::where('page_area_type', 'service')->get();
   $Involvements_info = content_info::where('page_area_type', 'involvement')->get();
   $Event_info = content_info::where('page_area_type', 'event')->get();
   $Activity_info = content_info::where('page_area_type', 'activity')->get();
-        //var_dump($data);
-        //pass data to page for editting
-         //passing multiple data
-          return view('pagesadmin.searchengineoptimisation')->with('DataToEdit',$Data)
-  ->with('Services_info',$Services_info)
-  ->with('Sermons_info',$Sermons_info)
-  ->with('Projects_info',$Projects_info)
-  ->with('Programes_info',$programes_info)
-  ->with('Ministries_info',$Ministries_info)
-  ->with('Involvements_info',$Involvements_info)
-  ->with('Event_info',$Event_info)
-  ->with('Activity_info',$Activity_info)
-  ->with('DataInfo',$data);
+
+          return view('pagesadmin.searchengineoptimisation')
+                    ->with('DataToEdit',$Data)
+                    ->with('DataInfo',$data)
+                    ->with('Services_info',$Services_info)
+                    ->with('Sermons_info',$Sermons_info)
+                    ->with('Projects_info',$Projects_info)
+                    ->with('Programes_info',$programes_info)
+                    ->with('Ministries_info',$Ministries_info)
+                    ->with('Involvements_info',$Involvements_info)
+                    ->with('Event_info',$Event_info)
+                    ->with('Activity_info',$Activity_info);
     
     }
 
@@ -147,22 +154,36 @@ $Services_info = content_info::where('page_area_type', 'service')->get();
     public function update(Request $request, $id)
     {
 
-           //updating a testimonials data
-           $data = seo::find($id); //so we will have to find a particular data
-             $data->title = $request->title; //captured from form
-             $data->descriptiontext = $request->descriptiontext; //captured from form
-           $data->keywordstext = $request->keywordstext; //captured from form
-        $data->author = $request->author; //captured from form
-           $data->save();
+     $content = (new ContentService())->saveContentInfo([
+        'detail_type' => $request->author,
+        'title' => $request->title,
+        'heading' => $request->keywordstext,   
+        'description' => $request->descriptiontext,
+        'page_area_type' => 'seo',
+        'isToresize' => 1,
+        'max_width' => 1000,
+    ],
+    $request->allFiles(),
+    $id);
 
-    //DB::update('update student set first_name = ?,last_name=?,city_name=?,email=? where id = ?',[$first_name,$last_name,$city_name,$email,$id]);
-            return redirect('manage-seo')->with('success','Data updated sucessfully '); //create a session variable Success to store
-            //amessage
+
+return back()->with('success', 'Content saved!');
+
     }
 
 
 
-
+/**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+         $this->deleteById('content_info', $id);
+           return back()->with('success', 'Data deleted sucessfully!');
+    }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////

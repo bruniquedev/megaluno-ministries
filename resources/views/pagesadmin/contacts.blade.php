@@ -9,8 +9,8 @@
 
  <div class="col-md-12 col-md-12">
   <div class="panel_container-heading flex align-items-center flex-grow">
-<h4 class="m-r-10">Manage visitors contacts</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<h4 class="m-r-10">Manage contact messages</h4>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-contacts.index') }}"><i class="ion ion-android-refresh"></i> Refresh</a>
 </div>
 @if (session('success'))
 <div class="alert alert-success" role="alert">
@@ -18,11 +18,11 @@
 </div>
 @endif
 
-<div class="table-responsive">
+<div class="table-responsive m-t-10">
   <table class="table-container" id="search-table"
       data-sortable-table
     data-sort-url="{{ route('sort.update') }}"
-    data-model="messages"
+    data-model="content_info"
     data-column="sorted_order">
 <thead id="tablehead">
 <tr class="thead table-light">
@@ -47,11 +47,11 @@
 @foreach($DataInfo as $Info)
 
 <?php
-$status = "btn btn-danger btn-xs";
+$status = "btn-ui btn-ui-danger btn-ui-xs";
 $statustext = "unseen";
 $updateButtonText = "To seen";
-if ($Info->seenstatus == 1) {
-  $status = "btn btn-primary btn-xs";
+if ($Info->status == 1) {
+  $status = "btn-ui btn-ui-primary btn-ui-xs";
   $statustext = "seen";
   $updateButtonText = "To unseen";
 }
@@ -61,20 +61,20 @@ if ($Info->seenstatus == 1) {
     data-id="{{ $Info->id }}"
     draggable="true">
 <td>{{$Info->id}}</td>
-<td>{{$Info->sendername}}</td>
-<td>{{$Info->sendermail}}</td>
-<td>{{$Info->phonenumber}}</td>
-<td>{{$Info->subject}}</td>
-<td>{{$Info->messagetext}}</td>
+<td>{{$Info->title}}</td>
+<td>{{$Info->email_address}}</td>
+<td>{{$Info->phone_number}}</td>
+<td>{{$Info->heading}}</td>
+<td>{{$Info->description}}</td>
 <td>{{$statustext}}</td>
-<td>{{$Info->messagedate}}</td>
+<td>{{$Info->day_date}}</td>
 <td>
 
 <form action="{{ route('manage-contacts.destroy', $Info->id) }}" method="post" name="FORM" 
   enctype="multipart/form-data">
   @csrf <!--it provided a token which verifies that the form submitted came from the same url of the application-->
   @method('DELETE')
-<button type="submit" name="datasubmit" class="btn btn-danger btn-xs">
+<button type="submit" name="datasubmit" class="btn-ui btn-ui-danger btn-ui-xs">
 <i class="ion ion-android-delete"></i> Delete
 </button>
 </form>

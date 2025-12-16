@@ -12,7 +12,7 @@
   <div class="panel panel_container panel_container-default">
 <div class="panel_container-heading flex align-items-center flex-grow">
 <h4 class="m-r-10">Save Pages Titles</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-titles.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>
 <div class="panel panel_container-body" id="panel panel_containerbody1">
 
@@ -36,7 +36,6 @@
   <option value="{{$DataToEdit['title']}}" selected>{{$DataToEdit['title']}}</option>
   @endif
 <option value=""></option>
-<option value="testimonial">testimonial</option>
 @if(count($DataPages) > 0)
 @foreach($DataPages as $TitleInfo)
 <option value="{{$TitleInfo->page_area_type}}">{{$TitleInfo->page_area_type}}</option>
