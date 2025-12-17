@@ -5,9 +5,8 @@ namespace App\Http\Controllers\PagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\eventsinfo;
-use App\Models\events_details;
-use App\Models\donationsinfo;
+use App\Models\content_info;
+use App\Models\content_details;
 use Response;
 use App\AppHelper;
 
@@ -22,12 +21,11 @@ class SermonsPageController extends Controller
     {
               $option="All";
      
+     $SermonsData = content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 
-     $eventsinfodata= eventsinfo::where('status', 1)->orderBy('id', 'asc')->get();
-
-$title="Events";
+$title="Sermons";
          return view('pages.sermonsdetails')
-         ->with('DataInfo',$eventsinfodata)
+         ->with('DataInfo',$SermonsData)
          ->with('title',strtoupper($title))
          ->with('option',$option);
     }
@@ -37,20 +35,16 @@ $title="Events";
           $option="details";
        //var_dump($title);
      
-    $eventdetails= eventsinfo::where('status', 1)->where('id',$id)->get();
+$Sermondetails= content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->where('id',$id)->first();
+$detailItems = content_details::where('related_id', $id)->orderBy('ordersort', 'asc')->get();
+$relatedInfo= content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->where('id', '!=', $id)->orderBy('sorted_order', 'asc')->get();
 
-    $detailItems =DB::select('select * from events_details where related_id=:related_id order by id asc',["related_id"=>$id]);
-
-    $relatedInfo= eventsinfo::where('status', 1)->where('id', '!=', $id)->orderBy('id', 'asc')->get();
-
-    $DataDonationsInfo= donationsinfo::where('status', 1)->orderBy('id', 'asc')->limit(1)->get();
 
       return view('pages.sermonsdetails')
-      ->with('Details',$eventdetails)
+      ->with('Details',$Sermondetails)
       ->with('detailItems',$detailItems)
       ->with('DataInfo',$relatedInfo)
-      ->with('DataDonationsInfo',$DataDonationsInfo)
-      ->with('title',ucfirst($title))
+      ->with('title',ucfirst($Sermondetails->title))
       ->with('option',$option);
 }
 

@@ -4,16 +4,16 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Events" && $option=="All"){ 
+if($SEODataInfo->author=="Sermon" && $option=="All"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php }else if($option=="details"){ ?>
 
-@section('title',$Details[0]['headingtext'])
-@section('description',$Details[0]['descriptiontext'])
-@section('keywords',$Details[0]['headingtext'].' , '.$Details[0]['descriptiontext'])
+@section('title',$Details->title)
+@section('description',$Details->description)
+@section('keywords',$Details->title.', '.$Details->heading)
 
 <?php } ?>
 @endforeach
@@ -32,7 +32,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
    <div class="heading-bg bg-color-aliceblue h-90p m-b-10">
     <div class="heading-bg-content bg-color-aliceblue flex flex-column justify-center align-items-center h-90p">
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime section-heading">
-    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo"All Sermons: ";}else{?> {{$title}} : Sermon <?php } ?></a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo$title;}else{?> {{$title}} : Sermon <?php } ?></a></span></h1>
     </div>
 
 </div>
@@ -48,14 +48,14 @@ if($SEODataInfo->author=="Events" && $option=="All"){
 
 <!--with an image-->
   <div class="content-container-img w-100">
-  <img src='{{asset("storage/events_images/thumbnails/".$Details[0]["filename"]) }}' alt="img" class="about-img img-fluid">
+  <img src='{{asset("storage/content_uploads/thumbnails/".$Details->filename) }}' alt="img" class="about-img img-fluid">
   </div>
 <!--/with an image-->
 <!--with content-->
 <div class="about-content p-0p pagearea-detail-content w-100">
   <h1 class="f-s-20 f-w-500 m-t-30 animate-element delay6 fadeInDown-anime section-heading">
-    <span><a href="javascript:void(0);" class="color-black-dark">Book of Psalms</a></span></h1>
-    <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">By Louis Kennedy <span>|</span> March 3, 2025</h5>
+    <span><a href="javascript:void(0);" class="color-black-dark">{{$Details->heading}}</a></span></h1>
+    <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">{{$Details->publisher}} <span>|</span> {{$Details->day_date}}</h5>
     <div class="border-separator w-full"></div>
 
 <div class="head-description m-b-20">
