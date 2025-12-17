@@ -133,14 +133,14 @@
 <!-----dropdown---->
   <li class="custom-dropdown">
     <a href="javascript:void(0);" class="dropbtn">Donations 
-<?php if(count($Unreaddonations) > 0){ ?>
-      <span class="badge badges testsbadge" id="testsbadge" ><?php echo count($Unreaddonations); ?></span><?php } ?>  
+<?php if($Unreaddonations > 0){ ?>
+      <span class="badge badges testsbadge" id="testsbadge" ><?php echo $Unreaddonations; ?></span><?php } ?>  
       <i class="ion-android-arrow-dropdown"></i>
     </a>
     <ul class="custom-dropdown-content">
  <li><a href="/users-donations">Donors
- <?php if(count($Unreaddonations) > 0){ ?> 
-  <span class="badge badges testsbadge" id="testsbadge" ><?php echo count($Unreaddonations); ?></span> <?php } ?> 
+ <?php if($Unreaddonations > 0){ ?> 
+  <span class="badge badges testsbadge" id="testsbadge" ><?php echo $Unreaddonations; ?></span> <?php } ?> 
 </a></li>
 <li><a href="{{ route('manage-donations.create') }}">Create donation info</a></li>
 <li><a href="{{ route('manage-donations.index') }}">Donation info</a></li>
@@ -151,14 +151,14 @@
 <!-----dropdown---->
   <li class="custom-dropdown">
     <a href="javascript:void(0);" class="dropbtn">Reviews 
-<?php if(count($Unreadreviews) > 0){ ?>
-      <span class="badge badges testsbadge" id="testsbadge" ><?php echo count($Unreadreviews); ?></span><?php } ?>  
+<?php if($Unreadreviews > 0){ ?>
+      <span class="badge badges testsbadge" id="testsbadge" ><?php echo $Unreadreviews; ?></span><?php } ?>  
       <i class="ion-android-arrow-dropdown"></i>
     </a>
     <ul class="custom-dropdown-content">
  <li><a href="{{ route('manage-testimonials.index') }}">Testimonials
- <?php if(count($Unreadreviews) > 0){ ?> 
-  <span class="badge badges testsbadge" id="testsbadge" ><?php echo count($Unreadreviews); ?></span> <?php } ?> 
+ <?php if($Unreadreviews > 0){ ?> 
+  <span class="badge badges testsbadge" id="testsbadge" ><?php echo $Unreadreviews; ?></span> <?php } ?> 
 </a></li>
     </ul>
   </li> 
@@ -202,15 +202,15 @@
 <!-----dropdown---->
   <li class="custom-dropdown">
     <a class="dropbtn">Contacts
-      <?php if(count($Unreadmessages) > 0){ ?>  
-      <span class="badge badges messagebadge" id="messagebadge" ><?php echo count($Unreadmessages); ?></span><?php } ?> 
+      <?php if($Unreadmessages > 0){ ?>  
+      <span class="badge badges messagebadge" id="messagebadge" ><?php echo $Unreadmessages; ?></span><?php } ?> 
       <i class="ion-android-arrow-dropdown"></i>
     </a>
     <ul class="custom-dropdown-content">
 <li><a href="{{ route('manage-contact-setup.index') }}">Set up contacts</a></li>
 <li><a href="{{ route('manage-contacts.index') }}">Contacts
-<?php if(count($Unreadmessages) > 0){ ?>
-  <span class="badge badges messagebadge" id="messagebadge" ><?php echo count($Unreadmessages); ?></span><?php } ?> 
+<?php if($Unreadmessages > 0){ ?>
+  <span class="badge badges messagebadge" id="messagebadge" ><?php echo $Unreadmessages; ?></span><?php } ?> 
 </a></li>
 <!----<li><a href="{{ route('manage-areasserved.index') }}">Areas served</a></li>---->
     </ul>

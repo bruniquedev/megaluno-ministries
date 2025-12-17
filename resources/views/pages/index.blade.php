@@ -396,9 +396,9 @@ if($SEODataInfo->author=="Home"){
         <div class="u-repeater-item-mb container-multislider w-25 p-t-50p">
               <div class="item-content-mb">
                 <span class="u-icon-rectangle"><i class="ion ion-chatbubbles"></i></span>
-                <h5 class="u-heading-mb-5"> {{$info6->name}} </h5>
-                <h5 class="u-heading-mb-pf">{{$info6->job_title}}</h5>
-                <p class="u-text-mb text-style">{{$info6->descriptiontext}}</p>
+                <h5 class="u-heading-mb-5"> {{$info6->heading}} </h5>
+                <h5 class="u-heading-mb-pf">{{$info6->title}}</h5>
+                <p class="u-text-mb text-style">{{$info6->description}}</p>
                 <a href="#"><span class="u-icon-mb"><i class="ion ion-quote"></i></span></a>
               </div>
             </div>

@@ -5,7 +5,7 @@
 <div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center">   
  <div class="col-md-12 col-md-12">
-  <div class="panel_container-heading flex align-items-center flex-grow">
+  <div class="panel_container-heading flex align-items-center flex-grow m-b-10">
 <h4 class="m-r-10">Home intro info</h4>
 <a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-home.create') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>

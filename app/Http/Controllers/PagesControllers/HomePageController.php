@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Response;
-
-use App\Models\activitiesinfo;
-use App\Models\projectsinfo;
-use App\Models\eventsinfo;
-use App\Models\donationsinfo;
-
 use App\Models\content_info;
 use App\Models\content_details;
 
@@ -68,7 +62,7 @@ $GalleryinfoData = content_info::where('page_area_type', 'gallery')->where('ispu
 
 
 //////////////////////////////////////////
-$TestimonialsData =DB::select('select  * from testimonials where status=1 limit 4');
+$TestimonialsData = content_info::where('page_area_type', 'review')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->limit(4)->get();
 //////////////////////////////////////////////////////////
 //dd($TestimonialsData);
 

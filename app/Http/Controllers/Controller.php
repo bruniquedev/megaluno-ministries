@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\content_info;
 use App\Models\content_details;
+use App\Models\donations;
 use DB;//import if you want to use sql commands directly
 use Illuminate\Support\Facades\View;
 use Session;
@@ -26,10 +27,12 @@ class Controller extends BaseController
        
            //let's share some data globally
             $WebsiteLogoData = content_info::where('page_area_type', 'logo')->where('ispublished', 1)->first();
-            $ContactsSetupData =DB::select("SELECT * FROM contacts ORDER BY FIELD(detailtype, 'Tel', 'WhatsApp number', 'Email', 'WhatsApp link', 'Address', 'Map', 'Footer detail')");
+            //$ContactsSetupData =DB::select("SELECT * FROM contacts ORDER BY FIELD(detailtype, 'Tel', 'WhatsApp number', 'Email', 'WhatsApp link', 'Address', 'Map', 'Footer detail')");
+            $ContactsSetupData = content_info::where('page_area_type', 'contactsetup')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
+            //dd($ContactsSetupData);
             $SocialLinksData = content_info::where('page_area_type', 'sociallink')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
            // dd($SocialLinksData);
-            $SEOData =DB::select('select * from seo order by sorted_order asc');
+            $SEOData = content_info::where('page_area_type', 'seo')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
             $PartnersData = content_info::where('page_area_type', 'partner')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 
                 $Ministriesinfodata= content_info::where('page_area_type', 'ministry')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
@@ -37,9 +40,9 @@ class Controller extends BaseController
 
                  $visittime= date('Y-m-d');
                  $TodayTotalCountvisitors =DB::select('select distinct userip from pageview where visitdate =:visitdate', ['visitdate' => $visittime]);
-                $Unreaddonations =DB::select('select * from donations where donationstatus=0');
-                $Unreadmessages =DB::select('select * from messages where seenstatus=0');
-                $Unreadreviews =DB::select('select * from testimonials where status=0');               
+                $Unreaddonations = donations::where('donationstatus', 0)->count();
+                $Unreadmessages = content_info::where('page_area_type', 'message')->where('status', 0)->count();
+                $Unreadreviews = content_info::where('page_area_type', 'review')->where('ispublished', '0')->count();              
 $LogoIcon="";
 $Brandname="";
 if($WebsiteLogoData){

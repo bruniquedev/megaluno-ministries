@@ -35,13 +35,13 @@
 <?php $counter=0; ?>
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Email"){ 
+if($ContactsSetupDataInfo->detail_type=="Email"){ 
    $counter++;
    if($counter==1){
   ?>
   <a class="navbar-brand-social-header" 
-  id="link1_email" href="mailto:{{$ContactsSetupDataInfo->descriptiontext}}"> 
-  <i class=" ion-socials ion-ios-email"></i>{{$ContactsSetupDataInfo->descriptiontext}} </a>
+  id="link1_email" href="mailto:{{$ContactsSetupDataInfo->description}}"> 
+  <i class=" ion-socials ion-ios-email"></i>{{$ContactsSetupDataInfo->description}} </a>
   <?php } } ?>
 @endforeach
 @endif
@@ -50,9 +50,9 @@ if($ContactsSetupDataInfo->detailtype=="Email"){
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Tel"){ 
+if($ContactsSetupDataInfo->detail_type=="Tel"){ 
   ?>
-  <a class="navbar-brand-social-header" id="link1_phone" href="tel:{{$ContactsSetupDataInfo->descriptiontext}}"> <i class=" ion-socials ion-ios-telephone"></i>{{$ContactsSetupDataInfo->descriptiontext}}</a>
+  <a class="navbar-brand-social-header" id="link1_phone" href="tel:{{$ContactsSetupDataInfo->description}}"> <i class=" ion-socials ion-ios-telephone"></i>{{$ContactsSetupDataInfo->description}}</a>
   <?php } ?>
 @endforeach
 @endif

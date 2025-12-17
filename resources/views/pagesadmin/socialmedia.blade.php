@@ -10,7 +10,7 @@
 
       <!---panel panel_container---->
   <div class="panel panel_container panel_container-default">
-<div class="panel_container-heading flex align-items-center flex-grow">
+<div class="panel_container-heading flex align-items-center flex-grow m-b-10">
 <h4 class="m-r-10">Save Social media</h4>
 <a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-socialmedia.index') }}"><i class="ion ion-android-add-circle"></i> Create</a>
 </div>

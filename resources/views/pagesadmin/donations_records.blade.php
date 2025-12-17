@@ -8,9 +8,9 @@
 
 
  <div class="col-md-12 col-md-12">
-  <div class="panel_container-heading flex align-items-center flex-grow">
+  <div class="panel_container-heading flex align-items-center flex-grow m-b-10">
 <h4 class="m-r-10">Manage Donors & Donations</h4>
-<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('users-donations.index') }}"><i class="ion ion-android-refresh"></i> Refresh</a>
+<a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="/users-donations"><i class="ion ion-android-refresh"></i> Refresh</a>
 </div>
 @if (session('success'))
 <div class="alert alert-success" role="alert">

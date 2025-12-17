@@ -3,9 +3,9 @@
 @if(count($ContactsSetupData) > 0)
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="WhatsApp link"){ 
+if($ContactsSetupDataInfo->detail_type=="WhatsApp link"){ 
   ?>
-  <a href="{{$ContactsSetupDataInfo->descriptiontext}}"  target="_blank" class="float_whatsApp_btn">
+  <a href="{{$ContactsSetupDataInfo->description}}"  target="_blank" class="float_whatsApp_btn">
 <i class="ion ion-social-whatsapp-outline my-float_whatsApp_btn"></i>
 </a>
 <?php } ?>
@@ -31,9 +31,9 @@ if($ContactsSetupDataInfo->detailtype=="WhatsApp link"){
                 @if(count($ContactsSetupData) > 0)
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Footer detail"){ 
+if($ContactsSetupDataInfo->detail_type=="Footer detail"){ 
   ?>
-  <li class="w-85">{{$ContactsSetupDataInfo->descriptiontext}}</li>
+  <li class="w-85">{{$ContactsSetupDataInfo->description}}</li>
 <?php } ?>
 @endforeach
 @endif
@@ -103,24 +103,24 @@ if($ContactsSetupDataInfo->detailtype=="Footer detail"){
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Address"){ 
+if($ContactsSetupDataInfo->detail_type=="Address"){ 
   ?>
-<li><i class="ion-ios-location"></i><a href="javascript:void(0);">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
+<li><i class="ion-ios-location"></i><a href="javascript:void(0);">{{$ContactsSetupDataInfo->description}}</a></li>
 <?php } ?>
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Tel"){ 
+if($ContactsSetupDataInfo->detail_type=="Tel"){ 
   ?>
-<li><i class="ion-ios-telephone"></i><a href="tel:{{$ContactsSetupDataInfo->descriptiontext}}">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
+<li><i class="ion-ios-telephone"></i><a href="tel:{{$ContactsSetupDataInfo->description}}">{{$ContactsSetupDataInfo->description}}</a></li>
 <?php } ?>
 <?php 
-if($ContactsSetupDataInfo->detailtype=="WhatsApp number"){ 
+if($ContactsSetupDataInfo->detail_type=="WhatsApp number"){ 
   ?>
-<li><i class="ion ion-social-whatsapp-outline" style="font-size: 15px !important; width: auto;"></i><a href="{{$ContactsSetupDataInfo->addontext}}" target="_blank">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
+<li><i class="ion ion-social-whatsapp-outline" style="font-size: 15px !important; width: auto;"></i><a href="{{$ContactsSetupDataInfo->title}}" target="_blank">{{$ContactsSetupDataInfo->description}}</a></li>
 <?php } ?>
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Email"){ 
+if($ContactsSetupDataInfo->detail_type=="Email"){ 
   ?>
-<li style="color:#55acee !important;"><i class="ion-ios-email"></i><a style="color:#55acee !important;" href="mailto:{{$ContactsSetupDataInfo->descriptiontext}}">{{$ContactsSetupDataInfo->descriptiontext}}</a></li>
+<li style="color:#55acee !important;"><i class="ion-ios-email"></i><a style="color:#55acee !important;" href="mailto:{{$ContactsSetupDataInfo->description}}">{{$ContactsSetupDataInfo->description}}</a></li>
 <?php } ?>
 @endforeach
 @endif

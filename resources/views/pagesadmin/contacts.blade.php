@@ -8,7 +8,7 @@
 
 
  <div class="col-md-12 col-md-12">
-  <div class="panel_container-heading flex align-items-center flex-grow">
+  <div class="panel_container-heading flex align-items-center flex-grow m-b-10">
 <h4 class="m-r-10">Manage contact messages</h4>
 <a class="btn-ui btn-ui-primary btn-ui-xs" id="link1" href="{{ route('manage-contacts.index') }}"><i class="ion ion-android-refresh"></i> Refresh</a>
 </div>
