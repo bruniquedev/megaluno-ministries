@@ -38,7 +38,7 @@ $title="Sermons";
 $Sermondetails= content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->where('id',$id)->first();
 $detailItems = content_details::where('related_id', $id)->orderBy('ordersort', 'asc')->get();
 $relatedInfo= content_info::where('page_area_type', 'sermon')->where('ispublished', 1)->where('id', '!=', $id)->orderBy('sorted_order', 'asc')->get();
-
+//dd($detailItems);
 
       return view('pages.sermonsdetails')
       ->with('Details',$Sermondetails)

@@ -152,7 +152,7 @@ if($SEODataInfo->author=="Home"){
   <div class="item-col">
 <h3 class="text-left f-s-18 animate-element delay6 fadeInDown-anime">
 <span><a href="javascript:void(0);" class="color-black">{{$AboutinfoData->title}}</a></span></h3>
-<p class="">{{$AboutinfoData->description}}></p>
+<p class="">{{$AboutinfoData->description}}</p>
 
 @if($About_detailsData) 
 @if($AboutinfoData->id == $About_detailsData->related_id) 
@@ -201,7 +201,7 @@ if($SEODataInfo->author=="Home"){
   <div class="item-col">
 <h3 class="text-left f-s-18 animate-element delay6 fadeInDown-anime">
 <span><a href="javascript:void(0);" class="color-black">{{$DataDonationsInfo->title}}</a></span></h3>
-<p class="">{{$DataDonationsInfo->description}}></p>
+<p class="">{{$DataDonationsInfo->description}}</p>
 
 @if(count($Donation_detailsData) > 0) 
 @foreach ($Donation_detailsData as $detail3)

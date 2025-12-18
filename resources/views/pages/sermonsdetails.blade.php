@@ -58,32 +58,70 @@ if($SEODataInfo->author=="Sermon" && $option=="All"){
     <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">{{$Details->publisher}} <span>|</span> {{$Details->day_date}}</h5>
     <div class="border-separator w-full"></div>
 
-<div class="head-description m-b-20">
-<h5 class="m-t-10  f-w-500 f-s-18">John 3:14</h5>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
-<div class="head-description m-b-20">
-<h5 class="m-t-10 f-w-500 f-s-18">Jeremiah 1:30</h5>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.”</p>
-<p><span class="f-w-500 color-black-dark m-r-3 font-century-bold">Number 5:16</span> “For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.</p> 
-</div>
-
-<div class="head-description m-b-20">
-<p><span class="f-w-500 color-black-dark m-r-3 font-century-bold">1 Corinthians 13:4-8</span> Love is patient, love is kind. It does not envy, it does not boast, it is not proud.  It is not rude, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.  Love does not delight in evil but rejoices with the truth.  It always protects, always trusts, always hopes, always perseveres.  Love never fails. But where there are prophecies, they will cease; where there are tongues, they will be stilled; where there is knowledge, it will pass away.</p>
+  <div class="head-description m-b-20">
+<p>{{$Details->description}}</p>
 </div>
 
 
-<div class="head-description m-b-20" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+@if(count($detailItems) > 0)
+@foreach($detailItems as $info_detail)
+@if($info_detail->related_id==$Details->id)
+
+@if($info_detail->titlelist || $info_detail->descriptionlist)
+<div class="head-description m-b-20">
+
+
+@if($info_detail->titlelist)
+<h5 class="m-t-10 f-w-500 f-s-18">{{$info_detail->titlelist}}</h5>
+@endif
+
+
+@if($info_detail->descriptionlist)
+
+@if($info_detail->headinglist=="")
+<p>{{$info_detail->descriptionlist}}</p>
+@else
+@if($info_detail->headinglist)
+<p>
+  <span class="f-w-500 color-black-dark m-r-3 font-century-bold">{{$info_detail->headinglist}}</span> 
+@if($info_detail->descriptionlist)
+{{$info_detail->descriptionlist}}
+@endif
+</p>
+@endif
+@endif
+
+@endif
+
+
+</div>
+@endif
+
+
+
+@if($info_detail->filenamelist)
+<!--with an image-->
+  <div class="content-container-img w-100 m-b-20">
+  <img src='{{asset("storage/content_uploads/details/thumbnails/".$info_detail->filenamelist) }}' alt="img" class="about-img img-fluid">
+  </div>
+<!--/with an image-->
+@endif
+
+@if($info_detail->video_filelist)
+<div class="head-description m-b-30" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe 
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+    src="{{$info_detail->video_filelist}}" 
     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
   </iframe>
 </div>
+@endif
 
+@endif
+@endforeach
+@endif
 
 </div>
 <!--/with content-->
@@ -111,13 +149,13 @@ if($SEODataInfo->author=="Sermon" && $option=="All"){
   <div class="col-item w-32 m-r-10">
     <div class="t-container">
 <div class="t-item">
-    <a href="/sermon/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="t-item-content">
+    <a href="/sermon/{{$info->id}}/{{$info->slug}}" class="t-item-content">
        <div class="t-thumbnail">
-        <img class="img-fluid" src="{{ asset('storage/events_images/thumbnails/'.$info->filename) }}" alt="">
+        <img class="img-fluid" src="{{ asset('storage/content_uploads/thumbnails/'.$info->filename) }}" alt="">
        </div>
     </a>
     <div class="t-content">
-       <a class="t-description text-wrapping w-80" href="/sermon/{{$info->id}}/{{Str::slug($info->headingtext)}}">{{$info->headingtext}}</a> 
+       <a class="t-description text-wrapping w-80" href="/sermon/{{$info->id}}/{{$info->slug}}">{{$info->title}}</a> 
     </div>
 </div>
 </div>
