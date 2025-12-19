@@ -5,9 +5,8 @@ namespace App\Http\Controllers\PagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\eventsinfo;
-use App\Models\events_details;
-use App\Models\donationsinfo;
+use App\Models\content_info;
+use App\Models\content_details;
 use Response;
 use App\AppHelper;
 
@@ -25,7 +24,8 @@ class EventsPageController extends Controller
             $option="All";
      
 
-     $eventsinfodata= eventsinfo::where('status', 1)->orderBy('id', 'asc')->get();
+ $eventsinfodata = content_info::where('page_area_type', 'event')->where('ispublished', "0")->orderBy('sorted_order', 'asc')->get();
+
 
 $title="Events";
          return view('pages.eventsdetails')
@@ -38,21 +38,18 @@ $title="Events";
 
           $option="details";
        //var_dump($title);
-     
-    $eventdetails= eventsinfo::where('status', 1)->where('id',$id)->get();
 
-    $detailItems =DB::select('select * from events_details where related_id=:related_id order by id asc',["related_id"=>$id]);
 
-    $relatedInfo= eventsinfo::where('status', 1)->where('id', '!=', $id)->orderBy('id', 'asc')->get();
+$eventdetails= content_info::where('page_area_type', 'event')->where('ispublished', "0")->where('id',$id)->first();
+$detailItems = content_details::where('related_id', $id)->orderBy('ordersort', 'asc')->get();
+$relatedInfo= content_info::where('page_area_type', 'event')->where('ispublished', "0")->where('id', '!=', $id)->orderBy('sorted_order', 'asc')->get();
 
-    $DataDonationsInfo= donationsinfo::where('status', 1)->orderBy('id', 'asc')->limit(1)->get();
-
+//dd($eventdetails);
       return view('pages.eventsdetails')
       ->with('Details',$eventdetails)
       ->with('detailItems',$detailItems)
       ->with('DataInfo',$relatedInfo)
-      ->with('DataDonationsInfo',$DataDonationsInfo)
-      ->with('title',ucfirst($title))
+      ->with('title',ucfirst($eventdetails->title))
       ->with('option',$option);
 }
 

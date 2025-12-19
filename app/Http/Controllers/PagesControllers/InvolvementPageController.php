@@ -5,9 +5,8 @@ namespace App\Http\Controllers\PagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\projectsinfo;
-use App\Models\projects_details;
-use App\Models\donationsinfo;
+use App\Models\content_info;
+use App\Models\content_details;
 use Response;
 use App\AppHelper;
 
@@ -24,11 +23,11 @@ class InvolvementPageController extends Controller
             $option="All";
      
 
-     $Projectsinfodata= projectsinfo::where('status', 1)->orderBy('id', 'asc')->get();
+       $InvolvementData = content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
 
-          $title="Projects";
+          $title="GET INVOLVED";
          return view('pages.involvementsdetails')
-         ->with('DataInfo',$Projectsinfodata)
+         ->with('DataInfo',$InvolvementData)
          ->with('title',strtoupper($title))
          ->with('option',$option);
     }
@@ -37,22 +36,19 @@ class InvolvementPageController extends Controller
 
           $option="details";
        //var_dump($title);
-     
-    $projectdetails= projectsinfo::where('status', 1)->where('id',$id)->get();
 
-    $detailItems =DB::select('select * from projects_details where related_id=:related_id order by id asc',["related_id"=>$id]);
+$Involvementdetails= content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->where('id',$id)->first();
+$detailItems = content_details::where('related_id', $id)->orderBy('ordersort', 'asc')->get();
+$relatedInfo= content_info::where('page_area_type', 'involvement')->where('ispublished', 1)->where('id', '!=', $id)->orderBy('sorted_order', 'asc')->get();
 
-    $relatedInfo= projectsinfo::where('status', 1)->where('id', '!=', $id)->orderBy('id', 'asc')->get();
-
-    $DataDonationsInfo= donationsinfo::where('status', 1)->orderBy('id', 'asc')->limit(1)->get();
-
+//dd($detailItems);
       return view('pages.involvementsdetails')
-      ->with('Details',$projectdetails)
+      ->with('Details',$Involvementdetails)
       ->with('detailItems',$detailItems)
       ->with('DataInfo',$relatedInfo)
-      ->with('DataDonationsInfo',$DataDonationsInfo)
-      ->with('title',ucfirst($title))
+      ->with('title',ucfirst($Involvementdetails->title))
       ->with('option',$option);
+
 }
 
 }

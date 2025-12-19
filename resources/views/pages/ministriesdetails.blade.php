@@ -4,16 +4,16 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Programmes" && $option=="All"){ 
+if($SEODataInfo->author=="Ministry" && $option=="All"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php }else if($option=="details"){ ?>
 
-@section('title',$Details[0]['headingtext'])
-@section('description',$Details[0]['descriptiontext'])
-@section('keywords',$Details[0]['headingtext'].' , '.$Details[0]['descriptiontext'])
+@section('title',$Details->title)
+@section('description',$Details->description)
+@section('keywords',$Details->title.', '.$Details->heading)
 
 <?php } ?>
 @endforeach
@@ -32,7 +32,7 @@ if($SEODataInfo->author=="Programmes" && $option=="All"){
    <div class="heading-bg bg-color-aliceblue h-90p m-b-10">
     <div class="heading-bg-content bg-color-aliceblue flex flex-column justify-center align-items-center h-90p">
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime section-heading">
-    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo"All MINISTRIES ";}else{?> {{$title}}  <?php } ?></a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo$title;}else{?> {{$title}}  <?php } ?></a></span></h1>
     </div>
 
 </div>
@@ -50,40 +50,50 @@ if($SEODataInfo->author=="Programmes" && $option=="All"){
 <!--with content-->
 <div class="about-content pagearea-detail-content">
  
-
 <div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Mission or purpose.</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
+<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">{{$Details->title}}</h5>
+@if($Details->description)
+<p>{{$Details->description}}</p>
+@endif
 </div>
 
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Meeting times or schedules.</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
-
-
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Contact or registration info.</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
-
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Activities involved</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
-
+@if($Details->filename)
 <!--with an image-->
   <div class="content-container-img w-100">
-  <img src='{{asset("storage/activities_images/thumbnails/".$Details[0]["filename"]) }}' alt="img" class="about-img img-fluid">
+  <img src='{{asset("storage/content_uploads/thumbnails/".$Details->filename) }}' alt="img" class="about-img img-fluid">
   </div>
 <!--/with an image-->
+@endif
+
+
+@if(count($detailItems) > 0)
+@foreach($detailItems as $info_detail)
+@if($info_detail->related_id==$Details->id)
+
+@if($info_detail->headinglist || $info_detail->descriptionlist)
+<div class="head-description m-t-20">
+@if($info_detail->headinglist)
+<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">{{$info_detail->headinglist}}</h5>
+<div class="border-separator w-full"></div>
+@endif
+@if($info_detail->descriptionlist)
+<p>{{$info_detail->descriptionlist}}</p>
+@endif
+</div>
+@endif
+
+@if($info_detail->filenamelist)
+<!--with an image-->
+  <div class="content-container-img w-100">
+  <img src='{{asset("storage/content_uploads/details/thumbnails/".$info_detail->filenamelist) }}' alt="img" class="about-img img-fluid">
+  </div>
+<!--/with an image-->
+@endif
+
+@endif
+@endforeach
+@endif
+
 
 </div>
 <!--/with content-->
@@ -113,13 +123,13 @@ if($SEODataInfo->author=="Programmes" && $option=="All"){
   <div class="col-item w-32 m-r-10">
     <div class="t-container">
 <div class="t-item">
-    <a href="/ministry/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="t-item-content">
+    <a href="/ministry/{{$info->id}}/{{$info->slug}}" class="t-item-content">
        <div class="t-thumbnail">
-        <img class="img-fluid" src="{{ asset('storage/activities_images/thumbnails/'.$info->filename) }}" alt="">
+        <img class="img-fluid" src="{{ asset('storage/content_uploads/thumbnails/'.$info->filename) }}" alt="">
        </div>
     </a>
     <div class="t-content">
-       <a class="t-description text-wrapping w-80" href="/ministry/{{$info->id}}/{{Str::slug($info->headingtext)}}">{{$info->headingtext}}</a> 
+       <a class="t-description text-wrapping w-80" href="/ministry/{{$info->id}}/{{$info->slug}}">{{$info->title}}</a> 
     </div>
 </div>
 </div>

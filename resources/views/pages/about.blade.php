@@ -41,15 +41,20 @@ if($SEODataInfo->author=="About"){
  <div class="about-container animate-element delay6 fadeInLeft-anime w-85"> 
 <div class="about-content p-0p">
 
+@if($info->iconfile)
 <div class="w-100 flex justify-center">
  <div class="summary_img_wrapper">
   <img src='{{asset("storage/content_uploads/icons/".$info->iconfile) }}' alt="img" class="summary_img" />
 </div>
 </div>
+@endif
+
+@if($info->title)
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$info->title}}</a></span></h1>
-
     <div class="border-separator w-full"></div>
+    @endif
+
 @if($info->description)
 <p>{{$info->description}}</p>
 @endif
@@ -107,15 +112,19 @@ if($SEODataInfo->author=="About"){
  <div class="about-container animate-element delay6 fadeInLeft-anime w-100"> 
 <div class="about-content p-0p">
 
+@if($info->iconfile)
 <div class="w-100 flex justify-center">
  <div class="summary_img_wrapper">
   <img src='{{asset("storage/content_uploads/icons/".$info->iconfile) }}' alt="img" class="summary_img" />
 </div>
 </div>
+@endif
+
+@if($info->title)
   <h1 class="center f-s-25 m-b-10">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$info->title}}</a></span></h1>
-
     <div class="border-separator w-full"></div>
+@endif
 
 @if($info->description)
 <p>{{$info->description}}</p>

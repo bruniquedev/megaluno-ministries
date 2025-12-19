@@ -46,22 +46,33 @@ if($SEODataInfo->author=="Sermon" && $option=="All"){
 <div class="aboutarea pagecontainer-details-area"><!---->
  <div class="about-container more-details-container w-80 flex flex-column  flex-wrap flex-grow animate-element delay6 fadeInLeft-anime "> 
 
+ @if($Details->filename)
 <!--with an image-->
   <div class="content-container-img w-100">
   <img src='{{asset("storage/content_uploads/thumbnails/".$Details->filename) }}' alt="img" class="about-img img-fluid">
   </div>
 <!--/with an image-->
+@endif
+
 <!--with content-->
 <div class="about-content p-0p pagearea-detail-content w-100">
+  @if($Details->heading)
   <h1 class="f-s-20 f-w-500 m-t-30 animate-element delay6 fadeInDown-anime section-heading">
     <span><a href="javascript:void(0);" class="color-black-dark">{{$Details->heading}}</a></span></h1>
+   @endif
+
+
+@if($Details->publisher || $Details->day_date)
     <h5 class="color-black-fading m-t-10 f-w-500 f-s-15 font-Myriad-regular">{{$Details->publisher}} <span>|</span> {{$Details->day_date}}</h5>
     <div class="border-separator w-full"></div>
+    @endif
 
+
+@if($Details->description)
   <div class="head-description m-b-20">
 <p>{{$Details->description}}</p>
 </div>
-
+@endif
 
 @if(count($detailItems) > 0)
 @foreach($detailItems as $info_detail)

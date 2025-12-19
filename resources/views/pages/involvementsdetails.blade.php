@@ -4,16 +4,16 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Projects" && $option=="All"){ 
+if($SEODataInfo->author=="Involvement" && $option=="All"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php }else if($option=="details"){ ?>
 
-@section('title',$Details[0]['headingtext'])
-@section('description',$Details[0]['descriptiontext'])
-@section('keywords',$Details[0]['headingtext'].' , '.$Details[0]['descriptiontext'])
+@section('title',$Details->title)
+@section('description',$Details->description)
+@section('keywords',$Details->title.', '.$Details->heading)
 
 <?php } ?>
 @endforeach
@@ -32,7 +32,7 @@ if($SEODataInfo->author=="Projects" && $option=="All"){
    <div class="heading-bg bg-color-aliceblue h-90p m-b-10">
     <div class="heading-bg-content bg-color-aliceblue flex flex-column justify-center align-items-center h-90p">
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime section-heading">
-    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo"GET INVOLVED ";}else{?> {{$title}} <?php } ?></a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black-dark"><?php if($option=="All"){echo$title;}else{?> {{$title}} <?php } ?></a></span></h1>
     </div>
 
 </div>
@@ -54,38 +54,50 @@ if($SEODataInfo->author=="Projects" && $option=="All"){
  
 
 <div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Mission or purpose.</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
+  @if($Details->title)
+<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">{{$Details->title}}</h5>
+@endif
+@if($Details->description)
+<p>{{$Details->description}}</p>
+@endif
 </div>
 
+@if($Details->filename)
 <!--with an image-->
-  <div class="m-t-10 m-b-30 content-container-img w-100">
-  <img src='{{asset("storage/projects_images/thumbnails/".$Details[0]->filename) }}' alt="img" class="about-img img-fluid">
+  <div class="content-container-img w-100">
+  <img src='{{asset("storage/content_uploads/thumbnails/".$Details->filename) }}' alt="img" class="about-img img-fluid">
   </div>
 <!--/with an image-->
+@endif
 
 
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Meeting times or schedules.</h5>
+@if(count($detailItems) > 0)
+@foreach($detailItems as $info_detail)
+@if($info_detail->related_id==$Details->id)
+
+@if($info_detail->headinglist || $info_detail->descriptionlist)
+<div class="head-description m-t-20">
+@if($info_detail->headinglist)
+<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">{{$info_detail->headinglist}}</h5>
 <div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
+@endif
+@if($info_detail->descriptionlist)
+<p>{{$info_detail->descriptionlist}}</p>
+@endif
 </div>
+@endif
 
+@if($info_detail->filenamelist)
+<!--with an image-->
+  <div class="content-container-img w-100">
+  <img src='{{asset("storage/content_uploads/details/thumbnails/".$info_detail->filenamelist) }}' alt="img" class="about-img img-fluid">
+  </div>
+<!--/with an image-->
+@endif
 
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">How to join a ministry team.</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
-
-<div class="head-description m-b-20">
-<h5 class="m-t-10 m-b-10 f-w-500 f-s-18">Activities involved</h5>
-<div class="border-separator w-full"></div>
-<p>The believer struggling hard against shame needs to watch you exult, “My sin, not in part, but the whole, has been nailed to the cross, and I bear it no more!” The saint overburdened by work, striving, and performance needs to listen as you affirm, “We rest on Thee, our shield.</p>
-</div>
-
+@endif
+@endforeach
+@endif
 
 
 
@@ -98,40 +110,42 @@ if($SEODataInfo->author=="Projects" && $option=="All"){
 </div>
 </div>
 <!--/about section-->
-
+<?php } ?>
 
 
  @if(count($DataInfo) > 0) 
 <section class="section_area m-t-20">
- 
+ <?php if($option=="details"){ ?>
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-15 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><span class=""></span>OTHER INVOLVEMENTS</a></span></h1>
-
+<?php } ?>
 <div class="flex justify-center align-items-center flex-wrap flex-grow section-row-mini ">
  
 @foreach ($DataInfo as $info)
   <!--item-->
 <div class="n-container-item">
-  <a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}" class="n-container-img">
-  <img src="{{ asset('storage/projects_images/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
+  <a href="/involvement/{{$info->id}}/{{$info->slug}}" class="n-container-img">
+  <img src="{{ asset('storage/content_uploads/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
 </a>
   <div class="n-content">
-    <p class=""><a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}">{{$info->headingtext}}</a></p>
-    <p><a href="/involvement/{{$info->id}}/{{Str::slug($info->headingtext)}}">
-     <?php echo str_limit($info->descriptiontext, 10); ?></a></p>
+    <p class=""><a href="/involvement/{{$info->id}}/{{$info->slug}}">{{$info->title}}</a></p>
+    <p><a href="/involvement/{{$info->id}}/{{$info->slug}}">
+     <?php echo str_limit($info->descriptionlist, 10); ?></a></p>
   </div>
 </div>
 <!--item-->
 @endforeach 
 </div>
 
+ <?php if($option=="details"){ ?>
 <div class="flex justify-center align-items-center m-t-15 m-b-15">
 <a href="/involvements" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui">View more <i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
 </div>
+<?php } //end of detail checking ?>
 </section>
 @endif
 
-<?php } //end of detail checking ?>
+
 
 
 

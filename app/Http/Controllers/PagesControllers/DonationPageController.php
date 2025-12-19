@@ -5,8 +5,8 @@ namespace App\Http\Controllers\PagesControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\donations;
-use App\Models\donationsinfo;
+use App\Models\content_info;
+use App\Models\content_details;
 use Response;
 use App\AppHelper;
 
@@ -21,15 +21,14 @@ class DonationPageController extends Controller
     public function Index()
     {
 
-$DataDonationsInfo= donationsinfo::where('status', 1)->orderBy('id', 'asc')->limit(1)->get();
-    $id=0;
-if(count($DataDonationsInfo) > 0){
-$id = $DataDonationsInfo[0]->id;
-}
-$Donation_detailsData =DB::select('select * from donations_details where related_id=:id order by id asc',['id'=>$id]);
+
+
+ $DataDonationsInfo = content_info::where('page_area_type', 'donation')->where('ispublished', 1)->orderBy('sorted_order', 'asc')->get();
+$Donation_detailsData =  DB::table('content_info')->leftjoin('content_details', 'content_details.related_id', '=', 'content_info.id')->where('content_info.page_area_type', 'donation')->where('content_info.ispublished', 1)->orderBy('content_details.ordersort', 'asc')->get();
+//dd($Donation_detailsData);
 
         $title="Donate";
-           return view('pages.donate')
+           return view('pages.donate')      
     ->with('DataDonationsInfo',$DataDonationsInfo)
      ->with('Donation_detailsData',$Donation_detailsData)
           ->with('title',$title);
