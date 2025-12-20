@@ -4,12 +4,15 @@ namespace App\Http\Controllers\PagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\messages;
-use DB;//import if you want to use sql commands directly
-use Response;
 use App\Mail\SendContactformEmail;
 use Illuminate\Support\Facades\Mail;
-
+use DB;
+use DateTime;
+use Hash;
+use Response;
+use App\Models\content_info;
+use App\Models\content_details;
+use Illuminate\Support\Str;
 
 class ContactPageController extends Controller
 {
@@ -29,12 +32,11 @@ class ContactPageController extends Controller
      */
     public function postUserContactMessage(Request $request)
     {
-        //for login references
-       // https://www.codecheef.org/article/laravel-8-login-with-custom-guard-example?msclkid=f5d99338a9bf11ec80a1bf67a20f2416
+
 $response = array();      
 $message ="";
 $status_message ="false";
-  $data = new messages();       
+  $data = new content_info();       
 
 $Name = "Anonymous";
 $Phone = "Anonymous";
@@ -47,27 +49,31 @@ $Phone = $request->phonenumber;
 }
 
 
-$data->sendername= $Name;
-$data->sendermail= $request->email;  
-$data->phonenumber = $Phone;
-$data->subject = $request->subject;
-$data->messagetext = $request->message;
-$data->messagedate= date('Y-m-d H:i:s'); 
-$data->seenstatus = 0; 
+$data->title= $Name;
+$data->email_address= $request->email;  
+$data->phone_number = $Phone;
+$data->heading = $request->subject;
+$data->description = $request->message;
+$data->day_date= date('Y-m-d H:i:s'); 
+$data->status = 0; 
+$data->page_area_type = "message";
 $data->save();
 $message="Thank you for contacting us, we will get back to you as soon as possible.";
 $status_message ="true";
 
 
-$ContactsSetupData =DB::select('select * from contacts where detailtype=:detailtype limit 1',["detailtype"=>"Email"]);
+
+$ContactsSetupData = content_info::where('page_area_type', 'contactsetup')->where('detail_type', 'Email')->orderBy('sorted_order', 'asc')->first(); 
+
 $receiveremail = "bruniquedevelopers@gmail.com";
-if(count($ContactsSetupData) > 0){
-$receiveremail = $ContactsSetupData[0]->descriptiontext;
+if($ContactsSetupData->description){
+$receiveremail = $ContactsSetupData->description;
 }
-$WebsiteLogoData =DB::select('select * from logo limit 1');
+
+$WebsiteLogoData = content_info::where('page_area_type', 'logo')->orderBy('sorted_order', 'asc')->first(); 
 $receiver = "";
-if(count($WebsiteLogoData) > 0){
-$receiver = $WebsiteLogoData[0]->text;
+if($WebsiteLogoData->title){
+$receiver = $WebsiteLogoData->title;
 }
 
 $subject = $receiver." contact form message from ".$Name;

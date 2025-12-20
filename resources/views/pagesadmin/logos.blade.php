@@ -121,8 +121,7 @@ if ($Info->ispublished == 1) {
 ?>
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->title}}</td>
 <td>

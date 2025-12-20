@@ -5,11 +5,11 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Contact us"){ 
+if($SEODataInfo->detail_type=="Contact-us"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php } ?>
 @endforeach
 @endif
@@ -44,9 +44,9 @@ if($SEODataInfo->author=="Contact us"){
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Address"){ 
+if($ContactsSetupDataInfo->detail_type=="Address"){ 
   ?>
-   <h3 class="h4"><a href="#">{{$ContactsSetupDataInfo->descriptiontext}}  {{$ContactsSetupDataInfo->addontext}} </a></h3>
+   <h3 class="h4"><a href="#">{{$ContactsSetupDataInfo->description}}  {{$ContactsSetupDataInfo->title}} </a></h3>
   <?php  } ?>
 @endforeach
 @endif
@@ -59,15 +59,15 @@ if($ContactsSetupDataInfo->detailtype=="Address"){
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Tel"){ 
+if($ContactsSetupDataInfo->detail_type=="Tel"){ 
   ?>
-   <h3 class="h4"><a href="tel:{{$ContactsSetupDataInfo->descriptiontext}}">
-    {{$ContactsSetupDataInfo->descriptiontext}}  {{$ContactsSetupDataInfo->addontext}}</a></h3> 
+   <h3 class="h4"><a href="tel:{{$ContactsSetupDataInfo->description}}">
+    {{$ContactsSetupDataInfo->description}}  {{$ContactsSetupDataInfo->title}}</a></h3> 
   <?php  }
-  if($ContactsSetupDataInfo->detailtype=="WhatsApp number"){
+  if($ContactsSetupDataInfo->detail_type=="WhatsApp number"){
   ?>
-    <h3 class="h4"><a href="{{$ContactsSetupDataInfo->addontext}}" target="_blank">
-WhatsApp : {{$ContactsSetupDataInfo->descriptiontext}}</a></h3> 
+    <h3 class="h4"><a href="{{$ContactsSetupDataInfo->title}}" target="_blank">
+WhatsApp : {{$ContactsSetupDataInfo->description}}</a></h3> 
   <?php  } ?>
 @endforeach
 @endif
@@ -81,10 +81,10 @@ WhatsApp : {{$ContactsSetupDataInfo->descriptiontext}}</a></h3>
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Email"){ 
+if($ContactsSetupDataInfo->detail_type=="Email"){ 
   ?>
-   <h3 class="h4"><a href="mailto:{{$ContactsSetupDataInfo->descriptiontext}}">
-    {{$ContactsSetupDataInfo->descriptiontext}}  {{$ContactsSetupDataInfo->addontext}} </a></h3>
+   <h3 class="h4"><a href="mailto:{{$ContactsSetupDataInfo->description}}">
+    {{$ContactsSetupDataInfo->description}}  {{$ContactsSetupDataInfo->title}} </a></h3>
   <?php  } ?>
 @endforeach
 @endif
@@ -166,9 +166,9 @@ id="FORM_CONTACT" onsubmit="return User_contactMessage_request(event);" class="a
 <!--iterate through an array-->
 @foreach($ContactsSetupData as $ContactsSetupDataInfo)
 <?php 
-if($ContactsSetupDataInfo->detailtype=="Map"){ 
+if($ContactsSetupDataInfo->detail_type=="Map"){ 
   ?>
-<?php echo$ContactsSetupDataInfo->descriptiontext; ?>
+<?php echo$ContactsSetupDataInfo->description; ?>
   <?php  } ?>
 @endforeach
 @endif

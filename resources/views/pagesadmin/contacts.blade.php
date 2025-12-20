@@ -2,7 +2,7 @@
 
 @section('content') 
 
-<div class="container-fluid card-In m-t-150 m-b-50" >
+<div class="container card-In m-t-150 m-b-50" >
  <div class="row justify-content-center"> 	
         	
 
@@ -58,8 +58,7 @@ if ($Info->status == 1) {
 ?>
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->title}}</td>
 <td>{{$Info->email_address}}</td>

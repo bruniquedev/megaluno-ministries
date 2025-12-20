@@ -179,8 +179,7 @@
 @foreach($DataInfo as $Info)
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>    
 <td>{{$Info->title}}</td>
 <td>{{$Info->detail_type}}</td>   

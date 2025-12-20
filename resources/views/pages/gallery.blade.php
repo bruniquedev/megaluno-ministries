@@ -4,11 +4,11 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Gallery"){ 
+if($SEODataInfo->detail_type=="Gallery"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php } ?>
 @endforeach
 @endif
@@ -46,15 +46,15 @@ if($SEODataInfo->author=="Gallery"){
 <?php $counter++; ?>
 <div class="mySlides_G fade_G">
   <div class="numbertext_G"><?php echo $counter."/".count($DataInfo); ?></div>
-  <!--<div class="img_G" style="background-image: url('{{ asset("storage/gallery_images/thumbnails/".$Info->filename) }}');
+  <!--<div class="img_G" style="background-image: url('{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}');
     width:auto; height:500px;"></div>-->
 
   <div class="G-container-img">
-  <img src="{{ asset('storage/gallery_images/thumbnails/'.$Info->filename) }}" alt="img" class="G-image img-fluid">
+  <img src='{{ asset("storage/content_uploads/thumbnails/".$Info->filename) }}' alt="img" class="G-image img-fluid">
   </div>
 
 
-  <div class="text_G">{{ucfirst($Info->text)}}</div>
+  <div class="text_G">{{ucfirst($Info->title)}}</div>
 </div>
 @endforeach
 @endif
@@ -93,12 +93,12 @@ if($SEODataInfo->author=="Gallery"){
 
   <!--item-->
 <div class="n-container-item">
-  <a href="javascript:void(0);" class="light-box-preview n-container-img"  data-images="<?php echo asset('storage/gallery_images/thumbnails/'.$info->filename); ?>" data-desc="<?php echo$info->text; ?>">
-  <img src="{{ asset('storage/gallery_images/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
+  <a href="javascript:void(0);" class="light-box-preview n-container-img"  data-images="<?php echo asset('storage/content_uploads/thumbnails/'.$info->filename); ?>" data-desc="<?php echo$info->title; ?>">
+  <img src="{{ asset('storage/content_uploads/thumbnails/'.$info->filename) }}" alt="img" class="n-image img-fluid">
 </a>
   <div class="n-content">
     <p class="text-wrapping w-80 color-white">
-     <?php echo str_limit($info->text, 10); ?></p>
+     <?php echo str_limit($info->title, 10); ?></p>
   </div>
 </div>
 <!--item-->

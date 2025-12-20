@@ -4,11 +4,11 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Testimonials"){ 
+if($SEODataInfo->detail_type=="Testimonials"){ 
   ?>
 @section('title',$SEODataInfo->title)
-@section('description',$SEODataInfo->descriptiontext)
-@section('keywords',$SEODataInfo->keywordstext)
+@section('description',$SEODataInfo->description)
+@section('keywords',$SEODataInfo->heading)
 <?php } ?>
 @endforeach
 @endif
@@ -40,13 +40,13 @@ if($SEODataInfo->author=="Testimonials"){
 <div class="testimonial-column">
   <div class="testimonial-column-item">
     <div class="testimonail-content">
-<p>{{$review->descriptiontext}}</p>
+<p>{{$review->description}}</p>
     </div>
 
 <div class="testimonial_item_triangle"></div>
 
-<h4><strong>{{$review->name}}</strong></h4>
-<h5>Business <span>-</span> personel</h5>
+<h4><strong>{{$review->heading}}</strong></h4>
+<h5 class="color-black-fading">{{$review->title}}</h5>
   </div>
 
 <div class="testimonial-img"><img  src="<?php echo asset('images/user.png');?>" alt="Carla Larson"></div>

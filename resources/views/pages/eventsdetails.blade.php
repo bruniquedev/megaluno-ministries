@@ -4,7 +4,7 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="Events" && $option=="All"){ 
+if($SEODataInfo->detail_type=="Events" && $option=="All"){ 
   ?>
 @section('title',$SEODataInfo->title)
 @section('description',$SEODataInfo->description)
@@ -13,7 +13,7 @@ if($SEODataInfo->author=="Events" && $option=="All"){
 
 @section('title',$Details->title)
 @section('description',$Details->description)
-@section('keywords',$Details->title.', '.$Details->heading)
+@section('keywords',$Details->title)
 
 <?php } ?>
 @endforeach

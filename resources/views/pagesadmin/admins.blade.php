@@ -157,8 +157,7 @@ id="fullname" name="fullname"  >
 @foreach($DataInfo as $Info)
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->name}}</td>
 <td>{{$Info->email}}</td>

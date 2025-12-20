@@ -4,7 +4,7 @@
 @if(count($SEOData) > 0)
 @foreach($SEOData as $SEODataInfo)
 <?php 
-if($SEODataInfo->author=="About"){ 
+if($SEODataInfo->detail_type=="About"){ 
   ?>
 @section('title',$SEODataInfo->title)
 @section('description',$SEODataInfo->description)

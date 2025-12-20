@@ -143,8 +143,7 @@ if($Info->status=="0"){$prioritytext="Low";}
 ?>
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->detail_type}}</td>
 <td>{{$valuetext}}</td>

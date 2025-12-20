@@ -59,8 +59,7 @@ if ($Info->donationstatus == 1) {
 ?>
 
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->reference}}</td>
 <td>{{$Info->amount}}</td>

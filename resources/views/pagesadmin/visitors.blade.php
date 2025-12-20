@@ -78,8 +78,7 @@
 <!--iterate through an array-->
 @foreach($getUserIpsdata as $Info)
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->userip}}</td>
 <td>{{$Info->page}}</td>

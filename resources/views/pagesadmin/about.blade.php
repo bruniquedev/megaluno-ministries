@@ -44,8 +44,7 @@ if(count($DataInfo) >0){
 
 ?>
 <tr data-sortable-row
-    data-id="{{ $Info->id }}"
-    draggable="true">
+    data-id="{{ $Info->id }}">
 <td><?php echo $Info->id; ?></td>
 <td><?php echo $Info->title; ?></td>
 <td><?php echo $Info->page_area_type; ?></td>

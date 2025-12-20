@@ -4,7 +4,8 @@ namespace App\Http\Controllers\PagesControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\gallery;
+use App\Models\content_info;
+use App\Models\content_details;
 use App\AppHelper;
 use DB;//import if you want to use sql commands directly
 use Illuminate\Support\Facades\Storage;// will enable us access storage directory in 
@@ -18,10 +19,8 @@ class GalleryPageController extends Controller
      */
     public function index()
     {
-           $title ="Gallery";
-
-           $data =DB::select('select * from gallery order by id asc');
-       //var_dump($title);
+      $title ="Gallery";
+      $data = content_info::where('page_area_type', 'gallery')->orderBy('sorted_order', 'asc')->get(); 
       return view('pages.gallery')->with('DataInfo',$data)
       ->with('title',$title);
     }
