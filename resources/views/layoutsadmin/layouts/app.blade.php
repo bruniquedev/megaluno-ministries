@@ -34,9 +34,11 @@ These ouble double braces you see  work as echo, in laravel we do'nt use echo bu
     <!-- Styles -->
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('css/global_style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/navigation.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/table_custom.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/dynamicformelements.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
     
 

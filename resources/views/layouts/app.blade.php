@@ -24,7 +24,7 @@
     <script src="{{ asset('js/jquery.js') }}" defer></script>
     <!-- Styles -->
    <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />-->
-
+<link href="{{ asset('css/global_style.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/navigation.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom_slider_relative.css') }}" rel="stylesheet" type="text/css" />
 

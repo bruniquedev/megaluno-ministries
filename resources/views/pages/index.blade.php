@@ -187,7 +187,7 @@ if($SEODataInfo->detail_type=="Home"){
 <div class="about-content pagearea-content">
 
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
-    <span><a href="javascript:void(0);" class="color-black"><span class=""><?php echo Title_and_description("donation")['heading']; ?></span> :</a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black"><span class=""><?php echo Title_and_description("donation")['heading']; ?></span></a></span></h1>
 
     <div class="border-separator w-full"></div>
 
