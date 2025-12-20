@@ -52,7 +52,7 @@ if($SEODataInfo->detail_type=="Events" && $option=="All"){
   </div>
 <!--/with an image-->
 <!--with content-->
-<div class="about-content pagearea-detail-content w-45">
+<div class="about-content pagearea-detail-content w-45 event-detail-page">
 
    @if($Details->title)
   <h1 class="f-s-20 f-w-500 animate-element delay6 fadeInDown-anime section-heading">

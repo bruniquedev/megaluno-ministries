@@ -69,6 +69,11 @@
     font-size: 20px!important;
 }
 .about-container .about-content{
+    padding: 0px 0px;
+}
+
+.about-container .about-content.event-detail-page,
+.about-container .about-content.donate-page{
     padding: 0px 10px;
 }
 
@@ -193,7 +198,7 @@ width: 94%!important;
 }
 
 .col-box-item.box-area-contact{
-    width: 100%!important;
+    width: 99%!important;
 } 
 .col-item.col-box-item{
       width: 100%!important;  

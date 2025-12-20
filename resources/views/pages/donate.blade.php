@@ -28,7 +28,7 @@ if($SEODataInfo->detail_type=="Donation"){
     <div class="section_area m-t-30">
 <div class="aboutarea background-img pagecontainerarea bg-img-attachment" style="background-image: url('{{asset("storage/content_uploads/thumbnails/".$info->filename) }}');">
  <div class="about-container page-container animate-element delay6 fadeInLeft-anime "> 
-<div class="about-content pagearea-content">
+<div class="about-content pagearea-content donate-page">
 
 @if($info->title)
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime">
