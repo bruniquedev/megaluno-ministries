@@ -1363,7 +1363,14 @@ background: none;
     }
 
      #ul-footeritem li{
+            display: flex;
+    align-items: center;
   margin: 5px auto;
+    }
+
+
+    #ul-footeritem li:before{
+margin-right: 5px;
     }
     
     #ul-footeritem li a{
@@ -1398,6 +1405,8 @@ background: none;
     }
     
     .contact-footer-ul li{
+        display: flex;
+        align-items: center;
         list-style-type: none;
         color: #fff;
         font-size: 15px;
@@ -1408,6 +1417,10 @@ background: none;
         margin: 5px auto;
     }
 
+    .contact-footer-ul li:before{
+     margin-right: 5px;
+    }
+
     .contact-footer-ul li a{
         color: #fff;
         text-decoration: none;
@@ -1416,15 +1429,15 @@ background: none;
     
   
 #ul-footeritem li:before,.contact-footer-ul li:before {
-    width: 16px;
+   /* width: 16px;
     float: left;
-    height: 16px;
+    height: 16px;*/
     content: "\f363";
     font-family: Ionicons;
-    position: relative;
+    /*position: relative;
     top: -5px;
-    left: 5px;
-    font-size: 1.9rem;
+    left: 5px;*/
+    font-size: 1.5rem;
 }
 
     
