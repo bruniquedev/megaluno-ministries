@@ -364,7 +364,8 @@ flex: wrap;
 }
 
 
-a.more-btn-eui {
+a.more-btn-eui, 
+button.more-btn-eui {
     width: 30%;
     font-size: 18px;
     border: 1px solid #222!important;
@@ -373,11 +374,69 @@ a.more-btn-eui {
     align-items: center;
     justify-content: center;
 }
-a.more-btn-eui.donate-btn {
+a.more-btn-eui.donate-btn,
+button.more-btn-eui.donate-btn {
     background-color: #1a9fca!important;
     border: 1px solid #fff !important;
     color: #fff !important;
     }
+
+
+/*******Donation form*********/
+
+.donation-box {
+    background-color: #F5F5F5;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: relative;
+}
+
+.donation-box .donation-title {
+    background-color: #1a9fca;
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: white;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 15px;
+}
+
+.donation-box .donating-area input {
+    width: 100%;
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 4px;
+    border-width: 0px;
+    color: #5C5C5C;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.donation-box .donating-area .form-input-group{
+
+        margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.donation-box .donating-area .amount-input-container{
+    align-items: center;
+}
+.donation-box .donating-area .amount-input-container .donation-currency{
+        font-size: 20px;
+            margin-right: 10px;
+}
+
+.donation-box .donating-area .amount-input-container .donate-amount{
+border-bottom: 2px dashed #757575;
+    font-size: 20px;
+    color: #000;
+}
+/********end Donation form*********/
+
+
 
 
 .t-item {

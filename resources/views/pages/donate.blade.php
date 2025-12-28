@@ -86,9 +86,49 @@ if($SEODataInfo->detail_type=="Donation"){
 </div>
 
 
-<div class="flex justify-center align-items-center m-t-15 m-b-15">
-<a href="javascript:void(0);" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui donate-btn">Donate with :<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></a>
+
+<div class=" m-t-15 m-b-15 w-100 donation-container">
+
+<div class="donation-box">
+  <div class="donation-title">Donation Information</div>
+
+  <form class="donating-area w-100 m-t-15">
+
+
+  <div class="form-groupy w-100">
+  <label for="Name">Full name <span class="color-danger f-s-17">*</span></label>
+  <div class="form-input-group">    
+  <input type="text" class="input-control" required="required"  name="Name" id="Name" placeholder="Full name" />
 </div>
+</div>                           
+ <div class="form-groupy w-100">
+  <label for="email"> Email<span class="color-danger f-s-17">*</span></label>
+  <div class="form-input-group">    
+  <input type="email" class="input-control" required="required" name="email" id="email" placeholder="Email" />
+</div>
+  <div class="help-block with-errors"></div>
+    </div> 
+
+
+    <div class="flex flex-wrap">                          
+ <div class="form-groupy w-100">
+  <label for="amount">Amount($) <span class="color-danger f-s-17">*</span></label>
+  <div class="form-input-group amount-input-container">
+  <span class="donation-currency">$</span>    
+  <input type="number" class="input-control donate-amount" required="required" name="amount" id="amount" placeholder="$0" value="5" min="5" step="any" />
+</div>
+  <div class="help-block with-errors"></div>
+    </div> 
+    </div>
+   <input type="hidden" class="input-control" required="required" name="id" id="id" placeholder="{{$info->id}}" value="{{$info->id}}"  />
+
+<button type="submit" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui donate-btn w-100">DONATE NOW<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></button>
+</form>
+</div>
+</div>
+
+
+
 </div>
   </div> 
 </div>
