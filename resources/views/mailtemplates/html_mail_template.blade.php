@@ -9,7 +9,7 @@
   
 <div>
 <p><b>for more details visit,</b></p>
-<p><b><a href="{{ url()->current() }}">{{ url()->current() }}</a></b></p>
+<p><b><a href="{{ url('/')}}">{{ url('/') }}</a></b></p>
 </div>
   
 <b>Kind regards,</b>
