@@ -100,7 +100,8 @@ if($SEODataInfo->detail_type=="Donation"){
   <div class="form-input-group">    
   <input type="text" class="input-control" required="required"  name="Name" id="Name" placeholder="Full name" />
 </div>
-</div>                           
+</div> 
+
  <div class="form-groupy w-100">
   <label for="email"> Email<span class="color-danger f-s-17">*</span></label>
   <div class="form-input-group">    
@@ -109,6 +110,13 @@ if($SEODataInfo->detail_type=="Donation"){
   <div class="help-block with-errors"></div>
     </div> 
 
+ <div class="form-groupy w-100">
+  <label for="phonenumber"> Phone number<span class="color-danger f-s-14 m-l-5 f-w-400">optional</span></label>
+  <div class="form-input-group">    
+  <input type="text" class="input-control" name="phonenumber" id="phonenumber" placeholder="phone number" />
+</div>
+  <div class="help-block with-errors"></div>
+    </div>
 
     <div class="flex flex-wrap">                          
  <div class="form-groupy w-100">

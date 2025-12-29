@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b8adc0ada37a8d80a1ed357f5b93689",
+    "content-hash": "677d44de15e0af942631b81c4e9dcfb7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1558,6 +1558,79 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+        },
+        {
+            "name": "mhassan654/laravel-pesapal-sdk",
+            "version": "v0.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhassan654/laravel-pesapal-sdk.git",
+                "reference": "d9506229b6dfe794d4acd87d125e41d54565383d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhassan654/laravel-pesapal-sdk/zipball/d9506229b6dfe794d4acd87d125e41d54565383d",
+                "reference": "d9506229b6dfe794d4acd87d125e41d54565383d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Pesapal": "Mhassan654\\Pesapal\\PesapalFacade"
+                    },
+                    "providers": [
+                        "Mhassan654\\Pesapal\\PesapalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mhassan654\\Pesapal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MUWONGE HASSAN",
+                    "email": "hassansaava@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel package to manage current pesapal payment api, can be used for web and restful apis",
+            "homepage": "https://github.com/mhassan654/pesapal",
+            "keywords": [
+                "Ezee Money",
+                "airtel",
+                "laravel",
+                "laravel 7",
+                "laravel 8",
+                "laravel 9",
+                "mastercard",
+                "mhassan654",
+                "mtn",
+                "payments",
+                "pesapal",
+                "visa"
+            ],
+            "support": {
+                "issues": "https://github.com/mhassan654/laravel-pesapal-sdk/issues",
+                "source": "https://github.com/mhassan654/laravel-pesapal-sdk/tree/v0.5.3"
+            },
+            "time": "2024-05-18T21:53:12+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7647,5 +7720,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

@@ -114,7 +114,7 @@ Route::get('/admin', [AuthController::class, 'ShowAdminLogin'])->name('adminlogi
 Route::post('post-adminlogin', [AuthController::class, 'postAdminLogin'])->name('adminlogin.post'); 
 
 
-
+///pesapal-ipn
 
 
 
