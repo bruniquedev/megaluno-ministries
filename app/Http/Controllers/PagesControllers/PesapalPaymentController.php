@@ -41,10 +41,10 @@ class PesapalPaymentController extends Controller
 
         $transaction_id =  (new Pesapal)->random_reference();
         $payments = new PesapalPayment;
-        $payments -> merchant_reference =$transaction_id;
-        $payments -> status = 'NEW';
-        $payments -> amount = $request->amount;
-        $payments -> save();
+        $payments->merchant_reference =$transaction_id;
+        $payments->status = 'NEW';
+        $payments->amount = $request->amount;
+        $payments->save();
 
 
         $billing_object = (object)[
