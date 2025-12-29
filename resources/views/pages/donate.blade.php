@@ -18,6 +18,17 @@ if($SEODataInfo->detail_type=="Donation"){
 
 @section('content') 
 
+@if (session('success'))
+<div class="alert-ui alert-success-ui" role="alert">
+{{ session('success') }}
+</div>
+@endif
+@if (session('failure'))
+<div class="alert-ui alert-danger-ui" role="alert">
+{{ session('failure') }}
+</div>
+@endif
+
 <section class="main-content-section w-full m-t-150 m-b-50">
     <div class="main-content-container">
 
@@ -92,7 +103,7 @@ if($SEODataInfo->detail_type=="Donation"){
 <div class="donation-box">
   <div class="donation-title">Donation Information</div>
 
-  <form class="donating-area w-100 m-t-15" role="form" method="POST" action="{{ route('payment.post') }}"   name="FORM_payment">
+  <form class="donating-area w-100 m-t-15" role="form" method="POST" action="{{ route('donationsubmit.post') }}"   name="FORM_payment">
 @csrf
 
   <div class="form-groupy w-100">
@@ -129,6 +140,7 @@ if($SEODataInfo->detail_type=="Donation"){
     </div> 
     </div>
    <input type="hidden" class="input-control" required="required" name="id" id="id" placeholder="{{$info->id}}" value="{{$info->id}}"  />
+   <input type="hidden" class="input-control" required="required" name="description" id="description" placeholder="{{$info->title}}" value="{{$info->title}}"  />
 
 <button type="submit" class="btn-ui btn-ui-lg btn-ui-default more-btn-eui donate-btn w-100">DONATE NOW<i class="ion ion-ios-arrow-right f-s-17 m-l-5"></i></button>
 </form>

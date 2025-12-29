@@ -12,7 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "mhassan654/laravel-pesapal-sdk": "^0.5.3"
+        "nyawach/laravel-pesapal": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -15,7 +15,7 @@ use App\Http\Controllers\PagesControllers\DonationPageController;
 use App\Http\Controllers\PagesControllers\ContactPageController;
 use App\Http\Controllers\PagesControllers\TestimonialsPageController;
 use App\Http\Controllers\PagesControllers\GalleryPageController;
-use App\Http\Controllers\PagesControllers\PesapalPaymentController;
+use App\Http\Controllers\PagesControllers\PesapalController;
 
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
 
@@ -114,10 +114,11 @@ Route::get('/admin', [AuthController::class, 'ShowAdminLogin'])->name('adminlogi
 Route::post('post-adminlogin', [AuthController::class, 'postAdminLogin'])->name('adminlogin.post'); 
 
 
-///pesapal-ipn
-//App\Http\Controllers\ eg "TransactionController@confirmation"
-//Route::get('donepayment', ['as' => 'paymentsuccess', 'uses'=>'PaymentsController@paymentsuccess']);
-Route::post('pesapal-pay', [PesapalPaymentController::class, 'payment'])->name('payment.post');
+//pesapal-ipn
+//payment-callback
+Route::post('donation-submission', [PesapalController::class, 'submitDonation'])->name('donationsubmit.post');
+Route::get('/payment-callback/{pesapalguard}', [PesapalController::class, 'paymentCallback']);
+Route::post('pesapal-ipn', [PesapalController::class, 'InstantPaymentNotification'])->name('ipn.post');
 
 Route::name('')->middleware('visitor')->group(function() {
     

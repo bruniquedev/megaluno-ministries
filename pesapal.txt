@@ -1,5 +1,4 @@
 https://joshuawilfred.medium.com/pesapal-payment-gateway-integration-with-rilt-stack-react-inertia-laravel-tailwindcss-8a8de8a71082
-https://github.com/mhassan654/laravel-pesapal-sdk
 
 https://codepen.io/DevinWalker/pen/EKRzPx
 
