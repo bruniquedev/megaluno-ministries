@@ -1,5 +1,5 @@
 <b>Hello <i>{{ $MailData->receiver }}</i></b>,
-<p><b>I hope you’re well. Please see attached {{ $MailData->doctype.' N0-'.$MailData->id }} for  {{ $MailData->projectname }}.</b></p>
+<p><b>{{ $MailData->message}}</b></p>
   
 <div>
 <p><b>Don’t hesitate to reach out if you have any questions.</b></p>

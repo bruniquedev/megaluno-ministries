@@ -40,7 +40,7 @@ class Controller extends BaseController
 
                  $visittime= date('Y-m-d');
                  $TodayTotalCountvisitors =DB::select('select distinct userip from pageview where visitdate =:visitdate', ['visitdate' => $visittime]);
-                $Unreaddonations = donations::where('donationstatus', 0)->count();
+                $Unreaddonations = donations::where('status', 0)->count();
                 $Unreadmessages = content_info::where('page_area_type', 'message')->where('status', 0)->count();
                 $Unreadreviews = content_info::where('page_area_type', 'review')->where('ispublished', '0')->count();              
 $LogoIcon="";

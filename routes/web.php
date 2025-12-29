@@ -117,7 +117,7 @@ Route::post('post-adminlogin', [AuthController::class, 'postAdminLogin'])->name(
 //pesapal-ipn
 //payment-callback
 Route::post('donation-submission', [PesapalController::class, 'submitDonation'])->name('donationsubmit.post');
-Route::get('/payment-callback/{pesapalguard}', [PesapalController::class, 'paymentCallback']);
+Route::get('/payment-callback/{pesapalguard}', [PesapalController::class, 'pesapalCallback']);
 Route::post('pesapal-ipn', [PesapalController::class, 'InstantPaymentNotification'])->name('ipn.post');
 
 Route::name('')->middleware('visitor')->group(function() {

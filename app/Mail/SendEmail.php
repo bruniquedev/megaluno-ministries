@@ -35,11 +35,6 @@ class SendEmail extends Mailable
      * @return $this
      */
 
-/*
-method is used to initialize more email-specific values like from, view template
-In our case, we've passed the $MailData object as a constructor argument, and it's assigned to the MailData public property.
-we need to create email templates that we're supposed to use while sending emails. Go ahead and create a file resources/views/mailtemplates/html_mail_template.blade.php as shown in the following snippet.
-*/
 
     /**
      * Build the message.
@@ -48,9 +43,14 @@ we need to create email templates that we're supposed to use while sending email
      */
    public function build()
     {
-        return $this->from($this->MailData->billfromemail)
+     
+
+ return $this->from($this->MailData->sendermail, $this->MailData->sender)
+                    ->subject($this->MailData->subject)
                     ->view('mailtemplates.html_mail_template')
-                    ->text('mailtemplates.plain_mail_template')
+                    //->cc(['megaluno23@gmail.com','info@gmail.com'])
                     ->with('MailData',$this->MailData);
+
+
     }
 }

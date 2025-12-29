@@ -28,7 +28,8 @@
 <tr class="thead table-light">
 <th>Id</th>
 <th>Reference</th>
-<th>Amount</th>
+<th>Amount($)</th>
+<th>Donation status</th>
 <th>Donor name</th>
 <th>Email</th>
 <th>Phone</th>
@@ -51,18 +52,28 @@
 $status = "btn-ui btn-ui-danger btn-ui-xs";
 $statustext = "unseen";
 $updateButtonText = "To seen";
-if ($Info->donationstatus == 1) {
+if ($Info->status == 1) {
   $status = "btn-ui btn-ui-primary btn-ui-xs";
   $statustext = "seen";
   $updateButtonText = "To unseen";
 }
+
+$dstatus = "btn-ui btn-ui-danger btn-ui-xs";
+$dstatustext = "un-successful";
+if ($Info->donationstatus == 1) {
+  $dstatus = "btn-ui btn-ui-success btn-ui-xs";
+  $dstatustext = "successful";
+}
+
+
 ?>
 
 <tr data-sortable-row
     data-id="{{ $Info->id }}">
 <td>{{$Info->id}}</td>
 <td>{{$Info->reference}}</td>
-<td>{{$Info->amount}}</td>
+<td>${{$Info->amount}}</td>
+<td><button class="{{$dstatus}}">{{$dstatustext}}</button></td>
 <td>{{$Info->donorname}}</td>
 <td>{{$Info->donoremail}}</td>
 <td>{{$Info->donorphonenumber}}</td>
@@ -81,7 +92,7 @@ if ($Info->donationstatus == 1) {
 </form>
 </td>
 
-<td><a class="{{$status}}" id="link1" href="/users-donations/{{$Info->id}}/edit">
+<td><a class="{{$status}}" id="link1" href="/update-donationstatus/{{$Info->id}}">
 	<i class="ion ion-edit"></i> {{$updateButtonText}}</a></td>
   <td class="drag-handle" draggable="true">⋮⋮</td>
 </tr>
