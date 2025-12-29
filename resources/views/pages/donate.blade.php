@@ -92,8 +92,8 @@ if($SEODataInfo->detail_type=="Donation"){
 <div class="donation-box">
   <div class="donation-title">Donation Information</div>
 
-  <form class="donating-area w-100 m-t-15">
-
+  <form class="donating-area w-100 m-t-15" role="form" method="POST" action="{{ route('payment.post') }}"   name="FORM_payment">
+@csrf
 
   <div class="form-groupy w-100">
   <label for="Name">Full name <span class="color-danger f-s-17">*</span></label>

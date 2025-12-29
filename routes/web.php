@@ -15,7 +15,7 @@ use App\Http\Controllers\PagesControllers\DonationPageController;
 use App\Http\Controllers\PagesControllers\ContactPageController;
 use App\Http\Controllers\PagesControllers\TestimonialsPageController;
 use App\Http\Controllers\PagesControllers\GalleryPageController;
-
+use App\Http\Controllers\PagesControllers\PesapalPaymentController;
 
 use App\Http\Controllers\AdminPagesControllers\VisitorsController;
 
@@ -115,9 +115,9 @@ Route::post('post-adminlogin', [AuthController::class, 'postAdminLogin'])->name(
 
 
 ///pesapal-ipn
-
-
-
+//App\Http\Controllers\ eg "TransactionController@confirmation"
+//Route::get('donepayment', ['as' => 'paymentsuccess', 'uses'=>'PaymentsController@paymentsuccess']);
+Route::post('pesapal-pay', [PesapalPaymentController::class, 'payment'])->name('payment.post');
 
 Route::name('')->middleware('visitor')->group(function() {
     
