@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\PagesControllers;
-use Pesapal;
+//use Pesapal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PesapalPayment;
@@ -84,9 +84,9 @@ class PesapalPaymentController extends Controller
 
         if ($decode_response->status == "200"){
             $payments = PesapalPayment::where('merchant_reference',$decode_response->merchant_reference)->first();
-            $payments -> order_tracking_id = $decode_response->order_tracking_id;
-            $payments -> status = 'PENDING';
-            $payments -> update();
+            $payments->order_tracking_id = $decode_response->order_tracking_id;
+            $payments->status = 'PENDING';
+            $payments->update();
         }
         return $this->customSuccessResponseWithPayload($decode_response);
     }
@@ -101,9 +101,9 @@ class PesapalPaymentController extends Controller
         $ref = $request->input('merchant_reference');
 
         $payments = PesapalPayment::where('merchant_reference',$ref)->first();
-        $payments -> trackingid = $trackingid;
-        $payments -> status = 'PENDING';
-        $payments -> save();
+        $payments->trackingid = $trackingid;
+        $payments->status = 'PENDING';
+        $payments->save();
 
 
         $payments=PesapalPayment::all();
@@ -140,23 +140,23 @@ class PesapalPaymentController extends Controller
 
         if ($status->status == "200"){
             $payments = PesapalPayment::where('order_tracking_id',$trackingid)->first();
-            $payments -> status = $status->status;
+            $payments->status = $status->status;
 
 //            Pesapal status code representing the payment_status_description.
 //            0 - INVALID
 //            1 - COMPLETED
 //            2 - FAILED
 //            3 - REVERSED
-            $payments -> status_code = $status->status_code;
-            $payments -> payment_method = $status->payment_method;
-            $payments -> description = $status->description;
-            $payments -> created_date = $status->created_date;
-            $payments -> message = $status->message;
-            $payments -> payment_account = $status->payment_account;
-            $payments -> merchant_reference = $status->merchant_reference;
-            $payments -> currency = $status->currency;
-            $payments -> amount = $status->amount;
-            $payments -> update();
+            $payments->status_code = $status->status_code;
+            $payments->payment_method = $status->payment_method;
+            $payments->description = $status->description;
+            $payments->created_date = $status->created_date;
+            $payments->message = $status->message;
+            $payments->payment_account = $status->payment_account;
+            $payments->merchant_reference = $status->merchant_reference;
+            $payments->currency = $status->currency;
+            $payments->amount = $status->amount;
+            $payments-> update();
             return $this->customSuccessResponseWithPayload("success");
         }
         return $this->customFailResponseWithPayload("something went wrong");
@@ -205,9 +205,9 @@ class PesapalPaymentController extends Controller
     {
         $payments = PesapalPayment::where('order_tracking_id',$OrderTrackingId)->first();
         if ($payments){
-            $payments -> status = $status;
-            $payments -> payment_method = $payment_method;
-            $payments ->update();
+            $payments->status = $status;
+            $payments->payment_method = $payment_method;
+            $payments->update();
         }
 
     }
