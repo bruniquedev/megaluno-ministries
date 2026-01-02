@@ -95,7 +95,7 @@ if($SEODataInfo->detail_type=="Home"){
  
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-3 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><?php echo Title_and_description("sermon")['heading']; ?></a></span></h1>
-<p class="center m-b-30"><?php echo Title_and_description("sermon")['description']; ?></p>
+<p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("sermon")['description']; ?></p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 @foreach ($SermonsData as $info2)
@@ -232,7 +232,7 @@ if($SEODataInfo->detail_type=="Home"){
 <!--/about section-->
 
 
-<div class="background-img bg-img-attachment" style="background-image: url('{{asset("storage/content_uploads/thumbnails/".$AboutinfoData->filename) }}');"><!--bg attachment start-->
+<div class="background-img bg-img-attachment"><!--bg attachment start-->
    
  @if(count($MinistriesData) > 0) 
 <section class="section_area m-t-20 bg-color-white p-5p b-r-t-l b-r-t-r">
@@ -240,7 +240,7 @@ if($SEODataInfo->detail_type=="Home"){
   <h1 class="f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span> <?php echo Title_and_description("ministry")['heading']; ?></a></span></h1>
 
-<p class="center m-b-30"><?php echo Title_and_description("ministry")['description']; ?></p>
+<p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("ministry")['description']; ?></p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
  
@@ -280,7 +280,7 @@ if($SEODataInfo->detail_type=="Home"){
  
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span><?php echo Title_and_description("involvement")['heading']; ?></a></span></h1>
-    <p class="center m-b-30"><?php echo Title_and_description("involvement")['description']; ?></p>
+    <p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("involvement")['description']; ?></p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 
@@ -314,7 +314,7 @@ if($SEODataInfo->detail_type=="Home"){
  
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
     <span><a href="javascript:void(0);" class="color-black-dark"><?php echo Title_and_description("event")['heading']; ?></a></span></h1>
-    <p class="center m-b-30"><?php echo Title_and_description("event")['description']; ?></p>
+    <p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("event")['description']; ?></p>
 
 <div class="flex justify-center  flex-wrap flex-grow section-row-content">
 @foreach ($Eventsinfodata as $info5)
@@ -383,9 +383,9 @@ if($SEODataInfo->detail_type=="Home"){
 <section class="section_area m-t-20 testimonials-area">
  
   <h1 class="center f-s-25 animate-element delay6 fadeInDown-anime m-t-30 m-b-1 section-heading heading-underline">
-    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span><?php echo Title_and_description("testimonial")['heading']; ?></a></span></h1>
+    <span><a href="javascript:void(0);" class="color-black-dark"><span class="font-century-light"></span><?php echo Title_and_description("review")['heading']; ?></a></span></h1>
 
-    <p class="center m-b-30 tst-desc"><?php echo Title_and_description("testimonial")['description']; ?></p>
+    <p class="center tst-desc f-s-17 text-para"><?php echo Title_and_description("review")['description']; ?></p>
 
 <div class="multi-carousel" data-seconds="10" id="MulticarouselTestimonials">
   <div class="row-multislider">

@@ -65,7 +65,10 @@ p{
 color: #222;
 }
 
-
+.text-para{
+    margin: 0 auto;
+    width: 80%;
+}
 
 .font-Myriad-regular{
     font-family: "Myriad-Regular";

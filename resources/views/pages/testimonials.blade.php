@@ -31,6 +31,8 @@ if($SEODataInfo->detail_type=="Testimonials"){
 </div>
 <!--/about section-->
 
+    <p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("review")['description']; ?></p>
+
   @if(count($TestimonialsData) > 0)
   <div class="property-details-reviews  flex flex-wrap flex-grow">
 

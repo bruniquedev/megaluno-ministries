@@ -39,6 +39,8 @@ if($SEODataInfo->detail_type=="Ministry" && $option=="All"){
 </div>
 <!--/about section-->
 
+<?php if($option=="All"){?>
+    <p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("ministry")['description']; ?></p><?php } ?>
 
 <?php if($option=="details"){ ?>
     <!--about section-->

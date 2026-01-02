@@ -39,6 +39,9 @@ if($SEODataInfo->detail_type=="Events" && $option=="All"){
 </div>
 <!--/about section-->
 
+<?php if($option=="All"){ ?>
+    <p class="center m-b-30 f-s-17 text-para"><?php echo Title_and_description("event")['description']; ?></p><?php } ?>
+
 
 <?php if($option=="details"){ ?>
     <!--about section-->
